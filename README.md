@@ -1,6 +1,6 @@
 # Muster
 
-## About This Muster
+## About Muster
 
 
 
