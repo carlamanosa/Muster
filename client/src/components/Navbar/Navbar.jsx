@@ -22,11 +22,11 @@ function MyNavbar() {
     <Navbar bg="light" variant="light" expand="lg">
       <Container>
         {!user.email && (
-        <NavbarBrand to="/login">Candle App</NavbarBrand>
+        <NavbarBrand to="/login">Muster</NavbarBrand>
         )}
         {user.email && (
           <Fragment>
-            <NavbarBrand to="/">Candle App</NavbarBrand>
+            <NavbarBrand to="/">Muster</NavbarBrand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="mr-auto">
