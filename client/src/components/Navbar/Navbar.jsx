@@ -19,7 +19,7 @@ function MyNavbar() {
     });
   }
   return (
-    <Navbar bg="dark" variant="dark" expand="lg">
+    <Navbar bg="light" variant="light" expand="lg">
       <Container>
         {!user.email && (
         <NavbarBrand to="/login">Candle App</NavbarBrand>
