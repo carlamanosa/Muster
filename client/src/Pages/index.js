@@ -10,4 +10,4 @@ export {
     Home
 };
 
-export * from "./Candle";
+export * from "./Event";

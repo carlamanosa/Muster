@@ -11,4 +11,4 @@ export {
 }
 
 export * from "./User";
-export * from "./Candle";
+export * from "./Event";

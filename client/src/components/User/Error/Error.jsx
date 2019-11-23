@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import User from '../../../utils/Stores/User';
+import User from '../../../utils/Account/User';
 import Error from '../../Error';
 
 const { CLEAR_USER_ERROR } = User.actions;

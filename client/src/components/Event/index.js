@@ -7,6 +7,6 @@ export default {
 }
 
 export {
-    Card as CandleCard,
-    Error as CandleError
+    Card as EventCard,
+    Error as EventError
 }

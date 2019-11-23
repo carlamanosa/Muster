@@ -4,18 +4,18 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Candle from '../../../utils/Stores/Candle';
-import User from "../../../utils/Stores/User";
-import { CandleError } from '../../../components';
+import Event from '../../../utils/Account/Events';
+import User from "../../../utils/Account/User";
+import { EventError } from '../../../components';
 import { useHistory } from 'react-router-dom';
 
-const { CANDLES_LOADING, ADD_CANDLE, CANDLES_ERROR } = Candle.actions;
+const { EVENTS_LOADING, ADD_EVENT, EVENTS_ERROR } = Event.actions;
 
 export default function () {
     User.refreshOnLoad();
     const history = useHistory();
     const [validated, setValidated] = useState(false);
-    const [/* user not needed */, candleDispatch] = Candle.useContext();
+    const [/* user not needed */, eventDispatch] = Event.useContext();
     const nameInput = useRef();
     const scentInput = useRef();
     const heightInput = useRef();
@@ -32,22 +32,22 @@ export default function () {
         const height = heightInput.current.value;
 
         // If we have an email and password we run the loginUser function and clear the form
-        createCandle(name, scent, height);
+        createEvent(name, scent, height);
     };
 
-    // createCandle does a post to our "api/login" route and if successful, redirects us the the members page
-    function createCandle(name, scent, height) {
+    // createEvent does a post to our "api/login" route and if successful, redirects us the the members page
+    function createEvent(name, scent, height) {
         setValidated(false);
-        candleDispatch({ type: CANDLES_LOADING });
-        Candle.API.createCandle({
+        eventDispatch({ type: EVENTS_LOADING });
+        Event.API.createEvent({
             name,
             scent,
             height
-        }).then(candle => {
-            candleDispatch({ type: ADD_CANDLE, candle });
-            history.push("/candle");
+        }).then(event => {
+            eventDispatch({ type: ADD_EVENT, event });
+            history.push("/event");
         }).catch((err) => {
-            candleDispatch({ type: CANDLES_ERROR, message: err });
+            eventDispatch({ type: EVENTS_ERROR, message: err });
         });
     }
 
@@ -55,49 +55,49 @@ export default function () {
         <Container className="mt-5">
             <Row>
                 <Col md={{ span: 6, offset: 3 }}>
-                    <h2>Create Candle</h2>
+                    <h2>Create Event</h2>
                     <Form
                         validated={validated}
                         onSubmit={handleSubmit}
                         noValidate>
-                        <Form.Group controlId="formCandleName">
+                        <Form.Group controlId="formEventName">
                             <Form.Label>Name</Form.Label>
                             <Form.Control
                                 required
                                 pattern=".*\S+.*"
                                 type="text"
-                                placeholder="Enter Candle Name"
+                                placeholder="Enter Event Name"
                                 ref={nameInput} />
                             <Form.Control.Feedback type="invalid">
                                 Name is required.
                             </Form.Control.Feedback>
                         </Form.Group>
 
-                        <Form.Group controlId="formCandleScent">
+                        <Form.Group controlId="formEventScent">
                             <Form.Label>Scent</Form.Label>
                             <Form.Control
                                 required
                                 pattern=".*\S+.*"
                                 type="text"
-                                placeholder="Enter Candle Scent"
+                                placeholder="Enter Event Scent"
                                 ref={scentInput} />
                             <Form.Control.Feedback type="invalid">
                                 Scent is required.
                             </Form.Control.Feedback>
                         </Form.Group>
 
-                        <Form.Group controlId="formCandleHeight">
+                        <Form.Group controlId="formEventHeight">
                             <Form.Label>Height</Form.Label>
                             <Form.Control
                                 required
                                 type="number"
-                                placeholder="Enter Candle Height"
+                                placeholder="Enter Event Height"
                                 ref={heightInput} />
                             <Form.Control.Feedback type="invalid">
                                 Height is required and must be a number.
                             </Form.Control.Feedback>
                         </Form.Group>
-                            <CandleError />
+                            <EventError />
                         <Button variant="primary" type="submit">
                             Create
                         </Button>

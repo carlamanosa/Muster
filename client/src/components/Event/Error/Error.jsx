@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
-import Candle from '../../../utils/Stores/Candle';
-import User from '../../../utils/Stores/User';
+import Event from '../../../utils/Account/Events';
+import User from '../../../utils/Account/User';
 import Error from '../../Error';
 import { useHistory } from "react-router-dom";
 
-const { CLEAR_CANDLES_ERROR } = Candle.actions;
+const { CLEAR_EVENTS_ERROR } = Event.actions;
 const { USER_ERROR } = User.actions;
 
 export default function () {
-    const [{ error }, candleDispatch] = Candle.useContext();
+    const [{ error }, eventDispatch] = Event.useContext();
     const [/* user not needed */, userDispatch] = User.useContext();
     const history = useHistory();
     let message = null;
@@ -41,7 +41,7 @@ export default function () {
         }
         clearTimeout(messageTimeout);
         messageTimeout = setTimeout(() => {
-            candleDispatch({ type: CLEAR_CANDLES_ERROR })
+            eventDispatch({ type: CLEAR_EVENTS_ERROR })
         }, 5500)
     }, [message])
     return (
