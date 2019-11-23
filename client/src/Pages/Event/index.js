@@ -1,12 +1,18 @@
-import EventList from "./List";
+import EventAddList from "./AddList";
+import EventGetList from "./GetList";
 import EventAdd from "./Add";
+import EventGet from "./Get";
 
 export default {
-    EventList,
-    EventAdd
+    EventAddList,
+    EventGetList,
+    EventAdd,
+    EventGet
 }
 
 export {
-    EventList,
-    EventAdd
+    EventAddList,
+    EventGetList,
+    EventAdd,
+    EventGet
 }

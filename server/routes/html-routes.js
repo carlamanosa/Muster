@@ -19,7 +19,7 @@ const isNotAuthenticated = require("../config/middleware/isNotAuthenticated");
 router.route(["/signup", "/login"]).get(isNotAuthenticated);
 
 // These routes should redirect to login page if they are not logged in:
-router.route(["/", "/event", "/event/create"]).get(isAuthenticated);
+router.route(["/", "/event", "/event/create", "/event/getlist", "event/addlist"]).get(isAuthenticated);
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //                      END Middleware section                             //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//

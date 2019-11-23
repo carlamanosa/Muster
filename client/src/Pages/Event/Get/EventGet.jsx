@@ -32,20 +32,20 @@ export default function () {
         const height = heightInput.current.value;
 
         // If we have an email and password we run the loginUser function and clear the form
-        addEvent(name, scent, height);
+        eventAPI(name, scent, height);
     };
 
     // addEvent does a post to our "api/login" route and if successful, redirects us the the members page
-    function addEvent(name, scent, height) {
+    function eventAPI(name, scent, height) {
         setValidated(false);
         eventDispatch({ type: EVENTS_LOADING });
-        Event.API.addEvent({
+        Event.API.eventAPI({
             name,
             scent,
             height
         }).then(event => {
             eventDispatch({ type: ADD_EVENT, event });
-            history.push("/event/addlist");
+            history.push("/event/getlist");
         }).catch((err) => {
             eventDispatch({ type: EVENTS_ERROR, message: err });
         });
@@ -55,7 +55,7 @@ export default function () {
         <Container className="mt-5">
             <Row>
                 <Col md={{ span: 6, offset: 3 }}>
-                    <h2>Add Event</h2>
+                    <h2>Add (API) Event</h2>
                     <Form
                         validated={validated}
                         onSubmit={handleSubmit}
@@ -99,7 +99,7 @@ export default function () {
                         </Form.Group>
                             <EventError />
                         <Button variant="primary" type="submit">
-                            Add
+                            Add (API) Event
                         </Button>
                     </Form>
                 </Col>
