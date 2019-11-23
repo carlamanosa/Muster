@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Link } from 'react-router-dom';
 import { UserForm } from '../../components';
-import User from '../../utils/Stores/User';
+import User from '../../utils/Account/User';
 
 function EmailMessage() {
     return (

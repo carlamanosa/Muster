@@ -5,7 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavLink from "./NavLink";
 import NavbarBrand from "./NavbarBrand";
-import User from "../../utils/Stores/User";
+import User from "../../utils/Account/User";
 import "./Navbar.css";
 
 const { USER_LOADING, SET_USER } = User.actions;
@@ -31,8 +31,8 @@ function MyNavbar() {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="mr-auto">
                 <NavLink to="/">Home</NavLink>
-                <NavLink to="/candle">Candle</NavLink>
-                <NavLink to="/candle/create">Create Candle</NavLink>
+                <NavLink to="/candle">Event</NavLink>
+                <NavLink to="/candle/create">Create Event</NavLink>
                 <Nav.Link eventKey="/logout" onClick={logout}>Logout</Nav.Link>
               </Nav>
             </Navbar.Collapse>

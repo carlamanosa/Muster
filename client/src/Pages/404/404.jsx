@@ -2,7 +2,7 @@ import React from "react";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import User from '../../utils/Stores/User';
+import User from '../../utils/Account/User';
 
 export default function (props) {
     User.refreshOnLoad();

@@ -1,7 +1,7 @@
 import React, { useState, useRef, Fragment } from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import User from '../../../utils/Stores/User';
+import User from '../../../utils/Account/User';
 import UserError from '../Error';
 
 const { USER_LOADING, SET_USER, USER_ERROR } = User.actions;

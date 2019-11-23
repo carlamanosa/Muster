@@ -2,13 +2,13 @@ import React from "react";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import User from '../../utils/Stores/User';
-import Candle from '../../utils/Stores/Candle';
+import User from '../../utils/Account/User';
+import Event from '../../utils/Account/Events';
 
 export default function () {
     User.refreshOnLoad();
-    // we eagerly load candles here so when the user switches pages it will appear faster. 
-    Candle.refreshOnLoad();
+    // we eagerly load events here so when the user switches pages it will appear faster. 
+    Event.refreshOnLoad();
     const [{user}] = User.useContext();
 
     return (

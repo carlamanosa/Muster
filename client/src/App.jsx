@@ -1,6 +1,6 @@
 /* eslint-disable react/prefer-stateless-function */
 import React from "react";
-import User from "./utils/Stores/User";
+import User from "./utils/Account/User";
 import { BrowserRouter } from "react-router-dom";
 import Routes from './routes';
 import {
