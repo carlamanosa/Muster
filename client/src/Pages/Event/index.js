@@ -1,12 +1,12 @@
 import EventList from "./List";
-import EventCreate from "./Create";
+import EventAdd from "./Add";
 
 export default {
     EventList,
-    EventCreate
+    EventAdd
 }
 
 export {
     EventList,
-    EventCreate
+    EventAdd
 }

@@ -32,7 +32,7 @@ function MyNavbar() {
               <Nav className="mr-auto">
                 <NavLink to="/">Home</NavLink>
                 <NavLink to="/event">Event</NavLink>
-                <NavLink to="/event/create">Create Event</NavLink>
+                <NavLink to="/event/add">Add Event</NavLink>
                 <Nav.Link eventKey="/logout" onClick={logout}>Logout</Nav.Link>
               </Nav>
             </Navbar.Collapse>

@@ -5,8 +5,8 @@ export default {
   getEvents: function() {
     return axios.get("/api/events").then(({data}) => data);
   },
-  // Creates an event in the database
-  createEvent: function(eventData) {
+  // Adds an event in the database
+  addEvent: function(eventData) {
     return axios.post("/api/events", eventData).then(({data}) => data);
   }
 };
