@@ -75,8 +75,8 @@ const EventProvider = ({ value = {}, ...props }) => {
   const [state, dispatch] = useReducer(reducer, {
     events: [],
     apiParams: {
-      main: "events?",
-      rest: {}
+      main: "events",
+      rest: "venue.state=ca&sort=score.desc"
     },
     apiEvents: [],
     pageLoading: true,

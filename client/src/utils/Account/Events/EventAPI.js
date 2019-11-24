@@ -13,6 +13,6 @@ export default {
     return axios.post("/api/events", eventData).then(({data}) => data);
   },
   eventAPI: function({main, rest}) {
-    return axios.get(BASEURL + main + key + rest).then(({data}) => data.events);
+    return axios.get(BASEURL + main + "?" + key + "&" + rest).then(({data}) => data.events);
   }
 };

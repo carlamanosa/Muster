@@ -16,10 +16,8 @@ const { EVENTS_LOADING, SET_API_EVENTS, EVENTS_ERROR } = Event.actions;
 
 export default function () {
 
-    const params = {};
-
     User.refreshOnLoad();
-    Event.refreshApiOnLoad(params);
+    Event.refreshApiOnLoad();
     const history = useHistory();
     const [validated, setValidated] = useState(false);
     const [/* user not needed */, eventDispatch] = Event.useContext();
@@ -43,12 +41,10 @@ export default function () {
     };
 
     // addEvent does a post to our "api/login" route and if successful, redirects us the the members page
-    function getApiEvents(params) {
+    function getApiEvents() {
         setValidated(false);
         eventDispatch({ type: EVENTS_LOADING });
-        Event.API.eventAPI({
-            params
-        }).then(data => {
+        Event.API.eventAPI({}).then(data => {
             const events = data.events;
             eventDispatch({ type: SET_API_EVENTS, events });
             history.push("/event/getlist");
