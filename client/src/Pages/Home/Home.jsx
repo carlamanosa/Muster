@@ -8,7 +8,7 @@ import Event from '../../utils/Account/Events';
 export default function () {
     User.refreshOnLoad();
     // we eagerly load events here so when the user switches pages it will appear faster. 
-    Event.refreshOnLoad();
+    Event.refreshDbOnLoad();
     const [{user}] = User.useContext();
 
     return (

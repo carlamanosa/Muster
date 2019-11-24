@@ -1,13 +1,14 @@
 import actions from "./EventActions.json";
 import API from "./EventAPI.js";
-import { Provider, useContext, refreshOnLoad } from "./EventState.jsx";
+import { Provider, useContext, refreshDbOnLoad, refreshApiOnLoad } from "./EventState.jsx";
 
 export default {
     actions,
     API,
     Provider, 
     useContext,
-    refreshOnLoad
+    refreshDbOnLoad,
+    refreshApiOnLoad
 };
 
 export {
@@ -15,5 +16,6 @@ export {
     API as eventAPI,
     Provider as EventProvider, 
     useContext as useEventContext,
-    refreshOnLoad as refreshEventsOnLoad
+    refreshDbOnLoad as refreshDbEventsOnLoad,
+    refreshApiOnLoad as refreshApiEventsOnLoad
 }

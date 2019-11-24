@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
@@ -11,18 +11,15 @@ import { EventError } from '../../../components';
 import { useHistory } from 'react-router-dom';
 import { EventRow } from '../../../components';
 
-const { EVENTS_LOADING, SET_API_EVENTS, EVENTS_ERROR } = Event.actions;
+const { EVENTS_LOADING, SET_API_PARAMS, SET_API_EVENTS, EVENTS_ERROR } = Event.actions;
 
 export default function () {
     User.refreshOnLoad();
-
-    // every time the user hits the event list page we will reload events.
-    Event.refreshOnLoad();
-    const [{ apiEvents, pageLoading }] = Event.useContext();
-
     const history = useHistory();
     const [validated, setValidated] = useState(false);
     const [/* user not needed */, eventDispatch] = Event.useContext();
+    const [{ apiEvents, pageLoading }] = Event.useContext();
+
     const typeInput = useRef();
 
     const handleSubmit = event => {
@@ -42,11 +39,11 @@ export default function () {
     function addEvent(type) {
         setValidated(false);
         eventDispatch({ type: EVENTS_LOADING });
+        eventDispatch({ type: SET_API_PARAMS });
         Event.API.eventAPI({
             type
         }).then(data => {
             const events = data.events;
-            console.log(events);
             eventDispatch({ type: SET_API_EVENTS, events });
             history.push("/event/getlist");
         }).catch((err) => {
@@ -91,11 +88,6 @@ export default function () {
             <Container className="mt-5">
                 <Row>
                     {console.log(apiEvents)}
-            {apiEvents.map(event =>
-                        <Col xs={12} md={6} lg={4} xl={3}>
-                            <EventRow {...event} />
-                        </Col>
-                    )}
                 </Row>
             </Container>
     </Container>

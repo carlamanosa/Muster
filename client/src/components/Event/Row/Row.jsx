@@ -5,7 +5,7 @@ export default function MyLink({ event }) {
     return (
         <Card className="m-2">
             <Card.Body>
-                {console.log(event)}
+                {console.log(event[0])}
                 <Card.Title>{event}</Card.Title>
                 <Card.Subtitle class="mb-2 text-muted">Link: {event}</Card.Subtitle>
             </Card.Body>
