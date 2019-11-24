@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Spinner from 'react-bootstrap/Spinner';
 import User from '../../../utils/Account/User';
 import Event from '../../../utils/Account/Events';
-import { EventRow } from '../../../components';
+import { EventCard } from '../../../components';
 
 export default function () {
     User.refreshOnLoad();
@@ -24,11 +24,10 @@ export default function () {
             <Row>
                 {events.map(event =>
                 <Col xs={12} md={6} lg={4} xl={3}>
-                    <EventRow {...event} />
+                    <EventCard {...event} />
                 </Col>
                 )}
             </Row>
-
         </Container>
         );
 }

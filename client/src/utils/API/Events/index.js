@@ -11,9 +11,9 @@ export default {
 };
 
 export {
-    actions as getEventActions,
-    API as getEventAPI,
-    Provider as GetEventProvider, 
-    useContext as useGetEventContext,
-    refreshOnLoad as refreshGetEventsOnLoad
+    actions as eventActions,
+    API as eventAPI,
+    Provider as EventProvider, 
+    useContext as useEventContext,
+    refreshOnLoad as refreshEventsOnLoad
 }
