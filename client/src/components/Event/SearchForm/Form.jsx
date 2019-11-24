@@ -12,20 +12,17 @@ import { EventError } from '../../../components';
 import { useHistory } from 'react-router-dom';
 import { EventRow } from '../../../components';
 
-const { EVENTS_LOADING, SET_API_EVENTS, EVENTS_ERROR } = Event.actions;
+const { EVENTS_LOADING, SET_API_PARAMS, SET_API_EVENTS, EVENTS_ERROR } = Event.actions;
 
 export default function () {
 
     const params = {};
 
     User.refreshOnLoad();
-    Event.refreshApiOnLoad(params);
     const history = useHistory();
     const [validated, setValidated] = useState(false);
     const [/* user not needed */, eventDispatch] = Event.useContext();
-    const [{ apiEvents, pageLoading }] = Event.useContext();
-
-    console.log("EventGetList.jsx.apiEvents: ", apiEvents);
+    const [{ apiParams, pageLoading }] = Event.useContext();
 
     const typeInput = useRef();
 
@@ -43,14 +40,12 @@ export default function () {
     };
 
     // addEvent does a post to our "api/login" route and if successful, redirects us the the members page
-    function getApiEvents(params) {
+    function setApiParams(params) {
         setValidated(false);
         eventDispatch({ type: EVENTS_LOADING });
-        Event.API.eventAPI({
-            params
-        }).then(data => {
-            const events = data.events;
-            eventDispatch({ type: SET_API_EVENTS, events });
+        eventDispatch({ type: SET_API_PARAMS, params})
+        .then( () => {
+            Event.refreshApiOnLoad();
             history.push("/event/getlist");
         }).catch((err) => {
             eventDispatch({ type: EVENTS_ERROR, message: err });
@@ -91,19 +86,6 @@ export default function () {
                         </Form>
                     </Col>
                 </Row>
-                <Table>
-                    <thead>
-                        <tr>
-                            <th>Results</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {console.log("on page render: ", apiEvents)}
-                    {apiEvents.map(event =>
-                        <EventRow {...event} />
-                    )}
-                    </tbody>
-                </Table>
             </Container>
         );
 }

@@ -2,6 +2,7 @@ import React, { createContext, useReducer, useContext, useEffect } from "react";
 import API from "./EventAPI";
 import actions from "./EventActions.json";
 const { EVENTS_LOADING,
+  SET_API_PARAMS,
   SET_EVENTS,
   SET_API_EVENTS,
   ADD_EVENT,
@@ -17,6 +18,15 @@ const reducer = (state, action) => {
       return {
         ...state,
         loading: true
+      };
+
+    case SET_API_PARAMS:
+      console.log(action.events);
+      return {
+        ...state,
+        apiParams: action.events,
+        loading: false,
+        pageLoading: false
       };
 
     case SET_EVENTS:
@@ -64,7 +74,10 @@ const reducer = (state, action) => {
 const EventProvider = ({ value = {}, ...props }) => {
   const [state, dispatch] = useReducer(reducer, {
     events: [],
-    apiParams: {},
+    apiParams: {
+      main: "events?",
+      rest: {}
+    },
     apiEvents: [],
     pageLoading: true,
     loading: false,
@@ -91,16 +104,18 @@ const refreshDbEvents = () => {
   }, []);
 };
 
-const refreshApiEvents = (params) => {
+const refreshApiEvents = () => {
   const [{ loading }, eventsDispatch] = useEventContext();
+  const [{apiParams}] = useEventContext();
+
   useEffect(() => {
     if (loading) {
       return;
     }
     eventsDispatch({ type: EVENTS_LOADING });
-    API.eventAPI(params).then(events => {
+    API.eventAPI(apiParams).then(events => {
       console.log("refreshApiEvents: ", events);
-      eventsDispatch({ type: SET_API_EVENTS, events});
+      eventsDispatch({ type: SET_API_EVENTS, events });
     });
   }, []);
 };
