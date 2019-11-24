@@ -9,16 +9,14 @@ import User from "../../../utils/Account/User";
 import { EventError } from '../../../components';
 import { useHistory } from 'react-router-dom';
 
-const { EVENTS_LOADING, ADD_EVENT, EVENTS_ERROR } = Event.actions;
+const { EVENTS_LOADING, SET_API_EVENTS, EVENTS_ERROR } = Event.actions;
 
 export default function () {
     User.refreshOnLoad();
     const history = useHistory();
     const [validated, setValidated] = useState(false);
     const [/* user not needed */, eventDispatch] = Event.useContext();
-    const nameInput = useRef();
-    const scentInput = useRef();
-    const heightInput = useRef();
+    const typeInput = useRef();
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -27,25 +25,23 @@ export default function () {
             setValidated(true);
             return;
         }
-        const name = nameInput.current.value;
-        const scent = scentInput.current.value;
-        const height = heightInput.current.value;
+        const type = typeInput.current.value;
 
         // If we have an email and password we run the loginUser function and clear the form
-        addEvent(name, scent, height);
+        addEvent(type);
     };
 
     // addEvent does a post to our "api/login" route and if successful, redirects us the the members page
-    function addEvent(name, scent, height) {
+    function addEvent(type) {
         setValidated(false);
         eventDispatch({ type: EVENTS_LOADING });
-        Event.API.addEvent({
-            name,
-            scent,
-            height
-        }).then(event => {
-            eventDispatch({ type: ADD_EVENT, event });
-            history.push("/event/addlist");
+        Event.API.eventAPI({
+            type
+        }).then(data => {
+            const events = data.events;
+            console.log(events);
+            eventDispatch({ type: SET_API_EVENTS, events });
+            history.push("/event/getlist");
         }).catch((err) => {
             eventDispatch({ type: EVENTS_ERROR, message: err });
         });
@@ -61,45 +57,20 @@ export default function () {
                         onSubmit={handleSubmit}
                         noValidate>
                         <Form.Group controlId="formEventName">
-                            <Form.Label>Name</Form.Label>
+                            <Form.Label>Type</Form.Label>
                             <Form.Control
                                 required
                                 pattern=".*\S+.*"
                                 type="text"
-                                placeholder="Enter Event Name"
-                                ref={nameInput} />
+                                placeholder="Enter Event Type"
+                                ref={typeInput} />
                             <Form.Control.Feedback type="invalid">
-                                Name is required.
-                            </Form.Control.Feedback>
-                        </Form.Group>
-
-                        <Form.Group controlId="formEventScent">
-                            <Form.Label>Scent</Form.Label>
-                            <Form.Control
-                                required
-                                pattern=".*\S+.*"
-                                type="text"
-                                placeholder="Enter Event Scent"
-                                ref={scentInput} />
-                            <Form.Control.Feedback type="invalid">
-                                Scent is required.
-                            </Form.Control.Feedback>
-                        </Form.Group>
-
-                        <Form.Group controlId="formEventHeight">
-                            <Form.Label>Height</Form.Label>
-                            <Form.Control
-                                required
-                                type="number"
-                                placeholder="Enter Event Height"
-                                ref={heightInput} />
-                            <Form.Control.Feedback type="invalid">
-                                Height is required and must be a number.
+                                Type is required.
                             </Form.Control.Feedback>
                         </Form.Group>
                             <EventError />
                         <Button variant="primary" type="submit">
-                            Add
+                            Submit
                         </Button>
                     </Form>
                 </Col>

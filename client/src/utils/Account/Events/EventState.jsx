@@ -3,6 +3,7 @@ import API from "./EventAPI";
 import actions from "./EventActions.json";
 const { EVENTS_LOADING,
   SET_EVENTS,
+  SET_API_EVENTS,
   ADD_EVENT,
   EVENTS_ERROR,
   CLEAR_EVENTS_ERROR } = actions;
@@ -22,6 +23,14 @@ const reducer = (state, action) => {
       return {
         ...state,
         events: action.events,
+        loading: false,
+        pageLoading: false
+      };
+
+    case SET_API_EVENTS:
+      return {
+        ...state,
+        apiEvents: action.events,
         loading: false,
         pageLoading: false
       };
@@ -54,6 +63,7 @@ const reducer = (state, action) => {
 const EventProvider = ({ value = {}, ...props }) => {
   const [state, dispatch] = useReducer(reducer, {
     events: [],
+    apiEvents: [],
     pageLoading: true,
     loading: false,
     error: null

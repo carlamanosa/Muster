@@ -11,7 +11,7 @@ export default function () {
     User.refreshOnLoad();
     // every time the user hits the event list page we will reload events.
     Event.refreshOnLoad();
-    const [{events, pageLoading}] = Event.useContext();
+    const [{apiEvents, pageLoading}] = Event.useContext();
 
     return pageLoading ? (
             <div className="d-flex justify-content-center mt-5">
@@ -22,7 +22,8 @@ export default function () {
         ) : (
         <Container className="mt-5">
             <Row>
-                {events.map(event =>
+                {console.log(apiEvents)};
+                {apiEvents.map(event =>
                 <Col xs={12} md={6} lg={4} xl={3}>
                     <EventCard {...event} />
                 </Col>
