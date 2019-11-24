@@ -34,7 +34,6 @@ function MyNavbar() {
                 <NavLink to="/event/addlist">Add Events</NavLink>
                 <NavLink to="/event/getlist">Get Events</NavLink>
                 <NavLink to="/event/add">Add Event</NavLink>
-                <NavLink to="/event/get">Get Event</NavLink>
                 <Nav.Link eventKey="/logout" onClick={logout}>Logout</Nav.Link>
               </Nav>
             </Navbar.Collapse>

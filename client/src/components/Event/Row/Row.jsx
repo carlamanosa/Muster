@@ -1,13 +1,13 @@
 import React from "react";
 import Card from 'react-bootstrap/Card';
 
-export default function MyLink({ name, scent, height }) {
+export default function MyLink({ event }) {
     return (
         <Card className="m-2">
             <Card.Body>
-                <Card.Title>{name}</Card.Title>
-                <Card.Subtitle class="mb-2 text-muted">{scent}</Card.Subtitle>
-                <Card.Text>This is the Event Row instead of the Event Card {height} cm</Card.Text>
+                {console.log(event)}
+                <Card.Title>{event}</Card.Title>
+                <Card.Subtitle class="mb-2 text-muted">Link: {event}</Card.Subtitle>
             </Card.Body>
         </Card>
     );

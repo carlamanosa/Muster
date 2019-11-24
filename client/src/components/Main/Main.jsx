@@ -15,8 +15,7 @@ import {
     Home,
     EventAddList,
     EventGetList,
-    EventAdd,
-    EventGet
+    EventAdd
 } from "../../pages";
 
 function Main() {
@@ -37,7 +36,6 @@ function Main() {
                         <LoggedInRoute exact path="/event/addlist" component={EventAddList} />
                         <LoggedInRoute exact path="/event/getlist" component={EventGetList} />
                         <LoggedInRoute exact path="/event/add" component={EventAdd} />
-                        <LoggedInRoute exact path="/event/get" component={EventGet} />
                         <LoggedOutRoute exact path="/login" component={Login} />
                         <LoggedOutRoute exact path="/signup" component={Signup} />
                         <Route path="*" component={NotFound} />
