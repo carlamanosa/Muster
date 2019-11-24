@@ -3,7 +3,6 @@ import API from "./EventAPI";
 import actions from "./EventActions.json";
 const { EVENTS_LOADING,
   SET_EVENTS,
-  SET_API_PARAMS,
   SET_API_EVENTS,
   ADD_EVENT,
   EVENTS_ERROR,
@@ -27,15 +26,6 @@ const reducer = (state, action) => {
         loading: false,
         pageLoading: false
       };
-
-    case SET_API_PARAMS:
-      console.log("param");
-      return {
-        ...state,
-        apiParams: action.events,
-        loading: false,
-        pageLoading: false
-      };  
 
     case SET_API_EVENTS:
       console.log("SET-API-EVENTS: ", action.events);
@@ -101,15 +91,16 @@ const refreshDbEvents = () => {
   }, []);
 };
 
-const refreshApiEvents = () => {
+const refreshApiEvents = (params) => {
   const [{ loading }, eventsDispatch] = useEventContext();
   useEffect(() => {
     if (loading) {
       return;
     }
     eventsDispatch({ type: EVENTS_LOADING });
-    API.eventAPI().then(events => {
-      eventsDispatch({ type: SET_API_EVENTS, events });
+    API.eventAPI(params).then(events => {
+      console.log("refreshApiEvents: ", events);
+      eventsDispatch({ type: SET_API_EVENTS, events});
     });
   }, []);
 };

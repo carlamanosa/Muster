@@ -1,14 +1,11 @@
 import React from "react";
-import Card from 'react-bootstrap/Card';
 
-export default function MyLink({ event }) {
+export default function MyLink({ title, type }) {
+    console.log("EventRow: ", title, type);
     return (
-        <Card className="m-2">
-            <Card.Body>
-                {console.log(event[0])}
-                <Card.Title>{event}</Card.Title>
-                <Card.Subtitle class="mb-2 text-muted">Link: {event}</Card.Subtitle>
-            </Card.Body>
-        </Card>
-    );
+        <tr>
+            <td>{title}</td>
+            <td>{type}</td>
+        </tr>
+    )
 }
