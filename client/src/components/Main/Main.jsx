@@ -13,8 +13,9 @@ import {
     Login,
     Signup,
     Home,
-    EventList,
-    EventCreate
+    EventAddList,
+    EventGetList,
+    EventAdd
 } from "../../pages";
 
 function Main() {
@@ -32,8 +33,9 @@ function Main() {
                 <Event.Provider>
                     <Switch>
                         <LoggedInRoute exact path="/" component={Home} />
-                        <LoggedInRoute exact path="/event" component={EventList} />
-                        <LoggedInRoute exact path="/event/create" component={EventCreate} />
+                        <LoggedInRoute exact path="/event/addlist" component={EventAddList} />
+                        <LoggedInRoute exact path="/event/getlist" component={EventGetList} />
+                        <LoggedInRoute exact path="/event/add" component={EventAdd} />
                         <LoggedOutRoute exact path="/login" component={Login} />
                         <LoggedOutRoute exact path="/signup" component={Signup} />
                         <Route path="*" component={NotFound} />

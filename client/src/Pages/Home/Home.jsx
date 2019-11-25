@@ -1,15 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import User from '../../utils/Account/User';
 import Event from '../../utils/Account/Events';
 
+const { USER_LOCATION } = Event.actions;
+
 export default function () {
+    
     User.refreshOnLoad();
     // we eagerly load events here so when the user switches pages it will appear faster. 
-    Event.refreshOnLoad();
+    Event.refreshDbOnLoad();
     const [{user}] = User.useContext();
+    const [eventDispatch] = Event.useContext();
+
+    useEffect(() => {
+        const startPos = {
+            lat: 0,
+            long: 0
+        };
+        const geoSuccess = function (position) {
+            startPos.lat = position.coords.latitude;
+            startPos.long = position.coords.longitude;
+            console.log("userLocation: ", startPos);
+            console.log("Call USER_LOCATION dispatch here");
+        };
+        navigator.geolocation.getCurrentPosition(geoSuccess);
+    }, []);
+
 
     return (
         <Container className="mt-5">

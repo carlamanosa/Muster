@@ -54,7 +54,7 @@ app.use(htmlRoutes);
 
 
 // Connect to the Mongo DB
-db.connect(process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist",
+db.connect(process.env.MONGODB_URI || "mongodb://localhost/Muster",
   { useNewUrlParser: true, useFindAndModify: false }).then(() => {
   // Start the API server
   app.listen(PORT, function() {

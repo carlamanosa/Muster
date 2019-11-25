@@ -10,7 +10,7 @@ import { EventCard } from '../../../components';
 export default function () {
     User.refreshOnLoad();
     // every time the user hits the event list page we will reload events.
-    Event.refreshOnLoad();
+    Event.refreshDbOnLoad();
     const [{events, pageLoading}] = Event.useContext();
 
     return pageLoading ? (
