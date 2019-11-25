@@ -13,16 +13,6 @@ export default function () {
     const [validated, setValidated] = useState(false);
     const [eventDispatch] = Event.useContext();
 
-    useEffect(() => {
-        var startPos;
-        var geoSuccess = function (position) {
-            startPos = position;
-            console.log(startPos.coords.latitude);
-            console.log(startPos.coords.longitude);
-        };
-        navigator.geolocation.getCurrentPosition(geoSuccess);
-    }, []);
-
     const typeInput = useRef();
     const taxoInput = useRef();
     const cityInput = useRef();
