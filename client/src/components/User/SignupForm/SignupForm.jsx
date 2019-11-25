@@ -4,60 +4,18 @@ import Button from 'react-bootstrap/Button';
 import User from '../../../utils/Account/User';
 import UserError from '../Error';
 
-const { USER_LOADING, SET_USER, USER_ERROR } = User.actions;
 
-export default function ({
-    api,
-    name,
-    className,
-    emailPattern,
-    passwordPattern,
-    EmailMessage = "",
-    PasswordMessage = ""
-}) {
-    User.refreshOnLoad();
-    const [validated, setValidated] = useState(false);
-    const [/* user not needed */, userDispatch] = User.useContext();
-    const emailInput = useRef();
-    const passwordInput = useRef();
-
-    const handleSubmit = event => {
-        event.preventDefault();
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            setValidated(true);
-            return;
-        }
-        const email = emailInput.current.value;
-        const password = passwordInput.current.value;
-
-        // If we have an email and password we run the loginUser function and clear the form
-        doUserFunc(email, password);
-    };
-
-    // doUserFunc does a post to our "api/login" route and if successful, redirects us the the members page
-    function doUserFunc(email, password) {
-        setValidated(false);
-        userDispatch({ type: USER_LOADING });
-        api({
-            email,
-            password
-        }).then(user => {
-            userDispatch({ type: SET_USER, user });
-        }).catch((err) => {
-            userDispatch({ type: USER_ERROR, message: err });
-        });
-    }
-
+function signupForm(){
     return (
         <Fragment>
             <h2>{name} Form</h2>
             <Form
                 validated={validated}
                 onSubmit={handleSubmit}
-                className={SignupForm}
+                className={className}
                 noValidate>
-            
+
+            {/* progress bar */}
             <ul id="progressbar">
                 <li class="active">Verify Phone</li>  
                 <li>Upload Documents</li> 
@@ -98,4 +56,6 @@ export default function ({
             </Form>
         </Fragment>
     );
-}
+};
+
+export default signupForm;
