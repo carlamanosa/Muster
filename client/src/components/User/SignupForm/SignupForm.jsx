@@ -55,7 +55,7 @@ export default function ({
             <Form
                 validated={validated}
                 onSubmit={handleSubmit}
-                className={SignupForm}
+                className={className}
                 noValidate>
             
             <ul id="progressbar">
