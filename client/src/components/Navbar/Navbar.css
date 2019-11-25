@@ -7,6 +7,11 @@
     animation-delay: 0s;
 }
 
+.navbar {
+    background-color: transparent;
+    height: 5rem;
+}
+
 @-webkit-keyframes navbarslide {
     100% { top: 0; }
 }

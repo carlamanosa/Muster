@@ -19,7 +19,7 @@ function MyNavbar() {
     });
   }
   return (
-    <Navbar bg="light" variant="light" expand="lg">
+    <Navbar className="navbar" expand="lg">
       <Container>
         {!user.email && (
         <NavbarBrand to="/login">Muster</NavbarBrand>
