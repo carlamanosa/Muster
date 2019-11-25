@@ -3,8 +3,9 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
-form.signup {
-  margin-top: 50px;
+
+form.signup{
+  background-color: aqua;
 }
 
 form.login {
