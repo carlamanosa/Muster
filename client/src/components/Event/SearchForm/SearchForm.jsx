@@ -7,12 +7,21 @@ import Col from 'react-bootstrap/Col';
 import Event from '../../../utils/Account/Events';
 import { EventError } from "../../../components";
 
-const { SET_API_EVENTS, EVENTS_ERROR } = Event.actions;
+const { SET_API_EVENTS, EVENTS_ERROR, USER_LOCATION } = Event.actions;
 
 export default function () {
     const [validated, setValidated] = useState(false);
+    const [eventDispatch] = Event.useContext();
 
-    console.log("How do I get the current location?");
+    useEffect(() => {
+        var startPos;
+        var geoSuccess = function (position) {
+            startPos = position;
+            console.log(startPos.coords.latitude);
+            console.log(startPos.coords.longitude);
+        };
+        navigator.geolocation.getCurrentPosition(geoSuccess);
+    }, []);
 
     const typeInput = useRef();
     const taxoInput = useRef();
@@ -39,57 +48,57 @@ export default function () {
     }
 
     return (
-            <Container className="mt-5">
-                <Row>
-                    <Col md={{ span: 6, offset: 3 }}>
-                        <h2>Search Events</h2>
-                        <Form
-                            validated={validated}
-                            onSubmit={handleSubmit}
-                            noValidate>
-                            <Form.Group controlId="formEventType">
-                                <Form.Label>Type</Form.Label>
-                                <Form.Control
-                                    required
-                                    pattern=".*\S+.*"
-                                    type="text"
-                                    placeholder="Enter Event Type"
-                                    ref={typeInput} />
-                                <Form.Control.Feedback type="invalid">
-                                    Type is required.
+        <Container className="mt-5">
+            <Row>
+                <Col md={{ span: 6, offset: 3 }}>
+                    <h2>Search Events</h2>
+                    <Form
+                        validated={validated}
+                        onSubmit={handleSubmit}
+                        noValidate>
+                        <Form.Group controlId="formEventType">
+                            <Form.Label>Type</Form.Label>
+                            <Form.Control
+                                required
+                                pattern=".*\S+.*"
+                                type="text"
+                                placeholder="Enter Event Type"
+                                ref={typeInput} />
+                            <Form.Control.Feedback type="invalid">
+                                Type is required.
                                 </Form.Control.Feedback>
-                            </Form.Group>
-                            <Form.Group controlId="formEventTaxo">
-                                <Form.Label>Taxo</Form.Label>
-                                <Form.Control
-                                    required
-                                    pattern=".*\S+.*"
-                                    type="text"
-                                    placeholder="Enter Event Type"
-                                    ref={taxoInput} />
-                                <Form.Control.Feedback type="invalid">
-                                    Type is required.
+                        </Form.Group>
+                        <Form.Group controlId="formEventTaxo">
+                            <Form.Label>Taxo</Form.Label>
+                            <Form.Control
+                                required
+                                pattern=".*\S+.*"
+                                type="text"
+                                placeholder="Enter Event Type"
+                                ref={taxoInput} />
+                            <Form.Control.Feedback type="invalid">
+                                Type is required.
                                 </Form.Control.Feedback>
-                            </Form.Group>
-                            <Form.Group controlId="formEventCity">
-                                <Form.Label>City</Form.Label>
-                                <Form.Control
-                                    required
-                                    pattern=".*\S+.*"
-                                    type="text"
-                                    placeholder="Enter Event Type"
-                                    ref={cityInput} />
-                                <Form.Control.Feedback type="invalid">
-                                    Type is required.
+                        </Form.Group>
+                        <Form.Group controlId="formEventCity">
+                            <Form.Label>City</Form.Label>
+                            <Form.Control
+                                required
+                                pattern=".*\S+.*"
+                                type="text"
+                                placeholder="Enter Event Type"
+                                ref={cityInput} />
+                            <Form.Control.Feedback type="invalid">
+                                Type is required.
                                 </Form.Control.Feedback>
-                            </Form.Group>
-                            <EventError />
-                            <Button variant="primary" type="submit">
-                                Submit
+                        </Form.Group>
+                        <EventError />
+                        <Button variant="primary" type="submit">
+                            Submit
                             </Button>
-                        </Form>
-                    </Col>
-                </Row>
-            </Container>
-        );
+                    </Form>
+                </Col>
+            </Row>
+        </Container>
+    );
 }
