@@ -138,6 +138,5 @@ router.post("/api/locations", isAuthenticatedData, function (req, res) {
     });
 });
 
-
 module.exports = router;
 
