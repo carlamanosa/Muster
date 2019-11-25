@@ -4,6 +4,7 @@ import User from "../../utils/Account/User";
 import Event from "../../utils/Account/Events";
 import { Switch, Route } from "react-router-dom";
 import Spinner from 'react-bootstrap/Spinner';
+import "./Main.css";
 import {
     LoggedInRoute,
     LoggedOutRoute
