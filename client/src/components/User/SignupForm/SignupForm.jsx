@@ -55,8 +55,14 @@ export default function ({
             <Form
                 validated={validated}
                 onSubmit={handleSubmit}
-                className={className}
+                className={SignupForm}
                 noValidate>
+            
+            <ul id="progressbar">
+                <li class="active">Verify Phone</li>  
+                <li>Upload Documents</li> 
+                <li>Security Questions</li>
+                 </ul>
                     
             {/* Email */}
                 <Form.Group controlId="formBasicEmail">
