@@ -86,5 +86,58 @@ router.post("/api/events", isAuthenticatedData, function (req, res) {
     });
 });
 
+router.get("/api/mobs", isAuthenticatedData, function (req, res) {
+  db.User.findById(req.user._id)
+    .then(function (dbUser) {
+      res.json(dbUser.mobs);
+    })
+    .catch(function (err) {
+      res.status(500).json(err);
+    });
+});
+router.post("/api/mobs", isAuthenticatedData, function (req, res) {
+  const mob = new db.Mob({
+    name: req.body.name,
+    id: req.body.mobId
+  });
+  console.log(JSON.stringify(mob));
+  db.User.update(
+    { _id: req.user._id }, 
+    { $push: { mobs: mob } })
+    .then(function () {
+      res.json(mob);
+    })
+    .catch(function (err) {
+      res.status(500).json(err);
+    });
+});
+
+router.get("/api/locations", isAuthenticatedData, function (req, res) {
+  db.User.findById(req.user._id)
+    .then(function (dbUser) {
+      res.json(dbUser.locations);
+    })
+    .catch(function (err) {
+      res.status(500).json(err);
+    });
+});
+router.post("/api/locations", isAuthenticatedData, function (req, res) {
+  const location = new db.Location({
+    lat: req.body.lat,
+    long: req.body.long
+  });
+  console.log(JSON.stringify(location));
+  db.User.update(
+    { _id: req.user._id }, 
+    { $push: { locations: location } })
+    .then(function () {
+      res.json(location);
+    })
+    .catch(function (err) {
+      res.status(500).json(err);
+    });
+});
+
+
 module.exports = router;
 
