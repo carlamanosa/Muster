@@ -4,8 +4,8 @@ const Schema = mongoose.Schema;
 
 const EventSchema = new Schema({
   name: { type: String, required: true },
-  scent: { type: String, required: true },
-  height: { type: Number, required: true }
+  date: { type: Number, required: true },
+  url: { type: String, required: true }
 });
 
 module.exports = EventSchema;
