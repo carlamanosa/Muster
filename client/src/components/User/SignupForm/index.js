@@ -1,1 +1,1 @@
-export { default } from "./SignupForm.jsx";
+export { default } from "./SignupForm";
