@@ -10,6 +10,7 @@ const { USER_LOADING, SET_USER, USER_ERROR } = User.actions;
 export default function ({
     api,
     name,
+    className,
     emailPattern,
     passwordPattern,
     EmailMessage = "",
