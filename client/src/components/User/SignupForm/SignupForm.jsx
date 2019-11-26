@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import User from '../../../utils/Account/User';
 import UserError from '../Error';
+import "./SignupForm.css";
 
 const { USER_LOADING, SET_USER, USER_ERROR } = User.actions;
 
