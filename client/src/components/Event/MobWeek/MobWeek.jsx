@@ -1,11 +1,11 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Fragment } from "react";
 
-function MobList() {
+function MobWeek() {
     return (
         <Fragment>
         </Fragment>
     );
 }
 
-export default MobList;
+export default MobWeek;
