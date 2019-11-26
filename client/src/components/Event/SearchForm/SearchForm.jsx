@@ -38,6 +38,10 @@ export default function () {
     }
 
     return (
+
+        // FOR REFERENCE - filter by taxonomies, query search bar
+
+
         <Container className="mt-5">
             <Row>
                 <Col md={{ span: 6, offset: 3 }}>
