@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Link } from 'react-router-dom';
-import { UserSignUpForm } from '../../components';
+import { UserSignupForm } from '../../components';
 import User from '../../utils/Account/User';
 
 function EmailMessage() {
@@ -36,7 +36,7 @@ export default function () {
         <Container className="mt-5">
             <Row>
                 <Col md={{ span: 6, offset: 3 }}>
-                    <UserSignUpForm
+                    <UserSignupForm
                         name="Sign Up"
                         className="signup"
                         api={User.API.signup}

@@ -4,22 +4,10 @@ import User from "../../utils/Account/User";
 import Event from "../../utils/Account/Events";
 import { Switch, Route } from "react-router-dom";
 import Spinner from 'react-bootstrap/Spinner';
-import {
-    LoggedInRoute,
-    LoggedOutRoute
-} from "../index.js";
-import {
-    NotFound,
-    Login,
-    Signup,
-    Home,
-    EventAddList,
-    EventGetList,
-    EventAdd
-} from "../../pages";
+import Mobs from "../../utils/Account/Mobs";
 
 function Main() {
-    const [{ pageLoading }] = User.useContext();
+    const [{ pageLoading }] = Mobs.useContext();
     User.refreshOnLoad();
     return (
         <Fragment>
