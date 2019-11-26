@@ -1,1 +1,1 @@
-export { default } from "./MobList.jsx";
+export { default } from "./MobList";
