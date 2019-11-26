@@ -1,17 +1,16 @@
 import Error from "./Error";
-import LoginForm from "./LoginForm"; 
-import SignupForm from "./SignupForm";
-
+import LoginForm from "./LoginForm";
+import SignUpForm from "./SignupForm";
 
 export default {
     Error,
     LoginForm,
-    SignupForm
+    SignUpForm
 }
 
 export {
     Error as UserError,
     LoginForm as UserLoginForm,
-    SignupForm as UserSignupForm
+    SignUpForm as UserSignUpForm
     
 }

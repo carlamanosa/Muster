@@ -51,26 +51,19 @@ export default function ({
 
     return (
         <Fragment>
-            <h2>{name} Form</h2>
+            <h2>{name} Form Does this Change?</h2>
+            <ul id="progressbar">
+                <li class="active">Verify Phone</li>  
+                <li>Upload Documents</li> 
+                <li>Security Questions</li>
+                 </ul>
+
             <Form
                 validated={validated}
                 onSubmit={handleSubmit}
-                className="SignupForm"
+                className={className}
                 noValidate>
-
-                <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control
-                        required
-                        pattern={emailPattern}
-                        type="email"
-                        placeholder="Enter email"
-                        ref={emailInput} />
-                    <Form.Control.Feedback type="invalid">
-                        <EmailMessage />
-                    </Form.Control.Feedback>
-                </Form.Group>
-                    
+                                
             {/* Email */}
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
