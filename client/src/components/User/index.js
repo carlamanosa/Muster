@@ -1,6 +1,6 @@
 import Error from "./Error";
 import LoginForm from "./LoginForm";
-import SignUpForm from "./LoginForm";
+import SignUpForm from "./SignupForm";
 
 export default {
     Error,

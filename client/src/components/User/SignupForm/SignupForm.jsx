@@ -51,19 +51,19 @@ export default function ({
 
     return (
         <Fragment>
-            <h2>{name} Form</h2>
-            <Form
-                validated={validated}
-                onSubmit={handleSubmit}
-                className={className}
-                noValidate>
-            
+            <h2>{name} Form Does this Change?</h2>
             <ul id="progressbar">
                 <li class="active">Verify Phone</li>  
                 <li>Upload Documents</li> 
                 <li>Security Questions</li>
                  </ul>
-                    
+
+            <Form
+                validated={validated}
+                onSubmit={handleSubmit}
+                className={className}
+                noValidate>
+                                
             {/* Email */}
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
