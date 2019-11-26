@@ -4,6 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import User from '../../utils/Account/User';
 import Event from '../../utils/Account/Events';
+import MobList from "../../components/MobList/MobList";
 
 const { USER_LOCATION } = Event.actions;
 
@@ -42,6 +43,8 @@ export default function () {
                     </h2>
                 </Col>
             </Row>
+
+            <MobList />
         </Container>
     );
 }

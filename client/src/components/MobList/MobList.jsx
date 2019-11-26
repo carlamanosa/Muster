@@ -1,37 +1,71 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Fragment } from "react";
-import User from "../../utils/Account/User";
-import Event from "../../utils/Account/Events";
-import { Switch, Route } from "react-router-dom";
-import Spinner from 'react-bootstrap/Spinner';
-import Mobs from "../../utils/Account/Mobs";
+import Table from 'react-bootstrap/Table';
+// import Mobs from "../../utils/Account/Mobs";
+// import Events from "../../utils/Account/Events";
 
-function Main() {
-    const [{ pageLoading }] = Mobs.useContext();
-    User.refreshOnLoad();
+function MobList() {
+    // Events.refreshDbOnLoad();
+    // Mobs.refreshOnLoad();
     return (
         <Fragment>
-            {pageLoading ? (
-                <div className="d-flex justify-content-center mt-5">
-                    <Spinner className="mt-5" animation="border" role="status">
-                        <span className="sr-only">Loading...</span>
-                    </Spinner>
-                </div>
-            ) : (
-                <Event.Provider>
-                    <Switch>
-                        <LoggedInRoute exact path="/" component={Home} />
-                        <LoggedInRoute exact path="/event/addlist" component={EventAddList} />
-                        <LoggedInRoute exact path="/event/getlist" component={EventGetList} />
-                        <LoggedInRoute exact path="/event/add" component={EventAdd} />
-                        <LoggedOutRoute exact path="/login" component={Login} />
-                        <LoggedOutRoute exact path="/signup" component={Signup} />
-                        <Route path="*" component={NotFound} />
-                    </Switch>
-                </Event.Provider>
-            )}
+               <Table id="mobList" responsive="sm">
+    <thead>
+      <tr>
+          My Events
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Sunday</td>
+      </tr>
+      <tr>
+        <td>Events</td>
+      </tr>
+      <tr>
+        <td>Monday</td>
+      </tr>
+      <tr>
+        <td>Events</td>
+      </tr>
+      <tr>
+        <td>Tuesday</td>
+      </tr>
+      <tr>
+        <td>Events</td>
+      </tr>
+      <tr>
+        <td>Wednesday</td>
+      </tr>
+      <tr>
+        <td>Events</td>
+      </tr>
+      <tr>
+        <td>Thursday</td>
+      </tr>
+      <tr>
+        <td>Events</td>
+      </tr>
+      <tr>
+        <td>Friday</td>
+      </tr>
+      <tr>
+        <td>Events</td>
+      </tr>
+      <tr>
+        <td>Saturday</td>
+      </tr>
+      <tr>
+        <td>Events</td>
+      </tr>
+    </tbody>
+  </Table>
+
+
+
+
         </Fragment>
     );
 }
 
-export default Main;
+export default MobList;
