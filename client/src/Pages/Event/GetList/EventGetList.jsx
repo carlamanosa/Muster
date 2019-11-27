@@ -4,7 +4,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import Table from 'react-bootstrap/Table'
 import Event from '../../../utils/Account/Events';
 import User from "../../../utils/Account/User";
-import { EventRow } from '../../../components';
+import { EventApiCalendar } from '../../../components';
 import { EventSearchForm } from "../../../components";
 
 export default function () {
@@ -33,7 +33,7 @@ export default function () {
                     <tbody>
                     {console.log("on page render: ", apiEvents)}
                     {apiEvents.map(event =>
-                        <EventRow {...event} />
+                        <EventApiCalendar {...event} />
                     )}
                     </tbody>
                 </Table>

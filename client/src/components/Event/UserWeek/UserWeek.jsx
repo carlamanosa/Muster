@@ -1,5 +1,6 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Fragment } from "react";
+import Card from 'react-bootstrap/Card'
 // get user saved events from database
 
 function UserWeek() {
