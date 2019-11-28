@@ -16,9 +16,10 @@ export default function () {
     const history = useHistory();
     const [validated, setValidated] = useState(false);
     const [/* user not needed */, eventDispatch] = Event.useContext();
+    const idInput = useRef();
     const nameInput = useRef();
-    const scentInput = useRef();
-    const heightInput = useRef();
+    const dateInput = useRef();
+    const urlInput = useRef();
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -27,25 +28,26 @@ export default function () {
             setValidated(true);
             return;
         }
+        const id = idInput.current.value;
         const name = nameInput.current.value;
-        const scent = scentInput.current.value;
-        const height = heightInput.current.value;
+        const date = dateInput.current.value;
+        const url = urlInput.current.value;
 
         // If we have an email and password we run the loginUser function and clear the form
-        addEvent(name, scent, height);
+        addEvent(id, name, date, url);
     };
 
     // addEvent does a post to our "api/login" route and if successful, redirects us the the members page
-    function addEvent(name, scent, height) {
+    function addEvent(id, name, date, url) {
         setValidated(false);
         eventDispatch({ type: EVENTS_LOADING });
         Event.API.addEvent({
+            id,
             name,
-            scent,
-            height
+            date,
+            url
         }).then(event => {
             eventDispatch({ type: ADD_USER_EVENT, event });
-            history.push("/event/addlist");
         }).catch((err) => {
             eventDispatch({ type: EVENTS_ERROR, message: err });
         });
@@ -60,6 +62,19 @@ export default function () {
                         validated={validated}
                         onSubmit={handleSubmit}
                         noValidate>
+                        <Form.Group controlId="formEventId">
+                            <Form.Label>ID</Form.Label>
+                            <Form.Control
+                                required
+                                pattern=".*\S+.*"
+                                type="number"
+                                placeholder="Enter Event Id"
+                                ref={idInput} />
+                            <Form.Control.Feedback type="invalid">
+                                ID is required.
+                            </Form.Control.Feedback>
+                        </Form.Group>
+
                         <Form.Group controlId="formEventName">
                             <Form.Label>Name</Form.Label>
                             <Form.Control
@@ -73,31 +88,31 @@ export default function () {
                             </Form.Control.Feedback>
                         </Form.Group>
 
-                        <Form.Group controlId="formEventScent">
-                            <Form.Label>Scent</Form.Label>
+                        <Form.Group controlId="formEventDate">
+                            <Form.Label>Date</Form.Label>
                             <Form.Control
                                 required
                                 pattern=".*\S+.*"
-                                type="text"
-                                placeholder="Enter Event Scent"
-                                ref={scentInput} />
+                                type="number"
+                                placeholder="Enter Event Date"
+                                ref={dateInput} />
                             <Form.Control.Feedback type="invalid">
-                                Scent is required.
+                                Date is required.
                             </Form.Control.Feedback>
                         </Form.Group>
 
-                        <Form.Group controlId="formEventHeight">
-                            <Form.Label>Height</Form.Label>
+                        <Form.Group controlId="formEventURL">
+                            <Form.Label>URL</Form.Label>
                             <Form.Control
                                 required
-                                type="number"
-                                placeholder="Enter Event Height"
-                                ref={heightInput} />
+                                type="text"
+                                placeholder="Enter Event URL"
+                                ref={urlInput} />
                             <Form.Control.Feedback type="invalid">
-                                Height is required and must be a number.
+                                URL is required and must be a number.
                             </Form.Control.Feedback>
                         </Form.Group>
-                            <EventError />
+                        <EventError />
                         <Button variant="primary" type="submit">
                             Add
                         </Button>

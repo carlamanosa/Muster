@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default {
   // Gets all events (from DB)
-  getEvents: function() {
+  getUserEvents: function() {
     return axios.get("/api/events").then(({data}) => data);
   },
   // Adds an event in the database

@@ -34,7 +34,7 @@ function Main() {
                     <Switch>
                         <LoggedInRoute exact path="/" component={Home} />
                         <LoggedInRoute exact path="/event/addlist" component={EventAddList} />
-                        <LoggedInRoute exact path="/event/explore-events" component={ExploreEvents} />
+                        <LoggedInRoute exact path="/event/explore" component={ExploreEvents} />
                         <LoggedInRoute exact path="/event/add" component={EventAdd} />
                         <LoggedOutRoute exact path="/login" component={Login} />
                         <LoggedOutRoute exact path="/signup" component={Signup} />

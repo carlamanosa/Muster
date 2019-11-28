@@ -70,9 +70,10 @@ router.get("/api/events", isAuthenticatedData, function (req, res) {
 });
 router.post("/api/events", isAuthenticatedData, function (req, res) {
   const event = new db.Event({
+    id: req.body.id,
     name: req.body.name,
-    scent: req.body.scent,
-    height: req.body.height
+    date: req.body.date,
+    url: req.body.url
   });
   console.log(JSON.stringify(event));
   db.User.update(
@@ -123,6 +124,7 @@ router.get("/api/locations", isAuthenticatedData, function (req, res) {
 });
 router.post("/api/locations", isAuthenticatedData, function (req, res) {
   const location = new db.Location({
+    timeStamp: req.body.timeStamp,
     lat: req.body.lat,
     long: req.body.long
   });
