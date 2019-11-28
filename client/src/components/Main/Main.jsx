@@ -15,7 +15,7 @@ import {
     Home,
     EventAddList,
     ExploreEvents,
-    EventAdd
+    EventAdd,
 } from "../../pages";
 
 function Main() {

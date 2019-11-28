@@ -13,7 +13,8 @@ const { SET_API_EVENTS, EVENTS_ERROR, SET_API_QUERY, USER_LOCATION } = Event.act
 export default function () {
     const [validated, setValidated] = useState(false);
     const [/* user not needed */, eventDispatch] = Event.useContext();
-    const [{apiEvents}] = Event.useContext();
+    const [{ apiEvents }] = Event.useContext();
+    const [swt, setSwt] = React.useState(true);
 
     // Where we store the user's input from our search form
     // This one is the filter (sports, concerts, theatre, etc)
@@ -38,13 +39,14 @@ export default function () {
         const taxo = rawTaxo.toLowerCase();
         const q = (rawQ.split(" ")).join("+");
         // Calling the function to make the API request (sending it our user's params)
-        setEventAPI(taxo, q);
+        console.log("swt: ", swt);
+        setEventAPI(taxo, q, swt);
     };
 
     // Build and then make API call (in progess)
-    function setEventAPI(taxo, q) {
+    function setEventAPI(taxo, q, geoIp) {
         const key = "client_id=MTk1OTI0NDF8MTU3NDQ1Mjc1MC43NQ&client_secret=24c6903bd6b5005c4d5de56d640bf9c071cf6f6a42b4a55c96dee81ebc08df14";
-        const queryURL = `https://api.seatgeek.com/2/events?taxonomies.name=${taxo}&q=${q}&${key}`;
+        const queryURL = `https://api.seatgeek.com/2/events?geoip=${geoIp}&per_page=25&&taxonomies.name=${taxo}&q=${q}&${key}`;
         eventDispatch({ type: SET_API_QUERY, queryURL });
         Event.API.eventAPI(
             queryURL
@@ -82,20 +84,29 @@ export default function () {
                             {/* Input Box (Search bar) for query input */}
                             <Form.Group as={Col} controlId="formGridQ">
                                 <Form.Control
-                                    required
                                     pattern=".*\S+.*"
                                     type="text"
                                     placeholder="Search Events"
                                     ref={qInput} />
-                                <Form.Control.Feedback type="invalid">
-                                    Something is required.
-                        </Form.Control.Feedback>
+                            </Form.Group>
+                        </Form.Row>
+
+                        <Form.Row>
+                            <Form.Group as={Col} controlId="formGridGeoIp">
+                                <Form.Check custom type="switch">
+                                    <Form.Check.Input isInvalid checked={swt} />
+                                    <Form.Check.Label onClick={() => setSwt(!swt)}>
+                                        {`Use Current Location: ${swt}`}
+                                    </Form.Check.Label>
+                                </Form.Check>
                             </Form.Group>
 
-                            {/* Submit Button (inside of the same Form.Row) */}
-                            <Button variant="primary" type="submit">
-                                Submit
-                    </Button>
+                            <Form.Group as={Col} controlId="formGridQ">
+                                {/* Submit Button (inside of the same Form.Row) */}
+                                <Button variant="primary" type="submit">
+                                    Submit
+                                </Button>
+                            </Form.Group>
                         </Form.Row>
                         <EventError />
                     </Form>
