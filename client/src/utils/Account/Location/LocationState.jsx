@@ -4,7 +4,7 @@ import actions from "./LocationActions.json";
 
 const { LOCATION_LOADING,
   SET_USER_LOCATION,
-  SET_SEARCH_LOCATION,
+  LOCATION_CONTROL,
   LOCATION_ERROR,
   CLEAR_LOCATION_ERROR } = actions;
 
@@ -27,11 +27,11 @@ const reducer = (state, action) => {
         pageLoading: false
       };
 
-    case SET_SEARCH_LOCATION:
-      console.log("SET-SEARCH-LOCATION: ", action.events);
+    case LOCATION_CONTROL:
+      console.log("LOCATION_CONTROL: ", action.events);
       return {
         ...state,
-        searchLocation: action.events,
+        locationControl: action.events,
         loading: false,
         pageLoading: false
       };
@@ -57,7 +57,7 @@ const reducer = (state, action) => {
 const LocationProvider = ({ value = {}, ...props }) => {
   const [state, dispatch] = useReducer(reducer, {
     userLocation: [],
-    searchLocation: "",
+    locationControl: false,
     pageLoading: true,
     loading: false,
     error: null
