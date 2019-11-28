@@ -14,7 +14,7 @@ import {
     Signup,
     Home,
     EventAddList,
-    EventGetList,
+    ExploreEvents,
     EventAdd
 } from "../pages";
 
@@ -34,7 +34,7 @@ function Routes() {
                     <Switch>
                         <LoggedInRoute exact path="/" component={Home} />
                         <LoggedInRoute exact path="/event/addlist" component={EventAddList} />
-                        <LoggedInRoute exact path="/event/getlist" component={EventGetList} />
+                        <LoggedInRoute exact path="/event/explore-events" component={ExploreEvents} />
                         <LoggedInRoute exact path="/event/add" component={EventAdd} />
                         <LoggedOutRoute exact path="/login" component={Login} />
                         <LoggedOutRoute exact path="/signup" component={Signup} />

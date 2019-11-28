@@ -5,15 +5,14 @@ import Table from 'react-bootstrap/Table'
 import Event from '../../../utils/Account/Events';
 import User from "../../../utils/Account/User";
 import { EventApiCalendar } from '../../../components';
-import { EventSearchForm } from "../../../components";
 
 export default function () {
 
     User.refreshOnLoad();
-    Event.refreshApiOnLoad();
+    // Event.refreshApiOnLoad();
     const [{ apiEvents, pageLoading }] = Event.useContext();
 
-    console.log("EventGetList.jsx.apiEvents: ", apiEvents);
+    console.log("EventGetList.apiEvents: ", apiEvents);
 
     return pageLoading ? (
         <div className="d-flex justify-content-center mt-5">
@@ -23,7 +22,7 @@ export default function () {
         </div>
     ) : (
             <Container className="mt-5">
-                <EventSearchForm />                
+                <EventApiCalendar />                
                 <Table>
                     <thead>
                         <tr>
@@ -31,10 +30,10 @@ export default function () {
                         </tr>
                     </thead>
                     <tbody>
-                    {console.log("on page render: ", apiEvents)}
+                    {/* {console.log("on page render: ", apiEvents)}
                     {apiEvents.map(event =>
                         <EventApiCalendar {...event} />
-                    )}
+                    )} */}
                     </tbody>
                 </Table>
             </Container>

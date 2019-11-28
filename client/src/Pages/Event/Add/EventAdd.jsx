@@ -9,7 +9,7 @@ import User from "../../../utils/Account/User";
 import { EventError } from '../../../components';
 import { useHistory } from 'react-router-dom';
 
-const { EVENTS_LOADING, ADD_EVENT, EVENTS_ERROR } = Event.actions;
+const { EVENTS_LOADING, ADD_USER_EVENT, EVENTS_ERROR } = Event.actions;
 
 export default function () {
     User.refreshOnLoad();
@@ -44,7 +44,7 @@ export default function () {
             scent,
             height
         }).then(event => {
-            eventDispatch({ type: ADD_EVENT, event });
+            eventDispatch({ type: ADD_USER_EVENT, event });
             history.push("/event/addlist");
         }).catch((err) => {
             eventDispatch({ type: EVENTS_ERROR, message: err });
