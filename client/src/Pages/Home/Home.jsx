@@ -11,11 +11,11 @@ import { EventUserWeek } from "../../components";
 const { USER_LOCATION } = Event.actions;
 
 export default function () {
-    
+
     User.refreshOnLoad();
     // we eagerly load events here so when the user switches pages it will appear faster. 
     Event.refreshDbOnLoad();
-    const [{user}] = User.useContext();
+    const [{ user }] = User.useContext();
     const [eventDispatch] = Event.useContext();
 
     useEffect(() => {
@@ -47,14 +47,13 @@ export default function () {
             </Row>
             <Row>
                 <Col>
-            <EventUserWeek />
-                </Col>
-
-                <Col>
-            <MobList />
+                    <EventUserWeek />
                 </Col>
                 <Col>
-            <EventMobCard />
+                    <MobList />
+                </Col>
+                <Col>
+                    <EventMobCard />
                 </Col>
             </Row>
         </Container>
