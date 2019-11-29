@@ -19,7 +19,7 @@ export default function () {
                             {user.email}
                         </span>
                     </h2>
-                    <h2>this is the profilepage page</h2>
+                    <h2>this is the mob page</h2>
                 </Col>
             </Row>
         </Container>
