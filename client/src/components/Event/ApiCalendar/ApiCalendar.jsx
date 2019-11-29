@@ -15,8 +15,7 @@ function ApiCalendar() {
     // send saved events to user database
     console.log(apiEvents, apiQuery);
 
-    const localizer = momentLocalizer(moment) // or globalizeLocalizer
-
+    const localizer = momentLocalizer(moment)
     const myEventsList = [
         {
             title: "Some Title",
@@ -37,18 +36,6 @@ function ApiCalendar() {
                 endAccessor="end"
                 style={{ height: "100vh" }}
             />
-
-
-            {/* Just displaying data returned from API in rows for now */}
-            {apiEvents.map(event =>
-                <Card className="m-2">
-                    <Card.Body>
-                        <Card.Title>{event.title}</Card.Title>
-                        <Card.Subtitle class="mb-2 text-muted">{event.datetime_local}</Card.Subtitle>
-                        <Card.Text>{event.url}</Card.Text>
-                    </Card.Body>
-                </Card>
-            )}
 
             {/* modal for event*/}
             {/* MODAL- taxonomies, venue, city,  time, seatgeek link, mob attendees (bonus), add button*/}
