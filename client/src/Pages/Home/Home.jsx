@@ -53,7 +53,9 @@ export default function () {
                     <MobList />
                 </Col>
                 <Col>
+                <div className="scrollbar my-5 mx-auto">
                     <EventMobCard />
+                    </div>
                 </Col>
             </Row>
         </Container>

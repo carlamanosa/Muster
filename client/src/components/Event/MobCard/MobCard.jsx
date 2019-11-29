@@ -1,21 +1,24 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Fragment } from "react";
-import Card from 'react-bootstrap/Card'
+import Card from 'react-bootstrap/Card';
+import "./MobCard.css";
 // get Mob List from database
 // get Mob Events from each mobs object
 
 export default function MobCard({ name, date, url }) {
     return (
         <Fragment>
-            <Card bg="info" text="white" style={{ width: '18rem' }}>
-                <Card.Header>Header</Card.Header>
+            <Card className="card">
+                <Card.Header id="event-title"><strong>Drake{name}</strong></Card.Header>
                 <Card.Body>
-                    <Card.Title>{name}</Card.Title>
-                    <Card.Text>
+                    <Card.Text className="date"> March 2020
                         {date}
                     </Card.Text>
-                    <Card.Text>
+                    <Card.Text className="url"> drake.com
                         {url}
+                    </Card.Text>
+                    <Card.Text className="mob">
+                        {name} Mob:
                     </Card.Text>
                 </Card.Body>
             </Card>

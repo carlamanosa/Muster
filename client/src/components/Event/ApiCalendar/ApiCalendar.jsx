@@ -1,6 +1,5 @@
 import React, { Fragment, useState, useRef, useEffect } from "react";
 import Card from 'react-bootstrap/Card';
-
 import Event from '../../../utils/Account/Events';
 
 function ApiCalendar() {
@@ -15,6 +14,7 @@ function ApiCalendar() {
             {/* calendar(2 weeks) to show events searched with buttons to go back and forth between weeks*/}
             {/* Just displaying data returned from API in rows for now */}
             {apiEvents.map(event =>
+
                 <Card className="m-2">
                     <Card.Body>
                         <Card.Title>{event.title}</Card.Title>
@@ -24,13 +24,10 @@ function ApiCalendar() {
                 </Card>
             )}
 
-          
-
-            
-
             {/* modal for event*/}
             {/* MODAL- taxonomies, venue, city,  time, seatgeek link, mob attendees (bonus), add button*/}
         </Fragment>
+        
     );
 }
 

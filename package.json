@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "if-env": "^1.0.4",
-    "mongoose": "^5.7.12"
+    "mongoose": "^5.7.12",
+    "react-event-calendar": "^0.3.0"
   }
 }
