@@ -1,11 +1,20 @@
 .card {
-    text-align: center;
     background-color: white;
     box-shadow: 0 3px 6px #FAE2AF, 0 3px 6px rgb(235, 210, 155);
+    width: 18rem;
     
 }
 
 #event-title {
     font-size: 20px;
     font-style: bold;
+    text-align: center;
+}
+
+#event-date {
+    text-align: center;
+}
+
+#event-url {
+    text-align: center;
 }

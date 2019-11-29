@@ -11,13 +11,13 @@ export default function MobCard({ name, date, url }) {
             <Card className="card">
                 <Card.Header id="event-title">Drake{name}</Card.Header>
                 <Card.Body>
-                    <Card.Text className="date"> March 2020
+                    <Card.Text id="event-date"> March 2020
                         {date}
                     </Card.Text>
-                    <Card.Text className="url"> drake.com
+                    <Card.Text id="event-url"> drake.com
                         {url}
                     </Card.Text>
-                    <Card.Text className="mob">
+                    <Card.Text id="mob">
                         {name} Mob:
                     </Card.Text>
                 </Card.Body>

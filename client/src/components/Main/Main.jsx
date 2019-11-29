@@ -16,6 +16,8 @@ import {
     EventAddList,
     ExploreEvents,
     EventAdd,
+    ProfilePage,
+    Mob
 } from "../../pages";
 
 function Main() {
@@ -36,6 +38,8 @@ function Main() {
                         <LoggedInRoute exact path="/event/addlist" component={EventAddList} />
                         <LoggedInRoute exact path="/event/explore" component={ExploreEvents} />
                         <LoggedInRoute exact path="/event/add" component={EventAdd} />
+                        <LoggedInRoute exact path="/user/profilepage" component={ProfilePage} />
+                        <LoggedInRoute exact path="/mob" component={Mob} />
                         <LoggedOutRoute exact path="/login" component={Login} />
                         <LoggedOutRoute exact path="/signup" component={Signup} />
                         <Route path="*" component={NotFound} />

@@ -51,9 +51,6 @@ export default function () {
                     <EventUserWeek />
                 </Col>
                 <Col>
-                    <MobList />
-                </Col>
-                <Col>
                 <Container className="mob-section">
                     <h2>Muster Mob</h2>
                 <div className="scrollbar my-5 mx-auto">
@@ -62,6 +59,11 @@ export default function () {
                     </Container>
                 </Col>
             </Row>
+            <Row>
+                <Col>
+                    <MobList />
+                </Col>
+                </Row>
         </Container>
     );
 }

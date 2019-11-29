@@ -3,7 +3,6 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import User from '../../utils/Account/User';
-import Testing from "../../components/Testing";
 
 export default function () {
     
@@ -20,8 +19,7 @@ export default function () {
                             {user.email}
                         </span>
                     </h2>
-                    <h2>this is the profilepage page</h2>
-                    <Testing />
+                    <h2>this is the mob page</h2>
                 </Col>
             </Row>
         </Container>

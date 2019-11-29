@@ -1,6 +1,9 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Fragment } from "react";
 import Card from 'react-bootstrap/Card'
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
 // geting Mob List from database 
 // get info from mob list objects 
 
@@ -13,7 +16,18 @@ function MobList() {
 
 
         <Fragment>
-            <div>Future Home of your Friends</div>
+            <Container>
+                <Row>
+                    <Col>
+                    Display Name 
+                    Link
+
+                    </Col>
+                    <Col>
+                    Common Friends
+                    </Col>
+                </Row>
+            </Container>
         </Fragment>
     );
 }
