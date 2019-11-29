@@ -1,9 +1,11 @@
 .card {
     text-align: center;
-    background-color: whitesmoke;
-    border: 
+    background-color: white;
+    box-shadow: 0 3px 6px #FAE2AF, 0 3px 6px rgb(235, 210, 155);
+    
 }
 
 #event-title {
     font-size: 20px;
+    font-style: bold;
 }

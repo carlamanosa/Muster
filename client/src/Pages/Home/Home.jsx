@@ -36,7 +36,7 @@ export default function () {
     return (
         <Container className="mt-5">
             <Row>
-                <Col md={{ span: 6, offset: 3 }}>
+                <Col >
                     <h2>
                         Welcome{" "}
                         <span className="member-name">

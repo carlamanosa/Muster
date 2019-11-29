@@ -9,7 +9,7 @@ export default function MobCard({ name, date, url }) {
     return (
         <Fragment>
             <Card className="card">
-                <Card.Header id="event-title"><strong>Drake{name}</strong></Card.Header>
+                <Card.Header id="event-title">Drake{name}</Card.Header>
                 <Card.Body>
                     <Card.Text className="date"> March 2020
                         {date}
