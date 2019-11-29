@@ -7,6 +7,7 @@ import Event from '../../utils/Account/Events';
 import MobList from "../../components/MobList/MobList";
 import { EventMobCard } from "../../components";
 import { EventUserWeek } from "../../components";
+import './Home.css';
 
 const { USER_LOCATION } = Event.actions;
 
@@ -53,9 +54,12 @@ export default function () {
                     <MobList />
                 </Col>
                 <Col>
+                <Container className="mob-section">
+                    <h2>Muster Mob</h2>
                 <div className="scrollbar my-5 mx-auto">
                     <EventMobCard />
                     </div>
+                    </Container>
                 </Col>
             </Row>
         </Container>
