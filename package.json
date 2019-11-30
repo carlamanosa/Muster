@@ -29,7 +29,10 @@
   },
   "dependencies": {
     "if-env": "^1.0.4",
+    "moment": "^2.24.0",
     "mongoose": "^5.7.12",
-    "react-event-calendar": "^0.3.0"
+    "react-big-calendar": "^0.23.0",
+    "react-event-calendar": "^0.3.0",
+    "react-moment": "^0.9.6"
   }
 }
