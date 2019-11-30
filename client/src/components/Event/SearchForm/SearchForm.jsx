@@ -6,19 +6,20 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Event from '../../../utils/Account/Events';
 import { EventError } from "../../../components";
-import ApiCalendar from "../ApiCalendar";
 
-const { SET_API_EVENTS, EVENTS_ERROR, SET_API_QUERY, USER_LOCATION } = Event.actions;
+const { SET_API_EVENTS, EVENTS_ERROR, SET_API_QUERY, EVENTS_LOADING } = Event.actions;
 
 export default function () {
     const [validated, setValidated] = useState(false);
     const [/* user not needed */, eventDispatch] = Event.useContext();
     const [{ apiEvents }] = Event.useContext();
     const [swt, setSwt] = React.useState(true);
-
+    
+    useEffect(() => {
+        eventDispatch({ type: EVENTS_LOADING });
+      }, []);
+    
     // Where we store the user's input from our search form
-    // This one is the filter (sports, concerts, theatre, etc)
-    const taxoInput = useRef();
     // This one is the text input from the search bar that we'll send as a query to the API
     const qInput = useRef();
 
@@ -34,19 +35,21 @@ export default function () {
         }
         // Our params object that we'll send to the API request
         // Built from user's input
-        const rawTaxo = taxoInput.current.value;
         const rawQ = qInput.current.value;
-        const taxo = rawTaxo.toLowerCase();
         const q = (rawQ.split(" ")).join("+");
         // Calling the function to make the API request (sending it our user's params)
         console.log("swt: ", swt);
-        setEventAPI(taxo, q, swt);
+        setEventAPI(q, swt);
     };
 
     // Build and then make API call (in progess)
-    function setEventAPI(taxo, q, geoIp) {
+    function setEventAPI(q, geoIp) {
         const key = "client_id=MTk1OTI0NDF8MTU3NDQ1Mjc1MC43NQ&client_secret=24c6903bd6b5005c4d5de56d640bf9c071cf6f6a42b4a55c96dee81ebc08df14";
+<<<<<<< HEAD
         const queryURL = `https://api.seatgeek.com/2/events?geoip=${geoIp}&datetime_local.gte=2019-12-01&datetime_local.lte=2019-12-31&per_page=25&&taxonomies.name=${taxo}&q=${q}&${key}`;
+=======
+        const queryURL = `https://api.seatgeek.com/2/events?geoip=${geoIp}&per_page=100&q=${q}&datetime_local.gte=2019-11-29&datetime_local.lte=2019-12-31&${key}`;
+>>>>>>> origin/master
         eventDispatch({ type: SET_API_QUERY, queryURL });
         Event.API.eventAPI(
             queryURL
@@ -70,7 +73,7 @@ export default function () {
                         onSubmit={handleSubmit}
                         noValidate>
                         <Form.Row>
-                            {/* Drop Down List of Taxonomies Options */}
+                            {/* Drop Down List of Taxonomies Options
                             <Form.Group as={Col} controlId="formGridTaxo">
                                 <Form.Control
                                     required
@@ -79,7 +82,7 @@ export default function () {
                                     <option>Concert</option>
                                     <option>Sports</option>
                                 </Form.Control>
-                            </Form.Group>
+                            </Form.Group> */}
 
                             {/* Input Box (Search bar) for query input */}
                             <Form.Group as={Col} controlId="formGridQ">
