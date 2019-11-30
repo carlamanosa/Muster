@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import User from '../../utils/Account/User';
-import Testing from "../../components/Testing";
+import TestingThings from "../../components/Testing";
 
 export default function () {
     
@@ -21,7 +21,7 @@ export default function () {
                         </span>
                     </h2>
                     <h2>this is the profilepage page</h2>
-                    <Testing />
+                    <TestingThings />
                 </Col>
             </Row>
         </Container>
