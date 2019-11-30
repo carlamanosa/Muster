@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
 const EventSchema = require("./schema/event");
 const MobSchema = require("./schema/mob");
-const LocationSchema = require("./schema/location");
-const QuestionSchema = require("./schema/question");
+const AboutSchema = require("./schema/about");
 // Requiring bcrypt for password hashing. Using the bcryptjs version as the regular bcrypt module sometimes causes errors on Windows machines
 var bcrypt = require("bcryptjs");
 
@@ -19,6 +18,23 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
+  displayName: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  firstName: {
+    type: String,
+    required: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+  },
+  location: {
+    type: Object,
+    required: true,
+  },
   events: [
     {
       type: EventSchema,
@@ -29,14 +45,9 @@ const UserSchema = new Schema({
       type: MobSchema,
     }
   ],  
-  locations: [
+  abouts: [
     {
-      type: LocationSchema,
-    }
-  ],
-  questions: [
-    {
-      type: QuestionSchema,
+      type: AboutSchema,
     }
   ]
 });

@@ -16,5 +16,13 @@ export default {
   // Creates a user and logs them in
   signup: function (userData) {
     return axios.post("/api/signup", userData).then(({ data }) => data);
+  },
+  // Gets aboutUser
+  getAboutUser: function (aboutUserData) {
+    return axios.get("/api/abouts", aboutUserData).then(({ data }) => data);
+  },
+  // Updates aboutUser
+  setAboutUser: function (aboutUserData) {
+    return axios.post("/api/abouts", aboutUserData).then(({ data }) => data);
   }
 };

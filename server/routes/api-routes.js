@@ -22,7 +22,11 @@ router.post("/api/login", passport.authenticate("local"), function (req, res) {
 router.post("/api/signup", function (req, res) {
   db.User.create({
       email: req.body.email,
-      password: req.body.password
+      password: req.body.password,
+      displayName: req.body.displayName,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      location: req.body.location,
     })
     .then(function () {
       res.redirect(307, "/api/login");
@@ -53,8 +57,13 @@ router.get("/api/user_data", function (req, res) {
     // Otherwise send back the user's email and id
     // Sending back a password, even a hashed password, isn't a good idea
     res.json({
+      id: req.user.id,
       email: req.user.email,
-      id: req.user.id
+      displayName: req.user.displayName,
+      location: req.user.location,
+      events: req.user.events,
+      mobs: req.user.mobs,
+      abouts: req.user.abouts
     });
   }
 });
@@ -113,32 +122,33 @@ router.post("/api/mobs", isAuthenticatedData, function (req, res) {
     });
 });
 
-router.get("/api/locations", isAuthenticatedData, function (req, res) {
+router.get("/api/abouts", isAuthenticatedData, function (req, res) {
   db.User.findById(req.user._id)
     .then(function (dbUser) {
-      res.json(dbUser.locations);
+      res.json(dbUser.abouts);
     })
     .catch(function (err) {
       res.status(500).json(err);
     });
 });
-router.post("/api/locations", isAuthenticatedData, function (req, res) {
-  const location = new db.Location({
-    timeStamp: req.body.timeStamp,
-    lat: req.body.lat,
-    long: req.body.long
+router.post("/api/abouts", isAuthenticatedData, function (req, res) {
+  const about = new db.About({
+    questions: req.body.questions,
+    aboutUser: req.body.aboutUser,
+    id: req.body.aboutUserId
   });
-  console.log(JSON.stringify(location));
+  console.log(JSON.stringify(about));
   db.User.update(
     { _id: req.user._id }, 
-    { $push: { locations: location } })
+    { $push: { abouts: about } })
     .then(function () {
-      res.json(location);
+      res.json(about);
     })
     .catch(function (err) {
       res.status(500).json(err);
     });
 });
+
 
 module.exports = router;
 
