@@ -9,8 +9,6 @@ import { EventMobCard } from "../../components";
 import { EventUserWeek } from "../../components";
 import './Home.css';
 
-const { USER_LOCATION } = Event.actions;
-
 export default function () {
 
     User.refreshOnLoad();
@@ -19,19 +17,19 @@ export default function () {
     const [{ user }] = User.useContext();
     const [eventDispatch] = Event.useContext();
 
-    useEffect(() => {
-        const startPos = {
-            lat: 0,
-            long: 0
-        };
-        const geoSuccess = function (position) {
-            startPos.lat = position.coords.latitude;
-            startPos.long = position.coords.longitude;
-            console.log("userLocation: ", startPos);
-            console.log("Call USER_LOCATION dispatch here");
-        };
-        navigator.geolocation.getCurrentPosition(geoSuccess);
-    }, []);
+    // useEffect(() => {
+    //     const startPos = {
+    //         lat: 0,
+    //         long: 0
+    //     };
+    //     const geoSuccess = function (position) {
+    //         startPos.lat = position.coords.latitude;
+    //         startPos.long = position.coords.longitude;
+    //         console.log("userLocation: ", startPos);
+    //         console.log("Call USER_LOCATION dispatch here");
+    //     };
+    //     navigator.geolocation.getCurrentPosition(geoSuccess);
+    // }, []);
 
 
     return (
@@ -41,7 +39,7 @@ export default function () {
                     <h2>
                         Welcome{" "}
                         <span className="member-name">
-                            {user.email}
+                            {user.firstName} ({user.displayName})
                         </span>
                     </h2>
                 </Col>

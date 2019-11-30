@@ -29,6 +29,14 @@ function PasswordMessage() {
     );
 }
 
+function DisplayNameMessage() {
+    return (
+        <Fragment>
+            Sorry, that Display Name is already taken.
+        </Fragment>
+    );
+}
+
 export default function () {
     User.refreshOnLoad();
 
@@ -43,6 +51,7 @@ export default function () {
                         passwordPattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
                         EmailMessage={EmailMessage}
                         PasswordMessage={PasswordMessage}
+                        DisplayNameMessage={DisplayNameMessage}
                     />
                     <br />
                     <p>Or log in <Link to="/login">here</Link></p>

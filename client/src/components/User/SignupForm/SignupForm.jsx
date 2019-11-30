@@ -14,13 +14,21 @@ export default function ({
     emailPattern,
     passwordPattern,
     EmailMessage = "",
-    PasswordMessage = ""
+    PasswordMessage = "",
+    DisplayNameMessage = ""
 }) {
     User.refreshOnLoad();
     const [validated, setValidated] = useState(false);
     const [/* user not needed */, userDispatch] = User.useContext();
+    const firstNameInput = useRef();
+    const lastNameInput = useRef();
+    const displayNameInput = useRef();
     const emailInput = useRef();
     const passwordInput = useRef();
+    const cityInput = useRef();
+    const stateInput = useRef();
+    const zipInput = useRef();
+
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -29,20 +37,32 @@ export default function ({
             setValidated(true);
             return;
         }
+        const firstName = firstNameInput.current.value;
+        const lastName = lastNameInput.current.value;
+        const displayName = displayNameInput.current.value;
         const email = emailInput.current.value;
         const password = passwordInput.current.value;
+        const location = {
+            city: cityInput.current.value,
+            state: stateInput.current.value,
+            zip: zipInput.current.value
+        }
 
-        // If we have an email and password we run the loginUser function and clear the form
-        doUserFunc(email, password);
+        // If we have everything, we run the loginUser function and clear the form
+        doUserFunc(email, password, displayName, firstName, lastName, location);
     };
 
-    // doUserFunc does a post to our "api/login" route and if successful, redirects us the the members page
-    function doUserFunc(email, password) {
+    // doUserFunc does a post to our "api/login" route and if successful, *will (hopefully)* redirect them to the AboutUser page
+    function doUserFunc(email, password, displayName, firstName, lastName, location) {
         setValidated(false);
         userDispatch({ type: USER_LOADING });
         api({
             email,
-            password
+            password,
+            displayName,
+            firstName,
+            lastName,
+            location
         }).then(user => {
             userDispatch({ type: SET_USER, user });
         }).catch((err) => {
@@ -54,18 +74,52 @@ export default function ({
         <Fragment>
             <h2>{name} Form Does this Change?</h2>
             <ul id="progressbar">
-                <li class="active">Verify Phone</li>  
-                <li>Upload Documents</li> 
+                <li class="active">Verify Phone</li>
+                <li>Upload Documents</li>
                 <li>Security Questions</li>
-                 </ul>
+            </ul>
 
             <Form
                 validated={validated}
                 onSubmit={handleSubmit}
                 className={className}
                 noValidate>
-                                
-            {/* Email */}
+
+                {/* First Name */}
+                <Form.Group controlId="formBasicFirstName">
+                    <Form.Label>First name</Form.Label>
+                    <Form.Control
+                        pattern=".*\S+.*"
+                        type="text"
+                        placeholder="First Name"
+                        ref={firstNameInput} />
+                </Form.Group>
+
+                {/* Last Name */}
+                <Form.Group controlId="formBasicLastName">
+                    <Form.Label>Last name</Form.Label>
+                    <Form.Control
+                        pattern=".*\S+.*"
+                        type="text"
+                        placeholder="Last Name"
+                        ref={lastNameInput} />
+                </Form.Group>
+
+                {/* Display Name */}
+                <Form.Group controlId="formBasicDisplayName">
+                    <Form.Label>Display Name</Form.Label>
+                    <Form.Control
+                        required
+                        pattern={emailPattern}
+                        type="text"
+                        placeholder="Choose a Display Name"
+                        ref={displayNameInput} />
+                    <Form.Control.Feedback type="invalid">
+                        <DisplayNameMessage />
+                    </Form.Control.Feedback>
+                </Form.Group>
+
+                {/* Email */}
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control
@@ -92,7 +146,57 @@ export default function ({
                         <PasswordMessage />
                     </Form.Control.Feedback>
                 </Form.Group>
-                    <UserError />
+
+                {/* City */}
+                <Form.Group controlId="formBasicCity">
+                    <Form.Label>City</Form.Label>
+                    <Form.Control
+                        pattern=".*\S+.*"
+                        type="text"
+                        placeholder="City"
+                        ref={cityInput}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                        Please provide a valid city.
+                    </Form.Control.Feedback>
+                </Form.Group>
+
+                {/* State */}
+                <Form.Group md="3" controlId="formBasicState">
+                    <Form.Label>State</Form.Label>
+                    <Form.Control
+                        pattern=".*\S+.*"
+                        type="text"
+                        placeholder="State"
+                        ref={stateInput}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                        Please provide a valid state.
+                    </Form.Control.Feedback>
+                </Form.Group>
+
+                {/* Zip */}
+                <Form.Group md="3" controlId="formBasicZip">
+                    <Form.Label>Zip</Form.Label>
+                    <Form.Control
+                        pattern=".*\S+.*"
+                        type="number"
+                        placeholder="Zip"
+                        ref={zipInput}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                        Please provide a valid zip.
+                    </Form.Control.Feedback>
+                </Form.Group>
+
+                <Form.Group>
+                    <Form.Check
+                        required
+                        label="Agree to terms and conditions"
+                        feedback="You must agree before submitting."
+                    />
+                </Form.Group>
+                <UserError />
                 <Button variant="primary" type="submit">
                     {name}
                 </Button>
