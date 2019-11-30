@@ -6,6 +6,7 @@ const {
   SET_USER_EVENTS,
   SET_API_EVENTS,
   SET_API_QUERY,
+  SET_QUERY_DATES,
   ADD_USER_EVENT,
   DELETE_USER_EVENT,
   SET_EVENT_STATE,
@@ -47,6 +48,15 @@ const reducer = (state, action) => {
         pageLoading: false
       };
 
+    case SET_QUERY_DATES:
+      console.log("SET-QUERY-DATES: ", action.dates);
+      return {
+        ...state,
+        queryDates: {...state.queryDates,
+        startDate: action.today},
+        loading: false,
+        pageLoading: false
+      };
 
     case ADD_USER_EVENT:
       return {
@@ -95,6 +105,10 @@ const EventProvider = ({ value = {}, ...props }) => {
     events: [],
     apiEvents: [],
     apiQuery: "",
+    queryDates: {
+      startDate: "",
+      endDate: ""
+    },
     pageLoading: true,
     loading: false,
     error: null
