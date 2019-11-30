@@ -53,19 +53,6 @@ function ApiCalendar() {
     return (
         <Fragment>
             {/* calendar(2 weeks) to show events searched with buttons to go back and forth between weeks*/}
-<<<<<<< HEAD
-            {/* Just displaying data returned from API in rows for now */}
-            {apiEvents.map(event =>
-
-                <Card className="m-2">
-                    <Card.Body>
-                        <Card.Title>{event.title}</Card.Title>
-                        <Card.Subtitle class="mb-2 text-muted">{event.datetime_local}</Card.Subtitle>
-                        <Card.Text>{event.url}</Card.Text>
-                    </Card.Body>
-                </Card>
-            )}
-=======
             <Calendar
                 localizer={localizer}
                 events={apiEventsList}
@@ -73,7 +60,6 @@ function ApiCalendar() {
                 endAccessor="end"
                 style={{ height: "100vh" }}
             />
->>>>>>> origin/master
 
             {/* modal for event*/}
             {/* MODAL- taxonomies, venue, city,  time, seatgeek link, mob attendees (bonus), add button*/}
