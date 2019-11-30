@@ -52,7 +52,7 @@ export default function ({
         doUserFunc(email, password, displayName, firstName, lastName, location);
     };
 
-    // doUserFunc does a post to our "api/login" route and if successful, redirects us the the members page
+    // doUserFunc does a post to our "api/login" route and if successful, *will (hopefully)* redirect them to the AboutUser page
     function doUserFunc(email, password, displayName, firstName, lastName, location) {
         setValidated(false);
         userDispatch({ type: USER_LOADING });

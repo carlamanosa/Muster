@@ -59,6 +59,8 @@ router.get("/api/user_data", function (req, res) {
     res.json({
       id: req.user.id,
       email: req.user.email,
+      firstName: req.user.firstName,
+      lastName: req.user.lastName,
       displayName: req.user.displayName,
       location: req.user.location,
       events: req.user.events,
