@@ -2,7 +2,6 @@ import React, { Fragment } from "react";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { Link } from 'react-router-dom';
 import { UserLoginForm } from '../../components';
 import User from '../../utils/Account/User';
 
@@ -28,7 +27,10 @@ export default function () {
     return (
         <Container className="mt-5">
             <Row>
-                <Col md={{ span: 6, offset: 3 }}>
+                <Col>
+                <h1>Meet Up and Mob Out.</h1>
+                </Col>
+                <Col>
                     <UserLoginForm
                         name="Log In"
                         className="login"
@@ -36,8 +38,6 @@ export default function () {
                         EmailMessage={EmailMessage}
                         PasswordMessage={PasswordMessage}
                     />
-                    <br />
-                    <p>Or sign up <Link to="/signup">here</Link></p>
                 </Col>
             </Row>
         </Container>

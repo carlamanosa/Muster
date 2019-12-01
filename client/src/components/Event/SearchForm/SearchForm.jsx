@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col';
 import Event from '../../../utils/Account/Events';
 import { EventError } from "../../../components";
 
+
 const { SET_API_EVENTS, EVENTS_ERROR, SET_API_QUERY, EVENTS_LOADING } = Event.actions;
 
 export default function () {
@@ -64,7 +65,7 @@ export default function () {
                 <Col md={{ span: 6, offset: 3 }}>
                     <h2>Search For Events</h2>
                     {/* search bar to get user events, query input (taxonomies filter) */}
-                    <Form
+                    <Form id="search-box"
                         validated={validated}
                         onSubmit={handleSubmit}
                         noValidate>

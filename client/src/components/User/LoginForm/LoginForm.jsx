@@ -3,6 +3,9 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import User from '../../../utils/Account/User';
 import UserError from '../Error';
+import Card from "react-bootstrap/Card";
+import { Link } from 'react-router-dom';
+import "./LoginForm.css";
 
 const { USER_LOADING, SET_USER, USER_ERROR } = User.actions;
 
@@ -51,8 +54,10 @@ export default function ({
 
     return (
         <Fragment>
-            <h2>{name} Form</h2>
-            <Form
+            
+            <Card id="login-card" className="text-center">
+            <h3>Login</h3>
+            <Form 
                 validated={validated}
                 onSubmit={handleSubmit}
                 className={className}
@@ -86,10 +91,15 @@ export default function ({
                     </Form.Control.Feedback>
                 </Form.Group>
                     <UserError />
-                <Button variant="primary" type="submit">
+                <Button id="login-button" variant="primary" type="submit">
                     {name}
                 </Button>
+
+                <br />
+                <br />
+                    <p >Or sign up <Link to="/signup">here</Link></p>
             </Form>
+            </Card>
         </Fragment>
     );
 }
