@@ -7,18 +7,11 @@ import Event from '../../utils/Account/Events';
 import MobList from "../../components/MobList/MobList";
 import { EventMobCard } from "../../components";
 import { EventUserWeek } from "../../components";
-import Modal from 'react-bootstrap/Modal';
-import ModalDialog from 'react-bootstrap/ModalDialog';
-import ModalHeader from 'react-bootstrap/ModalHeader';
-import ModalTitle from 'react-bootstrap/ModalTitle';
-import ModalBody from 'react-bootstrap/ModalBody';
-import ModalFooter from 'react-bootstrap/ModalFooter';
-import Button from 'react-bootstrap/Button';
-
 
 import './Home.css';
 import TestingThings from "../../components/Testing/Testing";
 import MobCard from "../../components/Event/MobCard";
+import MyMob from "../../components/MyMob/MyMob";
 
 export default function () {
 
@@ -58,12 +51,13 @@ export default function () {
             <Row>
 
                 <Col>
+                <h2> User Week</h2>
                     <EventUserWeek />
                 </Col>
 
                 <Col>
-                <h2>Muster Mob</h2>
-                <TestingThings />
+                    <h2>Muster Mob</h2>
+                    <MyMob />
                 </Col>
             </Row>
             <Row>

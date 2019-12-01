@@ -1,21 +1,22 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Fragment } from "react";
 import Table from 'react-bootstrap/Table'
+import Container from "react-bootstrap/Container";
+import Card from 'react-bootstrap/Card';
+import "./UserWeek.css";
 
 // get user saved events from database
 
 function UserWeek() {
 
     return (
-        <Fragment>
-            {/* table*/}
+        <Container>
+            <Card id="user-week">
+                <Card.Body>
+
+                     {/* table*/}
                 {/* event listeners for clicking the day of the week or name of the event*/}
                 <Table responsive>
-                    <thead>
-                        <tr>
-                            <h2>User Schedule</h2>
-                        </tr>
-                    </thead>
                     <tbody>
                         <tr>
                         <td>Sunday</td>
@@ -82,7 +83,12 @@ function UserWeek() {
                         </tr>
                     </tbody>
                     </Table>
-        </Fragment>
+                           
+                </Card.Body>
+                </Card>  
+
+           
+        </Container>
     );
 }
 
