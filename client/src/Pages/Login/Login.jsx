@@ -28,7 +28,7 @@ export default function () {
         <Container className="mt-5">
             <Row>
                 <Col>
-                <h1>Meet Up and Mob Out.</h1>
+                <h1>Link Up and Mob Out.</h1>
                 </Col>
                 <Col>
                     <UserLoginForm
