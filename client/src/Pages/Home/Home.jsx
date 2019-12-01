@@ -48,6 +48,8 @@ export default function () {
                     </h2>
                 </Col>
             </Row>
+
+            
             <Row>
 
                 <Col>
@@ -60,6 +62,9 @@ export default function () {
                     <MyMob />
                 </Col>
             </Row>
+
+            <br/>
+
             <Row>
                 <Col>
                     <MobList />
