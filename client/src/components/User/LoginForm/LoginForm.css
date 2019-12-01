@@ -12,3 +12,7 @@
 h3 {
     padding-top: 1rem;
 }
+
+#login-button {
+    background-color: lightgray;
+}

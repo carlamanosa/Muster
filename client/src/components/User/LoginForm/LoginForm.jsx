@@ -91,7 +91,7 @@ export default function ({
                     </Form.Control.Feedback>
                 </Form.Group>
                     <UserError />
-                <Button id="login-button" variant="primary" type="submit">
+                <Button id="login-button" variant="light" type="submit">
                     {name}
                 </Button>
 
