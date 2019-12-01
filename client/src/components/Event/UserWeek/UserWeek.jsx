@@ -20,66 +20,31 @@ function UserWeek() {
                     <tbody>
                         <tr>
                         <td>Sunday</td>
-                        {/* <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td> */}
+                        
                         </tr>
                         <tr>
                         <td>Monday</td>
-                        {/* <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td> */}
+                        
                         </tr>
                         <tr>
                         <td>Tuesday</td>
-                        {/* <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td> */}
+                       
                         </tr>
                         <tr>
                         <td>Wednesday</td>
-                        {/* <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td> */}
+                        
                         </tr>
                         <tr>
                         <td>Thursday</td>
-                        {/* <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td> */}
+                        
                         </tr>
                         <tr>
                         <td>Friday</td>
-                        {/* <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td> */}
+                        
                         </tr>
                         <tr>
                         <td>Saturday</td>
-                        {/* <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td> */}
+                        
                         </tr>
                     </tbody>
                     </Table>
