@@ -3,7 +3,9 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import User from '../../utils/Account/User';
-import TestingThings from "../../components/Testing";
+// import TestingThings from "../../components/Testing";
+import AboutUser from "../../components/User/AboutUser";
+
 
 export default function () {
     
@@ -13,16 +15,11 @@ export default function () {
     return (
         <Container className="mt-5">
             <Row>
-                <Col md={{ span: 6, offset: 3 }}>
-                    <h2>
-                        Welcome{" "}
-                        <span className="member-name">
-                            {user.email}
-                        </span>
-                    </h2>
-                    <h2>this is the profilepage page</h2>
-                    <TestingThings />
+                <Col md={{ span: 8, offset: 2 }}>
+                    <h4>this is the profilepage page, but we're using it to Test Things</h4>
+                    {/* <TestingThings /> */}
                 </Col>
+                <AboutUser />
             </Row>
         </Container>
     );
