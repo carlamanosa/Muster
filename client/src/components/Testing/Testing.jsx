@@ -6,10 +6,11 @@ import ModalTitle from 'react-bootstrap/ModalTitle';
 import ModalBody from 'react-bootstrap/ModalBody';
 import ModalFooter from 'react-bootstrap/ModalFooter';
 import Button from 'react-bootstrap/Button';
+
+
 function TestingThings() {
     return (
         <Fragment>
-            <div>Testing Things Here</div>
             <Modal>
             <ModalDialog>
                 <ModalHeader>

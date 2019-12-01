@@ -1,5 +1,8 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Fragment } from "react";
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 // geting Mob List from database 
 // get info from mob list objects 
 

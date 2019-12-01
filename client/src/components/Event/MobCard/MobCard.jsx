@@ -18,7 +18,7 @@ export default function MobCard({ name, date, url }) {
                         {url}
                     </Card.Text>
                     <Card.Text id="mob">
-                        {name} Mob:
+                        Mob:
                     </Card.Text>
                 </Card.Body>
             </Card>
