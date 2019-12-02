@@ -15,34 +15,33 @@ function ApiCalendar() {
     const localizer = momentLocalizer(moment);
 
     const today = moment().format('YYYY[-]MM[-]DD');
-    const step = moment(today).endOf('month').toDate();
-    const endMonth = moment(step).format('YYYY[-]MM[-]DD');
+    const endWeek = moment().weekday(7); // next Monday?    // const step = moment(today).endOf('month').toDate();
+    // const endMonth = moment(step).format('YYYY[-]MM[-]DD');
     const dates = {
         startDate: today,
-        endDate: endMonth
+        endDate: endWeek
     }
-
 
     useEffect(() => {
         eventDispatch({ type: EVENTS_LOADING });
-      }, []);
+    }, []);
 
     const apiEventsList = [];
 
     // change state and color for selected event 
     // send saved events to user database
 
-        apiEvents.map(event => {
-            apiEventsList.push({
-                title: event.short_title,
-                start: event.datetime_local,
-                end: event.datetime_local,
-                allDay: false
-            })
-        });    
+    apiEvents.map(event => {
+        apiEventsList.push({
+            title: event.short_title,
+            start: event.datetime_local,
+            end: event.datetime_local,
+            allDay: false
+        })
+    });
 
     const setDates = () => {
-        eventDispatch({ type: SET_QUERY_DATES,  dates});
+        eventDispatch({ type: SET_QUERY_DATES, dates });
     };
 
 
@@ -59,12 +58,13 @@ function ApiCalendar() {
                 startAccessor="start"
                 endAccessor="end"
                 style={{ height: "100vh" }}
-            />
+                views={['month']}
+                />
 
             {/* modal for event*/}
             {/* MODAL- taxonomies, venue, city,  time, seatgeek link, mob attendees (bonus), add button*/}
         </Fragment>
-        
+
     );
 }
 

@@ -14,7 +14,6 @@ export default function () {
     const [validated, setValidated] = useState(false);
     const [/* user not needed */, eventDispatch] = Event.useContext();
     const [{ apiEvents }] = Event.useContext();
-    const [swt, setSwt] = React.useState(true);
     
     useEffect(() => {
         eventDispatch({ type: EVENTS_LOADING });
@@ -39,14 +38,13 @@ export default function () {
         const rawQ = qInput.current.value;
         const q = (rawQ.split(" ")).join("+");
         // Calling the function to make the API request (sending it our user's params)
-        console.log("swt: ", swt);
-        setEventAPI(q, swt);
+        setEventAPI(q);
     };
 
     // Build and then make API call (in progess)
-    function setEventAPI(q, geoIp) {
+    function setEventAPI(q) {
         const key = "client_id=MTk1OTI0NDF8MTU3NDQ1Mjc1MC43NQ&client_secret=24c6903bd6b5005c4d5de56d640bf9c071cf6f6a42b4a55c96dee81ebc08df14";
-        const queryURL = `https://api.seatgeek.com/2/events?geoip=${geoIp}&per_page=100&q=${q}&datetime_local.gte=2019-11-29&datetime_local.lte=2019-12-31&${key}`;
+        const queryURL = `https://api.seatgeek.com/2/events?geoip=true&per_page=100&q=${q}&datetime_local.gte=2019-11-29&datetime_local.lte=2019-12-31&${key}`;
         eventDispatch({ type: SET_API_QUERY, queryURL });
         Event.API.eventAPI(
             queryURL
@@ -92,15 +90,6 @@ export default function () {
                         </Form.Row>
 
                         <Form.Row>
-                            <Form.Group as={Col} controlId="formGridGeoIp">
-                                <Form.Check custom type="switch">
-                                    <Form.Check.Input isInvalid checked={swt} />
-                                    <Form.Check.Label onClick={() => setSwt(!swt)}>
-                                        {`Use Current Location: ${swt}`}
-                                    </Form.Check.Label>
-                                </Form.Check>
-                            </Form.Group>
-
                             <Form.Group as={Col} controlId="formGridQ">
                                 {/* Submit Button (inside of the same Form.Row) */}
                                 <Button variant="primary" type="submit">
