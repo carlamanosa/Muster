@@ -15,3 +15,4 @@ export {
 };
 
 export * from "./Event";
+export * from "./AboutUser";

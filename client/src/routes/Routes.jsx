@@ -6,7 +6,7 @@ import { Switch, Route } from "react-router-dom";
 import Spinner from 'react-bootstrap/Spinner';
 import {
     LoggedInRoute,
-    LoggedOutRoute
+    LoggedOutRoute,
 } from "../components";
 import {
     NotFound,
@@ -17,7 +17,9 @@ import {
     ExploreEvents,
     EventAdd,
     ProfilePage,
-    Mob
+    Mob,
+    AboutUserSignUp,
+    AboutUserSignedUp
 } from "../pages";
 
 function Routes() {
@@ -35,6 +37,8 @@ function Routes() {
                 <Event.Provider>
                     <Switch>
                         <LoggedInRoute exact path="/" component={Home} />
+                        <LoggedInRoute exact path="/about/signup" component={AboutUserSignUp} />
+                        <LoggedInRoute exact path="/user/about" component={AboutUserSignedUp} />
                         <LoggedInRoute exact path="/event/addlist" component={EventAddList} />
                         <LoggedInRoute exact path="/event/explore" component={ExploreEvents} />
                         <LoggedInRoute exact path="/event/add" component={EventAdd} />
