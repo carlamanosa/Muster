@@ -1,10 +1,29 @@
+body {
+    margin: 0 auto;
+}
+
 #form-input:focus {
     background-color: rgb(255, 255, 255); 
-    box-shadow: 5px 5px rgb(221, 200, 240);
+    box-shadow: 5px 5px rgb(223, 248, 214);
     border-color: lightgray;
   }
 
-#form-input::selection {
-    background-color: lightgray;
+
+
+#checkbox:valid {
+    background-color: rgb(241, 239, 239);
 }
-  
+
+#submit-button {
+    margin: 0 auto;
+    background-color: lightgray;
+    border: none;
+}
+
+#submit-button:focus {
+    box-shadow: 5px 5px 5px rgb(223, 248, 214);
+}
+
+#login {
+    color: black;
+}

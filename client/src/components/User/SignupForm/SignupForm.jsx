@@ -177,14 +177,14 @@ export default function ({
                 </Form.Group>
 
                 <Form.Group>
-                    <Form.Check
+                    <Form.Check id="checkbox"
                         required
                         label="Agree to terms and conditions"
                         feedback="You must agree before submitting."
                     />
                 </Form.Group>
                 <UserError />
-                <Button variant="primary" type="submit">
+                <Button id="submit-button" type="submit">
                     {name}
                 </Button>
             </Form>

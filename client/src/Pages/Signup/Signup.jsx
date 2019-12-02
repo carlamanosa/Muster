@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col';
 import { Link } from 'react-router-dom';
 import { UserSignupForm } from '../../components';
 import User from '../../utils/Account/User';
+import "./Signup.css";
 
 function EmailMessage() {
     return (
@@ -54,7 +55,7 @@ export default function () {
                         DisplayNameMessage={DisplayNameMessage}
                     />
                     <br />
-                    <p>Already have a log in? Login <Link to="/login">here</Link></p>
+                    <p>Already have a log in? Login <Link id="link" to="/login">here</Link></p>
                 </Col>
             </Row>
         </Container>
