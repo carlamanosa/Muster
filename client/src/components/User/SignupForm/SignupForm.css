@@ -1,4 +1,4 @@
-body {
+#signupForm {
     margin: 0 auto;
 }
 
@@ -14,16 +14,27 @@ body {
     background-color: rgb(241, 239, 239);
 }
 
+#submitButtonRow {
+    justify-content: center;
+}
+
 #submit-button {
-    margin: 0 auto;
     background-color: lightgray;
     border: none;
+   
+}
+
+#linkRow {
+    justify-content: center;
+}
+
+#link {
+    color: rgb(108, 149, 92);
 }
 
 #submit-button:focus {
     box-shadow: 5px 5px 5px rgb(223, 248, 214);
 }
 
-#login {
-    color: black;
-}
+
+

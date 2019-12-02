@@ -3,7 +3,9 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import User from '../../../utils/Account/User';
 import UserError from '../Error';
+import { Link } from 'react-router-dom';
 import "./SignupForm.css";
+import Row from "react-bootstrap/Row";
 
 const { USER_LOADING, SET_USER, USER_ERROR } = User.actions;
 
@@ -71,7 +73,7 @@ export default function ({
     }
 
     return (
-        <Fragment>
+        <Fragment id="signupForm">
             <h2>Sign Up</h2>
             <br />
             <Form
@@ -184,9 +186,18 @@ export default function ({
                     />
                 </Form.Group>
                 <UserError />
+
+                <Form.Row id="submitButtonRow">
                 <Button id="submit-button" type="submit">
                     {name}
                 </Button>
+                </Form.Row>
+                <br />
+
+                <Form.Row id="linkRow">
+                <p>Already have a log in? Login <Link id="link" to="/login">here</Link></p>
+                </Form.Row>
+
             </Form>
         </Fragment>
     );

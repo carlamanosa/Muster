@@ -4,6 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { UserLoginForm } from '../../components';
 import User from '../../utils/Account/User';
+import "./Login.css";
 
 function EmailMessage() {
     return (

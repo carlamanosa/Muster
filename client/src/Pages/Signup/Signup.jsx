@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { Link } from 'react-router-dom';
+
 import { UserSignupForm } from '../../components';
 import User from '../../utils/Account/User';
 import "./Signup.css";
@@ -55,7 +55,6 @@ export default function () {
                         DisplayNameMessage={DisplayNameMessage}
                     />
                     <br />
-                    <p>Already have a log in? Login <Link id="link" to="/login">here</Link></p>
                 </Col>
             </Row>
         </Container>
