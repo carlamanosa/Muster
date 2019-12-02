@@ -1,0 +1,10 @@
+#form-input:focus {
+    background-color: rgb(255, 255, 255); 
+    box-shadow: 5px 5px rgb(221, 200, 240);
+    border-color: lightgray;
+  }
+
+#form-input::selection {
+    background-color: lightgray;
+}
+  

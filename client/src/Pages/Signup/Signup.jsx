@@ -54,7 +54,7 @@ export default function () {
                         DisplayNameMessage={DisplayNameMessage}
                     />
                     <br />
-                    <p>Or log in <Link to="/login">here</Link></p>
+                    <p>Already have a log in? Login <Link to="/login">here</Link></p>
                 </Col>
             </Row>
         </Container>

@@ -72,13 +72,8 @@ export default function ({
 
     return (
         <Fragment>
-            <h2>{name} Form Does this Change?</h2>
-            <ul id="progressbar">
-                <li class="active">Verify Phone</li>
-                <li>Upload Documents</li>
-                <li>Security Questions</li>
-            </ul>
-
+            <h2>Sign Up</h2>
+            <br />
             <Form
                 validated={validated}
                 onSubmit={handleSubmit}
@@ -87,8 +82,7 @@ export default function ({
 
                 {/* First Name */}
                 <Form.Group controlId="formBasicFirstName">
-                    <Form.Label>First name</Form.Label>
-                    <Form.Control
+                    <Form.Control id="form-input"
                         pattern=".*\S+.*"
                         type="text"
                         placeholder="First Name"
@@ -97,8 +91,7 @@ export default function ({
 
                 {/* Last Name */}
                 <Form.Group controlId="formBasicLastName">
-                    <Form.Label>Last name</Form.Label>
-                    <Form.Control
+                    <Form.Control id="form-input"
                         pattern=".*\S+.*"
                         type="text"
                         placeholder="Last Name"
@@ -107,12 +100,11 @@ export default function ({
 
                 {/* Display Name */}
                 <Form.Group controlId="formBasicDisplayName">
-                    <Form.Label>Display Name</Form.Label>
-                    <Form.Control
+                    <Form.Control id="form-input"
                         required
                         pattern={emailPattern}
                         type="text"
-                        placeholder="Choose a Display Name"
+                        placeholder="Display Name"
                         ref={displayNameInput} />
                     <Form.Control.Feedback type="invalid">
                         <DisplayNameMessage />
@@ -121,12 +113,11 @@ export default function ({
 
                 {/* Email */}
                 <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control
+                    <Form.Control id="form-input"
                         required
                         pattern={emailPattern}
                         type="email"
-                        placeholder="Enter email"
+                        placeholder="Email"
                         ref={emailInput} />
                     <Form.Control.Feedback type="invalid">
                         <EmailMessage />
@@ -135,8 +126,7 @@ export default function ({
 
                 {/* Password */}
                 <Form.Group controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
+                    <Form.Control id="form-input"
                         required
                         pattern={passwordPattern}
                         type="password"
@@ -149,8 +139,7 @@ export default function ({
 
                 {/* City */}
                 <Form.Group controlId="formBasicCity">
-                    <Form.Label>City</Form.Label>
-                    <Form.Control
+                    <Form.Control id="form-input"
                         pattern=".*\S+.*"
                         type="text"
                         placeholder="City"
@@ -163,8 +152,7 @@ export default function ({
 
                 {/* State */}
                 <Form.Group md="3" controlId="formBasicState">
-                    <Form.Label>State</Form.Label>
-                    <Form.Control
+                    <Form.Control id="form-input"
                         pattern=".*\S+.*"
                         type="text"
                         placeholder="State"
@@ -177,11 +165,10 @@ export default function ({
 
                 {/* Zip */}
                 <Form.Group md="3" controlId="formBasicZip">
-                    <Form.Label>Zip</Form.Label>
-                    <Form.Control
+                    <Form.Control id="form-input"
                         pattern=".*\S+.*"
                         type="number"
-                        placeholder="Zip"
+                        placeholder="Zipcode"
                         ref={zipInput}
                     />
                     <Form.Control.Feedback type="invalid">
