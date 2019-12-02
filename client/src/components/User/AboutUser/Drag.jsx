@@ -30,6 +30,7 @@ class Drag extends React.Component {
         items.splice(index, 0, this.draggedItem);
 
         this.setState({ items });
+        console.log(this.state.items);
     };
 
     onDragEnd = () => {
