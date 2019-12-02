@@ -1,0 +1,42 @@
+.AboutUser {
+    font-family: sans-serif;
+    font-size: 1.5rem;
+    text-align: center;
+    width: 50vw;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .AboutUser main {
+    background-color: #383838;
+    color: #fff;
+    padding: 10px;
+  }
+  
+  .AboutUser ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .AboutUser ul li {
+    background-color: #383838;
+    padding: 10px 20px;
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    line-height: 1;
+  }
+  
+  .AboutUser li .drag {
+    margin-right: 15px;
+    cursor: move;
+  }
+  
+  .AboutUser li svg {
+    height: 2rem;
+    color: #fff;
+  }
+  
