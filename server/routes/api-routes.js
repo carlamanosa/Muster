@@ -27,6 +27,7 @@ router.post("/api/signup", function (req, res) {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       location: req.body.location,
+      signedUp: false
     })
     .then(function () {
       res.redirect(307, "/api/login");
@@ -63,6 +64,7 @@ router.get("/api/user_data", function (req, res) {
       lastName: req.user.lastName,
       displayName: req.user.displayName,
       location: req.user.location,
+      signedUp: req.user.signedUp,
       events: req.user.events,
       mobs: req.user.mobs,
       abouts: req.user.abouts

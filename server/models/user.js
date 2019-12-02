@@ -35,6 +35,10 @@ const UserSchema = new Schema({
     type: Object,
     required: true,
   },
+  signedUp: {
+    type: Boolean,
+    required: true,
+  },
   events: [
     {
       type: EventSchema,
