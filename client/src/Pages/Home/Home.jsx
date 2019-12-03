@@ -11,7 +11,7 @@ import { EventUserWeek } from "../../components";
 import './Home.css';
 import TestingThings from "../../components/Testing/Testing";
 import MobCard from "../../components/Event/MobCard";
-import MyMob from "../../components/MyMob/MyMob";
+import MusterMob from "../../components/MusterMob/MusterMob";
 
 export default function () {
 
@@ -37,7 +37,7 @@ export default function () {
 
 
     return (
-        <Container className="mt-5">
+        <Container className="mt-3">
             <Row>
                 <Col >
                     <h2 id="welcome-sign">
@@ -61,7 +61,7 @@ export default function () {
 
                 <Col>
                     <h3>Muster Mob</h3>
-                    <MyMob />
+                    <MusterMob />
                 </Col>
             </Row>
 
