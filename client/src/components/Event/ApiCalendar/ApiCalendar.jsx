@@ -2,6 +2,8 @@ import React, { Fragment, useEffect, useState } from "react";
 import Event from '../../../utils/Account/Events';
 import { Calendar, momentLocalizer } from 'react-big-calendar'
 import moment from "moment";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 
 import "./ApiCalendar.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
@@ -14,10 +16,10 @@ function MyEvent(props) {
     const [displayclass, setDisplayClass] = useState("notSelected");
     useEffect(() => {
         props.event && props.event.resource && props.event.resource.eventSelected ? setDisplayClass("selected") : setDisplayClass("notSelected")
-        }, [props.event.resource.eventSelected]);
+    }, [props.event.resource.eventSelected]);
 
     return (
-        <div id = {displayclass}>
+        <div id={displayclass}>
             {props.event && props.event.resource && props.event.resource.eventSelected ? "it's here" : "it isn't here."} {props.title}
         </div>
     )
@@ -29,6 +31,8 @@ function ApiCalendar() {
     const [{ apiEvents }] = Event.useContext();
     const [apiEventsList, setApiEventsList] = useState([]);
     const [savedApiEventsList, setSavedApiEventsList] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [modalEvent, setModalEvent] = useState({});
     const localizer = momentLocalizer(moment);
 
     const today = moment().format('YYYY[-]MM[-]DD');
@@ -44,7 +48,7 @@ function ApiCalendar() {
     useEffect(() => {
         eventDispatch({ type: EVENTS_LOADING });
     }, []);
-    
+
     useEffect(() => {
         const newApiEventsList = [];
         apiEvents.map(event => {
@@ -54,14 +58,31 @@ function ApiCalendar() {
                 end: event.datetime_local,
                 allDay: false,
                 isSelected: true,
-                resource: {id: event.id}
+                resource: { id: event.id }
             })
         });
         setApiEventsList(newApiEventsList);
     }, [apiEvents]);
 
+    const updateSavedEventList = (newEvent) => {
+        if (!includes(newEvent)) {
+            setSavedApiEventsList([...savedApiEventsList, newEvent])
+            updateItem(newEvent, { eventSelected: true })
+        } else {
+            setSavedApiEventsList(savedApiEventsList.filter(item => item.resource.id !== newEvent.resource.id))
+            updateItem(newEvent, { eventSelected: "" });
+        }
+        setShowModal(false);
+        console.log(savedApiEventsList);
+    }
+
+    const includes = (event) => {
+        return savedApiEventsList.reduce((prev, item) => prev || item.resource.id === event.resource.id, false)
+    }
+
     const updateItem = (item, updatedFields) => {
         const newApiEventsList = apiEventsList.map(event => {
+            // console.log("newApiEvents")
             if (event.resource.id === item.resource.id) {
                 const resource = {
                     ...event.resource,
@@ -81,28 +102,14 @@ function ApiCalendar() {
         setApiEventsList(newApiEventsList);
     }
 
-    const includes = (event) => {
-        return savedApiEventsList.reduce((prev, item) => prev || item.resource.id === event.resource.id, false)
+    const handleCloseModal = () => setShowModal(false);
+
+    const handleShowModal = (event) => {
+        console.log("handleShowModal.event: ", event);
+        setModalEvent(event);
+        setShowModal(true);
     }
 
-    const callModal = (event) => {
-        console.log("Modal: ", event);
-    }
-    // change state and color for selected event 
-    // send saved events to user database
-
-    
-
-    const updateSavedEventList = (newEvent) => {
-        if (!includes(newEvent)) {
-            setSavedApiEventsList([...savedApiEventsList, newEvent])
-            updateItem(newEvent, { eventSelected: true })
-        } else {
-            setSavedApiEventsList(savedApiEventsList.filter(item => item.resource.id !== newEvent.resource.id ))
-            updateItem(newEvent, { eventSelected: "" });
-        }
-        console.log(savedApiEventsList);
-    }
 
     // update user's events in db
     // const updateDbEvents = (eventList) => {
@@ -128,10 +135,21 @@ function ApiCalendar() {
                 components={{
                     event: MyEvent
                 }}
-                onSelectEvent={updateSavedEventList}
-                />
+                onSelectEvent={handleShowModal}
+                popup={true}
+            />
 
             {/* modal for event*/}
+            <Modal show={showModal} onHide={handleCloseModal} animation={false}>
+                <Modal.Title>{modalEvent.title}</Modal.Title>
+                <Modal.Body>{modalEvent.start} - {modalEvent.end}</Modal.Body>
+                <Button variant="secondary" onClick={handleCloseModal}>
+                    Close
+                </Button>
+                <Button variant="primary" onClick={updateSavedEventList}>
+                    Save Event
+                </Button>
+            </Modal>
             {/* MODAL- taxonomies, venue, city,  time, seatgeek link, mob attendees (bonus), add button*/}
         </Fragment>
 
