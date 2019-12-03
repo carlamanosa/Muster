@@ -63,7 +63,7 @@ export default function () {
             <Row>
                 <Col md={{ span: 6, offset: 3 }}>
 
-                    <h2>Search For Events</h2>
+                    <h2>Search Events</h2>
                     <br />
                     <br />
                     {/* search bar to get user events, query input (taxonomies filter) */}

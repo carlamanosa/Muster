@@ -3,7 +3,7 @@
 }
 
 #formGridQ.form-control:focus {
-        box-shadow: 5px 5px 5px rgb(255, 165, 91);
+        box-shadow: 0 0 35px rgb(255, 165, 91);
         border-color: lightgray;
 }
 
