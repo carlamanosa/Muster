@@ -1,10 +1,11 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import Event from '../../../utils/Account/Events';
 import { Calendar, momentLocalizer } from 'react-big-calendar'
 import moment from "moment";
 
 import "./ApiCalendar.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import { isSelected } from "react-big-calendar/lib/utils/selection";
 
 const { EVENTS_ERROR, SET_QUERY_DATES, EVENTS_LOADING } = Event.actions;
 
@@ -15,11 +16,13 @@ function ApiCalendar() {
     const localizer = momentLocalizer(moment);
 
     const today = moment().format('YYYY[-]MM[-]DD');
-    const endWeek = moment().weekday(7); // next Monday?    // const step = moment(today).endOf('month').toDate();
-    // const endMonth = moment(step).format('YYYY[-]MM[-]DD');
+    const twoWeeks = moment().add(14, 'day');
+    console.log(moment(twoWeeks).format('YYYY[-]MM[-]DD'));
+    const step = moment(today).endOf('month').toDate();
+    const endMonth = moment(step).format('YYYY[-]MM[-]DD');
     const dates = {
         startDate: today,
-        endDate: endWeek
+        endDate: endMonth
     }
 
     useEffect(() => {
@@ -27,6 +30,7 @@ function ApiCalendar() {
     }, []);
 
     const apiEventsList = [];
+    const savedApiEventsList = [];
 
     // change state and color for selected event 
     // send saved events to user database
@@ -36,7 +40,9 @@ function ApiCalendar() {
             title: event.short_title,
             start: event.datetime_local,
             end: event.datetime_local,
-            allDay: false
+            allDay: false,
+            isSelected: true,
+            resource: {id: event.id}
         })
     });
 
@@ -44,10 +50,9 @@ function ApiCalendar() {
         eventDispatch({ type: SET_QUERY_DATES, dates });
     };
 
-
-    console.log("apiEvents: ", apiEvents);
-
-    console.log("apiEventsList: ", apiEventsList);
+    const willWork = (idk) => {
+        console.log(idk);
+    }
 
     return (
         <Fragment>

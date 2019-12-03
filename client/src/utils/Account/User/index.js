@@ -7,7 +7,7 @@ export default {
     API,
     Provider, 
     useContext,
-    refreshOnLoad
+    refreshOnLoad,
 };
 
 export {
@@ -15,5 +15,5 @@ export {
     API as userAPI,
     Provider as UserProvider, 
     useContext as useUserContext,
-    refreshOnLoad as refreshUserOnLoad
+    refreshOnLoad as refreshUserOnLoad,
 }
