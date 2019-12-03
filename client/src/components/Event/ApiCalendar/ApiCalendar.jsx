@@ -64,13 +64,13 @@ function ApiCalendar() {
         setApiEventsList(newApiEventsList);
     }, [apiEvents]);
 
-    const updateSavedEventList = (newEvent) => {
-        if (!includes(newEvent)) {
-            setSavedApiEventsList([...savedApiEventsList, newEvent])
-            updateItem(newEvent, { eventSelected: true })
+    const updateSavedEventList = () => {
+        if (!includes(modalEvent)) {
+            setSavedApiEventsList([...savedApiEventsList, modalEvent])
+            updateItem(modalEvent, { eventSelected: true })
         } else {
-            setSavedApiEventsList(savedApiEventsList.filter(item => item.resource.id !== newEvent.resource.id))
-            updateItem(newEvent, { eventSelected: "" });
+            setSavedApiEventsList(savedApiEventsList.filter(item => item.resource.id !== modalEvent.resource.id))
+            updateItem(modalEvent, { eventSelected: "" });
         }
         setShowModal(false);
         console.log(savedApiEventsList);
