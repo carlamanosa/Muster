@@ -25,7 +25,6 @@ function MyEvent(props) {
     )
 }
 
-
 function ApiCalendar() {
     const [/* user not needed */, eventDispatch] = Event.useContext();
     const [{ apiEvents }] = Event.useContext();
