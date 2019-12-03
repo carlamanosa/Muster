@@ -3,13 +3,9 @@ import API from "./EventAPI";
 import actions from "./EventActions.json";
 const {
   EVENTS_LOADING,
-  SET_USER_EVENTS,
   SET_API_EVENTS,
   SET_API_QUERY,
-  SET_QUERY_DATES,
-  ADD_USER_EVENT,
-  DELETE_USER_EVENT,
-  SET_EVENT_STATE,
+  USER_EVENTS,
   EVENTS_ERROR,
   CLEAR_EVENTS_ERROR } = actions;
 
@@ -24,7 +20,7 @@ const reducer = (state, action) => {
         loading: true
       };
 
-    case SET_USER_EVENTS:
+    case USER_EVENTS:
       return {
         ...state,
         events: action.events,
@@ -44,40 +40,6 @@ const reducer = (state, action) => {
       return {
         ...state,
         apiQuery: action.queryURL,
-        loading: false,
-        pageLoading: false
-      };
-
-    case SET_QUERY_DATES:
-      console.log("SET-QUERY-DATES: ", action.dates);
-      return {
-        ...state,
-        queryDates: {...state.queryDates,
-        startDate: action.today},
-        loading: false,
-        pageLoading: false
-      };
-
-    case ADD_USER_EVENT:
-      return {
-        ...state,
-        events: [action.event, ...state.events],
-        loading: false
-      };
-
-    case DELETE_USER_EVENT:
-      //NOT WORKING, JUST COPIED SET_USER_EVENTS
-      return {
-        ...state,
-        events: action.events,
-        loading: false,
-        pageLoading: false
-      };
-
-    case SET_EVENT_STATE:
-      return {
-        ...state,
-        events: action.events,
         loading: false,
         pageLoading: false
       };
@@ -105,10 +67,6 @@ const EventProvider = ({ value = {}, ...props }) => {
     events: [],
     apiEvents: [],
     apiQuery: "",
-    queryDates: {
-      startDate: "",
-      endDate: ""
-    },
     pageLoading: true,
     loading: false,
     error: null
@@ -129,7 +87,7 @@ const refreshDbEvents = () => {
     }
     eventDispatch({ type: EVENTS_LOADING });
     API.getUserEvents().then(events => {
-      eventDispatch({ type: SET_USER_EVENTS, events });
+      eventDispatch({ type: USER_EVENTS, events });
     });
   }, []);
 };
