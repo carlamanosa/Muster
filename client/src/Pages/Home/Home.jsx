@@ -35,7 +35,6 @@ export default function () {
     //     navigator.geolocation.getCurrentPosition(geoSuccess);
     // }, []);
 
-
     return (
         <Container className="mt-3">
             <Row>

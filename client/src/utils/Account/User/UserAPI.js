@@ -24,5 +24,5 @@ export default {
   // Updates aboutUser
   setAboutUser: function (aboutUserData) {
     return axios.post("/api/abouts", aboutUserData).then(({ data }) => data);
-  }
+  },
 };
