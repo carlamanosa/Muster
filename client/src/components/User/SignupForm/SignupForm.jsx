@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import "./SignupForm.css";
 import Row from "react-bootstrap/Row";
 
-const { USER_LOADING, SET_USER, USER_ERROR } = User.actions;
+const { USER_LOADING, SET_USER, USER_ERROR, FRIEND_ID } = User.actions;
 
 export default function ({
     api,
@@ -22,6 +22,8 @@ export default function ({
     User.refreshOnLoad();
     const [validated, setValidated] = useState(false);
     const [/* user not needed */, userDispatch] = User.useContext();
+    const[{ friendId }] = User.useContext();
+    console.log(friendId);
     const firstNameInput = useRef();
     const lastNameInput = useRef();
     const displayNameInput = useRef();
@@ -59,6 +61,7 @@ export default function ({
         setValidated(false);
         userDispatch({ type: USER_LOADING });
         api({
+            friendId,
             email,
             password,
             displayName,
@@ -66,7 +69,9 @@ export default function ({
             lastName,
             location
         }).then(user => {
+            const newFriendId = friendId + 1;
             userDispatch({ type: SET_USER, user });
+            userDispatch({ type: FRIEND_ID, newFriendId});
         }).catch((err) => {
             userDispatch({ type: USER_ERROR, message: err });
         });

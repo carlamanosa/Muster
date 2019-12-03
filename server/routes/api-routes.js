@@ -21,14 +21,15 @@ router.post("/api/login", passport.authenticate("local"), function (req, res) {
 // otherwise send back an error
 router.post("/api/signup", function (req, res) {
   db.User.create({
-      email: req.body.email,
-      password: req.body.password,
-      displayName: req.body.displayName,
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      location: req.body.location,
-      signedUp: false
-    })
+    friendId: req.body.friendId,
+    email: req.body.email,
+    password: req.body.password,
+    displayName: req.body.displayName,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    location: req.body.location,
+    signedUp: false
+  })
     .then(function () {
       res.redirect(307, "/api/login");
     })
@@ -58,6 +59,7 @@ router.get("/api/user_data", function (req, res) {
     // Otherwise send back the user's email and id
     // Sending back a password, even a hashed password, isn't a good idea
     res.json({
+      friendId: req.user.friendId,
       id: req.user.id,
       email: req.user.email,
       firstName: req.user.firstName,
@@ -90,7 +92,7 @@ router.post("/api/events", isAuthenticatedData, function (req, res) {
   });
   console.log(JSON.stringify(event));
   db.User.update(
-    { _id: req.user._id }, 
+    { _id: req.user._id },
     { $push: { events: event } })
     .then(function () {
       res.json(event);
@@ -116,7 +118,7 @@ router.post("/api/mobs", isAuthenticatedData, function (req, res) {
   });
   console.log(JSON.stringify(mob));
   db.User.update(
-    { _id: req.user._id }, 
+    { _id: req.user._id },
     { $push: { mobs: mob } })
     .then(function () {
       res.json(mob);
@@ -143,7 +145,7 @@ router.post("/api/abouts", isAuthenticatedData, function (req, res) {
   });
   console.log(JSON.stringify(about));
   db.User.update(
-    { _id: req.user._id }, 
+    { _id: req.user._id },
     { $push: { abouts: about } })
     .then(function () {
       res.json(about);

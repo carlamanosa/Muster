@@ -64,6 +64,9 @@ function ApiCalendar() {
                 endAccessor="end"
                 style={{ height: "100vh" }}
                 views={['month']}
+                onSelectEvent={willWork}
+                onDoubleClickEvent={willWork}
+                onSelecting={willWork}
                 />
 
             {/* modal for event*/}
