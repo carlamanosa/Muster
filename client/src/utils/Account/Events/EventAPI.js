@@ -6,7 +6,7 @@ export default {
     return axios.get("/api/events").then(({data}) => data);
   },
   // Adds an event in the database
-  addEvent: function(eventData) {
+  updateEvents: function(eventData) {
     return axios.post("/api/events", eventData).then(({data}) => data);
   },
   eventAPI: function(queryURL) {

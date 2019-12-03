@@ -5,14 +5,25 @@ import moment from "moment";
 
 import "./ApiCalendar.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import { isSelected } from "react-big-calendar/lib/utils/selection";
+import User from "../../User";
+import { set } from "mongoose";
 
-const { EVENTS_ERROR, SET_QUERY_DATES, EVENTS_LOADING } = Event.actions;
+const { EVENTS_ERROR, SET_, EVENTS_LOADING } = Event.actions;
+
+function MyEvent(props) {
+    return (
+        <div>
+            {props.event && props.event.resource && props.event.resource.hamburger ? "it's here" : "it isn't here."} {props.title}
+        </div>
+    )
+}
 
 
 function ApiCalendar() {
     const [/* user not needed */, eventDispatch] = Event.useContext();
-    const [{ apiEvents, queryDates }] = Event.useContext();
+    const [{ apiEvents }] = Event.useContext();
+    const [apiEventsList, setApiEventsList] = useState([]);
+    const [savedApiEventsList, setSavedApiEventsList] = useState([]);
     const localizer = momentLocalizer(moment);
 
     const today = moment().format('YYYY[-]MM[-]DD');
@@ -28,35 +39,77 @@ function ApiCalendar() {
     useEffect(() => {
         eventDispatch({ type: EVENTS_LOADING });
     }, []);
+    
+    useEffect(() => {
+        const newApiEventsList = [];
+        apiEvents.map(event => {
+            newApiEventsList.push({
+                title: event.short_title,
+                start: event.datetime_local,
+                end: event.datetime_local,
+                allDay: false,
+                isSelected: true,
+                resource: {id: event.id}
+            })
+        });
+        setApiEventsList(newApiEventsList);
+    }, [apiEvents]);
 
-    const apiEventsList = [];
-    const savedApiEventsList = [];
+    const updateItem = (item, updatedFields) => {
+        const newApiEventsList = apiEventsList.map(event => {
+            if (event.resource.id === item.resource.id) {
+                const resource = {
+                    ...event.resource,
+                    ...updatedFields
+                }
+                console.log({
+                    ...item,
+                    resource
+                });
+                return {
+                    ...item,
+                    resource
+                }
+            }
+            return event;
+        });
+        setApiEventsList(newApiEventsList);
+    }
+
+    const includes = (event) => {
+        return savedApiEventsList.reduce((prev, item) => prev || item.resource.id === event.resource.id, false)
+    }
 
     // change state and color for selected event 
     // send saved events to user database
 
-    apiEvents.map(event => {
-        apiEventsList.push({
-            title: event.short_title,
-            start: event.datetime_local,
-            end: event.datetime_local,
-            allDay: false,
-            isSelected: true,
-            resource: {id: event.id}
-        })
-    });
+    
 
-    const setDates = () => {
-        eventDispatch({ type: SET_QUERY_DATES, dates });
-    };
-
-    const willWork = (idk) => {
-        console.log(idk);
+    const updateSavedEventList = (newEvent) => {
+        if (!includes(newEvent)) {
+            setSavedApiEventsList([...savedApiEventsList, newEvent])
+            updateItem(newEvent, { hamburger: true })
+        } else {
+            setSavedApiEventsList(savedApiEventsList.filter(item => item.resource.id !== newEvent.resource.id ))
+            updateItem(newEvent, { hamburger: "" });
+        }
+        console.log(savedApiEventsList);
     }
+
+    // update user's events in db
+    // const updateDbEvents = (eventList) => {
+    //     Event.API.updateEvents(
+    //         eventList
+    //     ).then(events => {
+    //         eventDispatch({ type: USER_EVENTS, events});
+    //     }).catch((err) => {
+    //         eventDispatch({ type: EVENTS_ERROR, message: err });
+    //     });
+    // }
 
     return (
         <Fragment>
-            {/* calendar(2 weeks) to show events searched with buttons to go back and forth between weeks*/}
+            {/* calendar(month) to show events searched with buttons to go back and forth between weeks*/}
             <Calendar
                 localizer={localizer}
                 events={apiEventsList}
@@ -64,9 +117,10 @@ function ApiCalendar() {
                 endAccessor="end"
                 style={{ height: "100vh" }}
                 views={['month']}
-                onSelectEvent={willWork}
-                onDoubleClickEvent={willWork}
-                onSelecting={willWork}
+                components={{
+                    event: MyEvent
+                }}
+                onSelectEvent={updateSavedEventList}
                 />
 
             {/* modal for event*/}

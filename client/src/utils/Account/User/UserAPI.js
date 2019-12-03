@@ -18,11 +18,11 @@ export default {
     return axios.post("/api/signup", userData).then(({ data }) => data);
   },
   // Gets aboutUser
-  getAboutUser: function (aboutUserData) {
+  getAbouts: function (aboutUserData) {
     return axios.get("/api/abouts", aboutUserData).then(({ data }) => data);
   },
   // Updates aboutUser
-  setAboutUser: function (aboutUserData) {
+  setAbouts: function (aboutUserData) {
     return axios.post("/api/abouts", aboutUserData).then(({ data }) => data);
   },
 };

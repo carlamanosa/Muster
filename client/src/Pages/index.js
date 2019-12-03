@@ -4,6 +4,7 @@ import Signup from "./Signup";
 import Home from "./Home";
 import ProfilePage from "./ProfilePage";
 import Mob from "./Mob";
+import AboutUser from "./AboutUser";
 
 export {
     NotFound,
@@ -11,8 +12,8 @@ export {
     Signup,
     Home,
     ProfilePage,
-    Mob
+    Mob,
+    AboutUser
 };
 
 export * from "./Event";
-export * from "./AboutUser";

@@ -114,7 +114,7 @@ router.get("/api/mobs", isAuthenticatedData, function (req, res) {
 router.post("/api/mobs", isAuthenticatedData, function (req, res) {
   const mob = new db.Mob({
     name: req.body.name,
-    id: req.body.mobId
+    id: req.body.mobUserId
   });
   console.log(JSON.stringify(mob));
   db.User.update(
@@ -141,7 +141,6 @@ router.post("/api/abouts", isAuthenticatedData, function (req, res) {
   const about = new db.About({
     questions: req.body.questions,
     aboutUser: req.body.aboutUser,
-    id: req.body.aboutUserId
   });
   console.log(JSON.stringify(about));
   db.User.update(

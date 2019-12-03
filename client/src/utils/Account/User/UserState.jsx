@@ -1,7 +1,7 @@
 import React, { createContext, useReducer, useContext, useEffect } from "react";
 import API from "./UserAPI";
 import actions from "./UserActions.json";
-const { USER_LOADING, SET_USER, ABOUT_USER, USER_ERROR, CLEAR_USER_ERROR, FRIEND_ID } = actions;
+const { USER_LOADING, SET_USER, ABOUT_USER, USER_ERROR, CLEAR_USER_ERROR } = actions;
 
 const UserContext = createContext();
 const { Provider } = UserContext;
@@ -19,14 +19,6 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 user: action.user,
-                loading: false,
-                pageLoading: false
-            };
-
-        case FRIEND_ID:
-            return {
-                ...state,
-                friendId: action.newFriendId,
                 loading: false,
                 pageLoading: false
             };
@@ -62,7 +54,6 @@ const UserProvider = ({ value = {}, ...props }) => {
     const [state, dispatch] = useReducer(reducer, {
         user: {},
         about: [],
-        friendId: 13,
         signedUp: false,
         pageLoading: true,
         loading: false,
