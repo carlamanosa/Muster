@@ -22,7 +22,7 @@ function SearchFriends() {
                             <Form.Control id="searchBar" placeholder="" />
                             </Col>
                             <Col>
-                            <Button variant="light">Search</Button>
+                            <Button id="searchButton" variant="light">Search</Button>
                             </Col>
                         </Form.Row>
                     </Form>

@@ -18,7 +18,7 @@ export default function () {
         <Container className="mt-2">
             <Row>
                 <Col>
-                    <h3>My mob</h3>
+                    <h3>My Friends</h3>
                     <br />
                     <MobList />
                 </Col>
@@ -31,12 +31,11 @@ export default function () {
 
             <Row>
                 <Col>
-                    <h3>Suggested Friends</h3>
+                    <h3>Suggested Friend</h3>
                     <br />
                     <SuggestedFriends />
                 </Col>
-                <Col>
-                </Col>
+                
             </Row>
         </Container>
     );
