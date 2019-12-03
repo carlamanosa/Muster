@@ -65,11 +65,7 @@ export default function () {
 
             <br/>
 
-            <Row>
-                <Col>
-                    <MobList />
-                </Col>
-                </Row>
+            
         </Container>
     );
 }

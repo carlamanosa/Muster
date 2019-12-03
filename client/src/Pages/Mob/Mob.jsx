@@ -3,6 +3,8 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import User from '../../utils/Account/User';
+import MobList from "../../components/MobList/MobList";
+import SuggestedFriends from "../../components/SuggestedFriends";
 
 export default function () {
     
@@ -12,14 +14,15 @@ export default function () {
     return (
         <Container className="mt-5">
             <Row>
-                <Col md={{ span: 6, offset: 3 }}>
-                    <h2>
-                        Welcome{" "}
-                        <span className="member-name">
-                            {user.email}
-                        </span>
-                    </h2>
-                    <h2>this is the mob page</h2>
+                <Col>
+                    <h2>My mob</h2>
+                    <br />
+                    <MobList />
+                </Col>
+                <Col>
+                    <h2>Suggested Friends</h2>
+                    <br />
+                    <SuggestedFriends />
                 </Col>
             </Row>
         </Container>
