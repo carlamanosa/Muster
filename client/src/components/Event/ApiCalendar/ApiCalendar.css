@@ -23,7 +23,7 @@
   }
 
   div .rbc-event #notSelected {
-    background-color: cadetblue;
+    background-color: grey;
   }
 
   div .rbc-event #selected {
