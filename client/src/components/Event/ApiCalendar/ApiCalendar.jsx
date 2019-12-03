@@ -8,12 +8,17 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import User from "../../User";
 import { set } from "mongoose";
 
-const { EVENTS_ERROR, SET_, EVENTS_LOADING } = Event.actions;
+const { EVENTS_ERROR, SET_EVENTS, EVENTS_LOADING } = Event.actions;
 
 function MyEvent(props) {
+    const [displayclass, setDisplayClass] = useState("notSelected");
+    useEffect(() => {
+        props.event && props.event.resource && props.event.resource.eventSelected ? setDisplayClass("selected") : setDisplayClass("notSelected")
+        }, [props.event.resource.eventSelected]);
+
     return (
-        <div>
-            {props.event && props.event.resource && props.event.resource.hamburger ? "it's here" : "it isn't here."} {props.title}
+        <div id = {displayclass}>
+            {props.event && props.event.resource && props.event.resource.eventSelected ? "it's here" : "it isn't here."} {props.title}
         </div>
     )
 }
@@ -80,6 +85,9 @@ function ApiCalendar() {
         return savedApiEventsList.reduce((prev, item) => prev || item.resource.id === event.resource.id, false)
     }
 
+    const callModal = (event) => {
+        console.log("Modal: ", event);
+    }
     // change state and color for selected event 
     // send saved events to user database
 
@@ -88,10 +96,10 @@ function ApiCalendar() {
     const updateSavedEventList = (newEvent) => {
         if (!includes(newEvent)) {
             setSavedApiEventsList([...savedApiEventsList, newEvent])
-            updateItem(newEvent, { hamburger: true })
+            updateItem(newEvent, { eventSelected: true })
         } else {
             setSavedApiEventsList(savedApiEventsList.filter(item => item.resource.id !== newEvent.resource.id ))
-            updateItem(newEvent, { hamburger: "" });
+            updateItem(newEvent, { eventSelected: "" });
         }
         console.log(savedApiEventsList);
     }
@@ -115,7 +123,7 @@ function ApiCalendar() {
                 events={apiEventsList}
                 startAccessor="start"
                 endAccessor="end"
-                style={{ height: "100vh" }}
+                style={{ height: "80vh" }}
                 views={['month']}
                 components={{
                     event: MyEvent

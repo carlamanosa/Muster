@@ -21,7 +21,15 @@
   .App-intro {
     font-size: large;
   }
-  
+
+  div .rbc-event #notSelected {
+    background-color: cadetblue;
+  }
+
+  div .rbc-event #selected {
+    background-color: rgb(245, 220, 108);
+  }
+
   @keyframes App-logo-spin {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
