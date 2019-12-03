@@ -97,7 +97,7 @@ export default function ({
 
                 <br />
                 <br />
-                    <p >Or sign up <Link to="/signup">here</Link></p>
+                    <p >Or sign up <Link id="sign-up" to="/signup">here</Link></p>
             </Form>
             </Card>
         </Fragment>

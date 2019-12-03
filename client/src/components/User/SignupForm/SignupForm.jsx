@@ -3,7 +3,9 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import User from '../../../utils/Account/User';
 import UserError from '../Error';
+import { Link } from 'react-router-dom';
 import "./SignupForm.css";
+import Row from "react-bootstrap/Row";
 
 const { USER_LOADING, SET_USER, USER_ERROR } = User.actions;
 
@@ -71,14 +73,9 @@ export default function ({
     }
 
     return (
-        <Fragment>
-            <h2>{name} Form Does this Change?</h2>
-            <ul id="progressbar">
-                <li class="active">Verify Phone</li>
-                <li>Upload Documents</li>
-                <li>Security Questions</li>
-            </ul>
-
+        <Fragment id="signupForm">
+            <h2>Sign Up</h2>
+            <br />
             <Form
                 validated={validated}
                 onSubmit={handleSubmit}
@@ -87,8 +84,7 @@ export default function ({
 
                 {/* First Name */}
                 <Form.Group controlId="formBasicFirstName">
-                    <Form.Label>First name</Form.Label>
-                    <Form.Control
+                    <Form.Control id="form-input"
                         pattern=".*\S+.*"
                         type="text"
                         placeholder="First Name"
@@ -97,8 +93,7 @@ export default function ({
 
                 {/* Last Name */}
                 <Form.Group controlId="formBasicLastName">
-                    <Form.Label>Last name</Form.Label>
-                    <Form.Control
+                    <Form.Control id="form-input"
                         pattern=".*\S+.*"
                         type="text"
                         placeholder="Last Name"
@@ -107,12 +102,11 @@ export default function ({
 
                 {/* Display Name */}
                 <Form.Group controlId="formBasicDisplayName">
-                    <Form.Label>Display Name</Form.Label>
-                    <Form.Control
+                    <Form.Control id="form-input"
                         required
                         pattern={emailPattern}
                         type="text"
-                        placeholder="Choose a Display Name"
+                        placeholder="Display Name"
                         ref={displayNameInput} />
                     <Form.Control.Feedback type="invalid">
                         <DisplayNameMessage />
@@ -121,12 +115,11 @@ export default function ({
 
                 {/* Email */}
                 <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control
+                    <Form.Control id="form-input"
                         required
                         pattern={emailPattern}
                         type="email"
-                        placeholder="Enter email"
+                        placeholder="Email"
                         ref={emailInput} />
                     <Form.Control.Feedback type="invalid">
                         <EmailMessage />
@@ -135,8 +128,7 @@ export default function ({
 
                 {/* Password */}
                 <Form.Group controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
+                    <Form.Control id="form-input"
                         required
                         pattern={passwordPattern}
                         type="password"
@@ -149,8 +141,7 @@ export default function ({
 
                 {/* City */}
                 <Form.Group controlId="formBasicCity">
-                    <Form.Label>City</Form.Label>
-                    <Form.Control
+                    <Form.Control id="form-input"
                         pattern=".*\S+.*"
                         type="text"
                         placeholder="City"
@@ -163,8 +154,7 @@ export default function ({
 
                 {/* State */}
                 <Form.Group md="3" controlId="formBasicState">
-                    <Form.Label>State</Form.Label>
-                    <Form.Control
+                    <Form.Control id="form-input"
                         pattern=".*\S+.*"
                         type="text"
                         placeholder="State"
@@ -177,11 +167,10 @@ export default function ({
 
                 {/* Zip */}
                 <Form.Group md="3" controlId="formBasicZip">
-                    <Form.Label>Zip</Form.Label>
-                    <Form.Control
+                    <Form.Control id="form-input"
                         pattern=".*\S+.*"
                         type="number"
-                        placeholder="Zip"
+                        placeholder="Zipcode"
                         ref={zipInput}
                     />
                     <Form.Control.Feedback type="invalid">
@@ -190,16 +179,25 @@ export default function ({
                 </Form.Group>
 
                 <Form.Group>
-                    <Form.Check
+                    <Form.Check id="checkbox"
                         required
                         label="Agree to terms and conditions"
                         feedback="You must agree before submitting."
                     />
                 </Form.Group>
                 <UserError />
-                <Button variant="primary" type="submit">
+
+                <Form.Row id="submitButtonRow">
+                <Button id="submit-button" type="submit">
                     {name}
                 </Button>
+                </Form.Row>
+                <br />
+
+                <Form.Row id="linkRow">
+                <p>Already have a log in? Login <Link id="link" to="/login">here</Link></p>
+                </Form.Row>
+
             </Form>
         </Fragment>
     );

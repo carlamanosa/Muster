@@ -1,15 +1,7 @@
 #friend-list {
     background-color: white;
     box-shadow: 0 3px 6px rgb(180, 233, 201), 0 3px 6px rgb(180, 233, 201);
-    width: 30rem;
-    height: 10rem;
+    width: 25rem;
+    height: 25rem;
 }
 
-
-#common-friends {
-    background-color: white;
-    box-shadow: 0 3px 6px rgb(175, 217, 235), 0 3px 6px rgb(175, 217, 235);
-    width: 30rem;
-    height: 10rem;
-
-}

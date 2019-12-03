@@ -19,28 +19,8 @@ function MobList() {
 
 
         <Fragment>
-            <Container>
-                <Row>
-                    <Col>
-                    <h4>My Friends</h4>
-                    <Card id="friend-list">
-                        <Card.Body>
-                            {/* Display friend name */}
-                            {/* Display friend profile link */}
-                        </Card.Body>
-                    </Card>
-                    
-
-                    </Col>
-                    <Col>
-                    <h4>Common Friends</h4>
-                        <Card id="common-friends">
-                        <Card.Body>
-                            {/* Display Common friends */}
-                        </Card.Body>
-                    </Card>
-                    </Col>
-                </Row>
+            <Container id="friend-list">
+                
             </Container>
         </Fragment>
     );

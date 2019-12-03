@@ -2,9 +2,10 @@ import React, { Fragment } from "react";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { Link } from 'react-router-dom';
+
 import { UserSignupForm } from '../../components';
 import User from '../../utils/Account/User';
+import "./Signup.css";
 
 function EmailMessage() {
     return (
@@ -54,7 +55,6 @@ export default function () {
                         DisplayNameMessage={DisplayNameMessage}
                     />
                     <br />
-                    <p>Or log in <Link to="/login">here</Link></p>
                 </Col>
             </Row>
         </Container>
