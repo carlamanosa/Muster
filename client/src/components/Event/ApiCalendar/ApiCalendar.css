@@ -22,12 +22,17 @@
     font-size: large;
   }
 
-  div .rbc-event #notSelected {
-    background-color: grey;
+  div .rbc-event {
+    padding: grey;
   }
 
+  /* div .rbc-event #notSelected {
+    background-color: grey;
+  } */
+
   div .rbc-event #selected {
-    background-color: rgb(245, 220, 108);
+    background-color: rgb(245, 121, 83);
+    padding: rgb(245, 121, 83);
   }
 
   @keyframes App-logo-spin {

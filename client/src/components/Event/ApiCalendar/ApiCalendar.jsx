@@ -20,7 +20,7 @@ function MyEvent(props) {
 
     return (
         <div id={displayclass}>
-            {props.event && props.event.resource && props.event.resource.eventSelected ? "it's here" : "it isn't here."} {props.title}
+             {props.title}
         </div>
     )
 }
