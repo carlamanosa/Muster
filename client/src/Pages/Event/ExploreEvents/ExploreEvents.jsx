@@ -8,8 +8,10 @@ export default function () {
     User.refreshOnLoad();
 
     return (
-        <Container className="mt-5">
+        <Container className="mt-3">
             <EventSearchForm />
+            <br />
+            <br />
             <EventApiCalendar />
         </Container>
     );

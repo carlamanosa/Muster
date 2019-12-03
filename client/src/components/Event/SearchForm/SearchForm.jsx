@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Event from '../../../utils/Account/Events';
 import { EventError } from "../../../components";
+import "./SearchForm.css";
 
 
 const { SET_API_EVENTS, EVENTS_ERROR, SET_API_QUERY, EVENTS_LOADING } = Event.actions;
@@ -61,9 +62,12 @@ export default function () {
         <Container className="mt-5">
             <Row>
                 <Col md={{ span: 6, offset: 3 }}>
+
                     <h2>Search For Events</h2>
+                    <br />
+                    <br />
                     {/* search bar to get user events, query input (taxonomies filter) */}
-                    <Form id="search-box"
+                    <Form id="search-area"
                         validated={validated}
                         onSubmit={handleSubmit}
                         noValidate>
@@ -80,23 +84,19 @@ export default function () {
                             </Form.Group> */}
 
                             {/* Input Box (Search bar) for query input */}
-                            <Form.Group as={Col} controlId="formGridQ">
+                            <Form.Group as={Col} controlId="formGridQ" id="search-box">
                                 <Form.Control
                                     pattern=".*\S+.*"
                                     type="text"
                                     placeholder="Search Events"
                                     ref={qInput} />
+                                
                             </Form.Group>
-                        </Form.Row>
-
-                        <Form.Row>
-                            <Form.Group as={Col} controlId="formGridQ">
-                                {/* Submit Button (inside of the same Form.Row) */}
-                                <Button variant="primary" type="submit">
+                            <Button variant="light" type="submit" id="submit-button2">
                                     Submit
                                 </Button>
-                            </Form.Group>
                         </Form.Row>
+
                         <EventError />
                     </Form>
                 </Col>
