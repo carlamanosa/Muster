@@ -22,8 +22,22 @@
     font-size: large;
   }
 
+<<<<<<< HEAD
   div .rbc-event {
     padding: grey;
+=======
+  #padding {
+    padding: 2px 5px;
+    font-size: 1rem;
+  }
+
+  div .rbc-event {
+    padding: 0;
+  }
+
+  div .rbc-event #notSelected {
+    background-color: grey;
+>>>>>>> origin/db
   }
 
   /* div .rbc-event #notSelected {

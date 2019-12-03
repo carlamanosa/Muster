@@ -1,5 +1,6 @@
 #formGridQ.form-control{
-        border-color: none;
+        border-color: rgb(255, 165, 91);
+        border-width: thin;
 }
 
 #formGridQ.form-control:focus {
@@ -15,4 +16,3 @@ div.form-row {
         height: 2.4rem;
 
 }
-

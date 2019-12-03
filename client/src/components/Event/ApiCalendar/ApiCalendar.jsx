@@ -20,7 +20,13 @@ function MyEvent(props) {
 
     return (
         <div id={displayclass}>
+<<<<<<< HEAD
              {props.title}
+=======
+            <div id="padding">
+                {props.title}
+            </div>
+>>>>>>> origin/db
         </div>
     )
 }
@@ -112,6 +118,7 @@ function ApiCalendar() {
 
     // update user's events in db
     // const updateDbEvents = (eventList) => {
+    //     Event.refreshApiOnLoad();
     //     Event.API.updateEvents(
     //         eventList
     //     ).then(events => {
