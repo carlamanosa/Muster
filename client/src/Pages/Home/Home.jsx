@@ -40,25 +40,27 @@ export default function () {
         <Container className="mt-5">
             <Row>
                 <Col >
-                    <h2>
-                        Welcome{" "}
+                    <h2 id="welcome-sign">
+                        Welcome back, {" "}
                         <span className="member-name">
-                            {user.firstName} ({user.displayName})
+                            {user.firstName} 
                         </span>
                     </h2>
                 </Col>
             </Row>
 
+            <br />
             
             <Row>
 
                 <Col>
-                <h2> User Week</h2>
+                <h3> User Week</h3>
+                    <br />
                     <EventUserWeek />
                 </Col>
 
                 <Col>
-                    <h2>Muster Mob</h2>
+                    <h3>Muster Mob</h3>
                     <MyMob />
                 </Col>
             </Row>

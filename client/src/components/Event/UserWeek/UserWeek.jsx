@@ -2,7 +2,6 @@
 import React, { Fragment } from "react";
 import Table from 'react-bootstrap/Table'
 import Container from "react-bootstrap/Container";
-import Card from 'react-bootstrap/Card';
 import "./UserWeek.css";
 
 // get user saved events from database
@@ -10,18 +9,16 @@ import "./UserWeek.css";
 function UserWeek() {
 
     return (
-        <Container>
-            <Card id="user-week">
-                <Card.Body>
-
+        <Container id="user-week">
+        
                      {/* table*/}
                 {/* event listeners for clicking the day of the week or name of the event*/}
                 <Table responsive>
                     <tbody>
-                        <tr>
+                    
                         <td>Sunday</td>
                         
-                        </tr>
+                        
                         <tr>
                         <td>Monday</td>
                         
@@ -48,9 +45,7 @@ function UserWeek() {
                         </tr>
                     </tbody>
                     </Table>
-                           
-                </Card.Body>
-                </Card>  
+                         
 
            
         </Container>
