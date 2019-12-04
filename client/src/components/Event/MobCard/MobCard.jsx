@@ -27,6 +27,20 @@ function MobCard() {
                     <Card.Text>Sean</Card.Text>
                 </Card.Body>
             </Card>
+            <br />
+            <Card className="card" style = {{width: "100%"}}>
+                <Card.Header id="event-title">Friday</Card.Header>
+                <Card.Body>
+                    <Card.Text id="event-date"> Capitals at Ducks
+                    </Card.Text>
+                    <Card.Text>DeeDee</Card.Text>
+                    <Card.Text>MeeraIsFire</Card.Text>
+                    <Card.Text>DieLon</Card.Text>
+                    <Card.Text>Lauren</Card.Text>
+                    <Card.Text>Teach</Card.Text>
+                    <Card.Text>Steven</Card.Text>
+                </Card.Body>
+            </Card>
             {/* card */}
             {/* Turnary object (?) if they click on day of the week or name of event - default current day of week */}
             {/* Option 1 - Day of the week */}

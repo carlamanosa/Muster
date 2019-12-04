@@ -20,7 +20,7 @@ function SuggestedFriends() {
     return (
         
             <Container id="suggestedFriends">
-                <Card style={{ width: "100%" }} className = {showSuggestion} >
+                <Card style={{ width: "100%", marginTop: '15px'}} className = {showSuggestion} >
                     <Card.Body>Heather</Card.Body>
                     <Button variant="light" onClick={handleClick}>Add to Mob</Button>
                     <Button variant="light" onClick={handleClick}>Ignore</Button>
