@@ -45,7 +45,7 @@ function UserWeek() {
                     </tr>
                     <tr>
                         <Card id="UserWeekDayCard" style={{ width: "100%" }}>
-                            <Card.Body></Card.Body>
+                        <Card.Body><Card.Text>Graduation!</Card.Text><Card.Text>12:30 PM</Card.Text></Card.Body>
                         </Card>
                     </tr>                    
                     <tr>
@@ -61,7 +61,7 @@ function UserWeek() {
                     </tr>
                     <tr>
                         <Card id="UserWeekDayCard" style={{ width: "100%" }}>
-                            <Card.Body>Captials at Ducks 2019-12-06T19:00:00 - 2019-12-06T19:00:00</Card.Body>
+                            <Card.Body><Card.Text>Captials at Ducks</Card.Text><Card.Text>7:00 PM</Card.Text></Card.Body>
                         </Card>
                     </tr>                    
                     <tr>

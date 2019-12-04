@@ -12,18 +12,19 @@ function MobCard() {
    
     return (
         <Fragment>
-            <Card className="card">
-                <Card.Header id="event-title">Drake</Card.Header>
+            <Card className="card" style = {{width: "100%"}}>
+                <Card.Header id="event-title">Graduation!</Card.Header>
                 <Card.Body>
-                    <Card.Text id="event-date"> March 2020
-                        
+                    <Card.Text id="event-date"> Wednesday, December 4th
                     </Card.Text>
-                    <Card.Text id="event-url"> drake.com
-                        
-                    </Card.Text>
-                    <Card.Text id="mob">
-                        Mob:
-                    </Card.Text>
+                    <Card.Text>DeeDee</Card.Text>
+                    <Card.Text>MeeraIsFire</Card.Text>
+                    <Card.Text>DieLon</Card.Text>
+                    <Card.Text>Lauren</Card.Text>
+                    <Card.Text>Teach</Card.Text>
+                    <Card.Text>Calum</Card.Text>
+                    <Card.Text>Steven</Card.Text>
+                    <Card.Text>Sean</Card.Text>
                 </Card.Body>
             </Card>
             {/* card */}
