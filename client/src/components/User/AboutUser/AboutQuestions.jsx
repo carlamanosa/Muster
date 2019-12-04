@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import Button from 'react-bootstrap/Button';
 import Drag from "./Drag";
 import User from "../../../utils/Account/User";
 
@@ -16,10 +17,9 @@ function AboutQuestions() {
 
   return (
       <div>
-        <h2>One</h2>
         <Drag onChange={setDragAbout} />
         <div>
-          <button onClick={() => handleDragSubmit(dragAbout)}>Next Question</button>
+          <Button variant="light" onClick={() => handleDragSubmit(dragAbout)}>Save</Button>
         </div>
       </div>
   );
