@@ -142,13 +142,13 @@ function ApiCalendar() {
             />
 
             {/* modal for event*/}
-            <Modal show={showModal} onHide={handleCloseModal} animation={false}>
+            <Modal id="event-modal" show={showModal} onHide={handleCloseModal} animation={false}>
                 <Modal.Title>{modalEvent.title}</Modal.Title>
                 <Modal.Body>{modalEvent.start} - {modalEvent.end}</Modal.Body>
-                <Button variant="secondary" onClick={handleCloseModal}>
+                <Button id="close-button" variant="light" onClick={handleCloseModal}>
                     Close
                 </Button>
-                <Button variant="primary" onClick={updateSavedEventList}>
+                <Button id="save-button" variant="light" onClick={updateSavedEventList}>
                     Save Event
                 </Button>
             </Modal>

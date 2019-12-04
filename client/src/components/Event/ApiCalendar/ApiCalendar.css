@@ -49,4 +49,12 @@
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
   }
-  
+
+  #event-modal {
+    width: 35rem;
+    height: 40rem;
+    justify-content: center;
+    
+  }
+
+ 
