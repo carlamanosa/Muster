@@ -1,25 +1,30 @@
 /* eslint-disable react/prefer-stateless-function */
-import React, { Fragment } from "react";
+import React, { Fragment, useContext, useState, useEffect } from "react";
 import Card from 'react-bootstrap/Card';
 import "./MobCard.css";
+import Event from "../../../utils/Account/Events";
+import User from "../../../utils/Account/User";
 // get Mob List from database
 // get Mob Events from each mobs object
 
-export default function MobCard({ name, date, url }) {
+function MobCard() {
+    User.refreshOnLoad();
+   
     return (
         <Fragment>
-            <Card className="card">
-                <Card.Header id="event-title">Capitals at Ducks{name}</Card.Header>
+            <Card className="card" style = {{width: "100%"}}>
+                <Card.Header id="event-title">Graduation!</Card.Header>
                 <Card.Body>
-                    <Card.Text id="event-date"> 2019-12-06T19:00:00 - 2019-12-06T19:00:00
-                        {date}
+                    <Card.Text id="event-date"> Wednesday, December 4th
                     </Card.Text>
-                    <Card.Text id="event-url">
-                        {url}
-                    </Card.Text>
-                    <Card.Text id="mob">
-                        Mob:
-                    </Card.Text>
+                    <Card.Text>DeeDee</Card.Text>
+                    <Card.Text>MeeraIsFire</Card.Text>
+                    <Card.Text>DieLon</Card.Text>
+                    <Card.Text>Lauren</Card.Text>
+                    <Card.Text>Teach</Card.Text>
+                    <Card.Text>Calum</Card.Text>
+                    <Card.Text>Steven</Card.Text>
+                    <Card.Text>Sean</Card.Text>
                 </Card.Body>
             </Card>
             {/* card */}
@@ -33,3 +38,5 @@ export default function MobCard({ name, date, url }) {
         </Fragment>
     );
 }
+
+export default MobCard;

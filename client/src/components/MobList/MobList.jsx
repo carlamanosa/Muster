@@ -12,15 +12,44 @@ function MobList() {
 
 
     return (
-    //    list of mob friends
-            //  col 1-display name, link to profile
-            // search for friends (bar)
-            // col 2- common friends
+        //    list of mob friends
+        //  col 1-display name, link to profile
+        // search for friends (bar)
+        // col 2- common friends
 
 
         <Fragment>
-            <Container id="friend-list">
-                
+            <Container id="friend-list" style={{ 'maxHeight': '23rem', 'paddingTop': '1rem', 'minHeight': '23rem', 'overflowY': 'auto' }}>
+                <Card style={{ width: "100%" }}>
+                    <Card.Body>DeeDee</Card.Body>
+                </Card>
+                <Card style={{ width: "100%" }}>
+                    <Card.Body>MeeraIsFire</Card.Body>
+                </Card>
+                <Card style={{ width: "100%" }}>
+                    <Card.Body>DieLon</Card.Body>
+                </Card>
+                <Card style={{ width: "100%" }}>
+                    <Card.Body>Lauren</Card.Body>
+                </Card>
+                <Card style={{ width: "100%" }}>
+                    <Card.Body>Teach</Card.Body>
+                </Card>
+                <Card style={{ width: "100%" }}>
+                    <Card.Body>Calum</Card.Body>
+                </Card>
+                <Card style={{ width: "100%" }}>
+                    <Card.Body>Zachary</Card.Body>
+                </Card>
+                <Card style={{ width: "100%" }}>
+                    <Card.Body>MacieBaby</Card.Body>
+                </Card>
+                <Card style={{ width: "100%" }}>
+                    <Card.Body>Steven</Card.Body>
+                </Card>
+                <Card style={{ width: "100%" }}>
+                    <Card.Body>Sean</Card.Body>
+                </Card>
             </Container>
         </Fragment>
     );
