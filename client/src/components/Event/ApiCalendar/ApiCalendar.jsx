@@ -20,13 +20,9 @@ function MyEvent(props) {
 
     return (
         <div id={displayclass}>
-<<<<<<< HEAD
-             {props.title}
-=======
             <div id="padding">
                 {props.title}
             </div>
->>>>>>> origin/db
         </div>
     )
 }

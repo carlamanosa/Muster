@@ -22,11 +22,7 @@
     font-size: large;
   }
 
-<<<<<<< HEAD
-  div .rbc-event {
-    padding: grey;
-=======
-  #padding {
+  /* #padding {
     padding: 2px 5px;
     font-size: 1rem;
   }
@@ -37,8 +33,7 @@
 
   div .rbc-event #notSelected {
     background-color: grey;
->>>>>>> origin/db
-  }
+  } */
 
   /* div .rbc-event #notSelected {
     background-color: grey;
@@ -47,6 +42,7 @@
   div .rbc-event #selected {
     background-color: rgb(245, 121, 83);
     padding: rgb(245, 121, 83);
+    outline: 5px auto rgb(245, 121, 83)
   }
 
   @keyframes App-logo-spin {

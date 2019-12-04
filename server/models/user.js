@@ -9,11 +9,7 @@ var assert = require('assert');
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-  friendId: {
-    type: Number,
-    required: true,
-    unique: true
-  },
+  
   email: {
     type: String,
     required: true,
