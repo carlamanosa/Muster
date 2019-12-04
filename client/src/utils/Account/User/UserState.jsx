@@ -54,7 +54,6 @@ const UserProvider = ({ value = {}, ...props }) => {
     const [state, dispatch] = useReducer(reducer, {
         user: {},
         about: [],
-        signedUp: false,
         pageLoading: true,
         loading: false,
         error: null

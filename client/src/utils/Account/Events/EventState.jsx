@@ -95,6 +95,7 @@ const refreshDbEvents = () => {
 const refreshApiEvents = () => {
   const [{ loading }, eventDispatch] = useEventContext();
   const [{ apiQuery }] = useEventContext();
+  const [{ userEvents }] = useEventContext();
 
   useEffect(() => {
     if (loading) {

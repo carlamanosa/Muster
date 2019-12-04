@@ -1,21 +1,27 @@
 /* eslint-disable react/prefer-stateless-function */
-import React, { Fragment } from "react";
+import React, { Fragment, useContext, useState, useEffect } from "react";
 import Card from 'react-bootstrap/Card';
 import "./MobCard.css";
+import Event from "../../../utils/Account/Events";
+import User from "../../../utils/Account/User";
 // get Mob List from database
 // get Mob Events from each mobs object
 
-export default function MobCard({ name, date, url }) {
+function MobCard() {
+    User.refreshOnLoad();
+    const [displayEvents, setDisplayEvents] = useState([]);
+    
+    
     return (
         <Fragment>
             <Card className="card">
-                <Card.Header id="event-title">Drake{name}</Card.Header>
+                <Card.Header id="event-title">Drake</Card.Header>
                 <Card.Body>
                     <Card.Text id="event-date"> March 2020
-                        {date}
+                        
                     </Card.Text>
                     <Card.Text id="event-url"> drake.com
-                        {url}
+                        
                     </Card.Text>
                     <Card.Text id="mob">
                         Mob:
@@ -33,3 +39,5 @@ export default function MobCard({ name, date, url }) {
         </Fragment>
     );
 }
+
+export default MobCard;
