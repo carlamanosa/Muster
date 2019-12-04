@@ -21,14 +21,12 @@ router.post("/api/login", passport.authenticate("local"), function (req, res) {
 // otherwise send back an error
 router.post("/api/signup", function (req, res) {
   db.User.create({
-    friendId: req.body.friendId,
     email: req.body.email,
     password: req.body.password,
     displayName: req.body.displayName,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     location: req.body.location,
-    signedUp: false
   })
     .then(function () {
       res.redirect(307, "/api/login");
@@ -59,14 +57,12 @@ router.get("/api/user_data", function (req, res) {
     // Otherwise send back the user's email and id
     // Sending back a password, even a hashed password, isn't a good idea
     res.json({
-      friendId: req.user.friendId,
       id: req.user.id,
       email: req.user.email,
       firstName: req.user.firstName,
       lastName: req.user.lastName,
       displayName: req.user.displayName,
       location: req.user.location,
-      signedUp: req.user.signedUp,
       events: req.user.events,
       mobs: req.user.mobs,
       abouts: req.user.abouts
@@ -85,10 +81,11 @@ router.get("/api/events", isAuthenticatedData, function (req, res) {
 });
 router.post("/api/events", isAuthenticatedData, function (req, res) {
   const event = new db.Event({
-    id: req.body.id,
-    name: req.body.name,
-    date: req.body.date,
-    url: req.body.url
+    id: req.body.resource.id,
+    title: req.body.title,
+    start: req.body.start,
+    end: req.body.end,
+    isSelected: true
   });
   console.log(JSON.stringify(event));
   db.User.update(

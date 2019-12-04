@@ -4,16 +4,11 @@ const MobSchema = require("./schema/mob");
 const AboutSchema = require("./schema/about");
 // Requiring bcrypt for password hashing. Using the bcryptjs version as the regular bcrypt module sometimes causes errors on Windows machines
 var bcrypt = require("bcryptjs");
-var assert = require('assert');
+// var assert = require('assert');
 
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-  friendId: {
-    type: Number,
-    required: true,
-    unique: true
-  },
   email: {
     type: String,
     required: true,
@@ -39,10 +34,6 @@ const UserSchema = new Schema({
   },
   location: {
     type: Object,
-    required: true,
-  },
-  signedUp: {
-    type: Boolean,
     required: true,
   },
   events: [
@@ -78,7 +69,6 @@ const User = mongoose.model("User", UserSchema);
 // Now, the interesting part:
 // data = [
 //   {
-//     "friendId": 1,
 //     "email": "dee@dee.com",
 //     "password": "ThisPassword*9",
 //     "displayName": "DeeDee",
@@ -89,42 +79,40 @@ const User = mongoose.model("User", UserSchema);
 //       "state": "California",
 //       "zip": "92697"
 //     },
-//     "signedUp": true,
 //     "events": [
 //       {
 //         "id": 00,
-//         "name": "Graduation!",
-//         "date": "2019-12-04",
-//         "time": "1:00 PM",
-//         "url": "://www.wedidit.com/grad"
+//         "title": "Graduation!",
+//         "start": "2019-12-04",
+//         "end": "1:00 PM",
+//         "isSelected": true
 //       },
 //       {
 //         "id": 01,
-//         "name": "After Party",
-//         "date": "2019-12-04",
-//         "time": "3:00 PM",
-//         "url": "://www.wedidit.com/party"
+//         "title": "After Party",
+//         "start": "2019-12-04",
+//         "end": "3:00 PM",
+//         "isSelected": true
 //       },
 //       {
 //         "id": 02,
-//         "name": "Ski Trip",
-//         "date": "2019-12-05",
-//         "time": "10:00 AM",
-//         "url": "://www.wedidit.com/ski"
+//         "title": "Ski Trip",
+//         "start": "2019-12-05",
+//         "end": "10:00 AM",
+//         "isSelected": true
 //       },
 //       {
 //         "id": 04,
-//         "name": "Movie Night",
-//         "date": "2019-12-07",
-//         "time": "9:00 PM",
-//         "url": "://www.wedidit.com/movie"
+//         "title": "Movie Night",
+//         "start": "2019-12-07",
+//         "end": "9:00 PM",
+//         "isSelected": true
 //       }
 //     ],
 //     "mobs": [],
 //     "abouts": []
 //   },
 //   {
-//     "friendId": 2,
 //     "email": "meera@merr.com",
 //     "password": "ThisPassword*9",
 //     "displayName": "MeeraIsFire",
@@ -135,42 +123,40 @@ const User = mongoose.model("User", UserSchema);
 //       "state": "California",
 //       "zip": "92697"
 //     },
-//     "signedUp": true,
 //     "events": [
 //       {
 //         "id": 00,
-//         "name": "Graduation!",
-//         "date": "2019-12-04",
-//         "time": "1:00 PM",
-//         "url": "://www.wedidit.com/grad"
+//         "title": "Graduation!",
+//         "start": "2019-12-04",
+//         "end": "1:00 PM",
+//         "isSelected": true
 //       },
 //       {
 //         "id": 01,
-//         "name": "After Party",
-//         "date": "2019-12-04",
-//         "time": "3:00 PM",
-//         "url": "://www.wedidit.com/party"
+//         "title": "After Party",
+//         "start": "2019-12-04",
+//         "end": "3:00 PM",
+//         "isSelected": true
 //       },
 //       {
 //         "id": 02,
-//         "name": "Ski Trip",
-//         "date": "2019-12-05",
-//         "time": "10:00 AM",
-//         "url": "://www.wedidit.com/ski"
+//         "title": "Ski Trip",
+//         "start": "2019-12-05",
+//         "end": "10:00 AM",
+//         "isSelected": true
 //       },
 //       {
 //         "id": 05,
-//         "name": "",
-//         "date": "",
-//         "time": "",
-//         "url": "://www.wedidit.com/"
+//         "title": "Party!",
+//         "start": "2019-12-07",
+//         "end": "9:00 PM",
+//         "isSelected": true
 //       }
 //     ],
 //     "mobs": [],
 //     "abouts": []
 //   },
 //   {
-//     "friendId": 3,
 //     "email": "dillon@dillon.com",
 //     "password": "ThisPassword*9",
 //     "displayName": "DieLon",
@@ -181,42 +167,40 @@ const User = mongoose.model("User", UserSchema);
 //       "state": "California",
 //       "zip": "92697"
 //     },
-//     "signedUp": true,
 //     "events": [
 //       {
 //         "id": 00,
-//         "name": "Graduation!",
-//         "date": "2019-12-04",
-//         "time": "1:00 PM",
-//         "url": "://www.wedidit.com/grad"
+//         "title": "Graduation!",
+//         "start": "2019-12-04",
+//         "end": "1:00 PM",
+//         "isSelected": true
 //       },
 //       {
 //         "id": 01,
-//         "name": "After Party",
-//         "date": "2019-12-04",
-//         "time": "3:00 PM",
-//         "url": "://www.wedidit.com/party"
+//         "title": "After Party",
+//         "start": "2019-12-04",
+//         "end": "3:00 PM",
+//         "isSelected": true
 //       },
 //       {
 //         "id": 02,
-//         "name": "Ski Trip",
-//         "date": "2019-12-05",
-//         "time": "10:00 AM",
-//         "url": "://www.wedidit.com/ski"
+//         "title": "Ski Trip",
+//         "start": "2019-12-05",
+//         "end": "10:00 AM",
+//         "isSelected": true
 //       },
 //       {
 //         "id": 06,
-//         "name": "",
-//         "date": "2019-12-07",
-//         "time": "",
-//         "url": "://www.wedidit.com/"
+//         "title": "(Video) Game Night",
+//         "start": "2019-12-07",
+//         "end": "all day",
+//         "isSelected": true
 //       }
 //     ],
 //     "mobs": [],
 //     "abouts": []
 //   },
 //   {
-//     "friendId": 4,
 //     "email": "lawrence@lawrence.com",
 //     "password": "ThisPassword*9",
 //     "displayName": "Lauren",
@@ -227,42 +211,40 @@ const User = mongoose.model("User", UserSchema);
 //       "state": "California",
 //       "zip": "92697"
 //     },
-//     "signedUp": true,
 //     "events": [
 //       {
 //         "id": 00,
-//         "name": "Graduation!",
-//         "date": "2019-12-04",
-//         "time": "1:00 PM",
-//         "url": "://www.wedidit.com/grad"
+//         "title": "Graduation!",
+//         "start": "2019-12-04",
+//         "end": "1:00 PM",
+//         "isSelected": true
 //       },
 //       {
 //         "id": 01,
-//         "name": "After Party",
-//         "date": "2019-12-04",
-//         "time": "3:00 PM",
-//         "url": "://www.wedidit.com/party"
+//         "title": "After Party",
+//         "start": "2019-12-04",
+//         "end": "3:00 PM",
+//         "isSelected": true
 //       },
 //       {
 //         "id": 02,
-//         "name": "Ski Trip",
-//         "date": "2019-12-05",
-//         "time": "10:00 AM",
-//         "url": "://www.wedidit.com/ski"
+//         "title": "Ski Trip",
+//         "start": "2019-12-05",
+//         "end": "10:00 AM",
+//         "isSelected": true
 //       },
 //       {
-//         "id": 07,
-//         "name": "",
-//         "date": "2019-12-07",
-//         "time": "",
-//         "url": "://www.wedidit.com/"
+//         "id": 06,
+//         "title": "(Video) Game Night",
+//         "start": "2019-12-07",
+//         "end": "",
+//         "isSelected": true
 //       }
 //     ],
 //     "mobs": [],
 //     "abouts": []
 //   },
 //   {
-//     "friendId": 5,
 //     "email": "taylor@taylor.com",
 //     "password": "ThisPassword*9",
 //     "displayName": "Teach",
@@ -273,42 +255,26 @@ const User = mongoose.model("User", UserSchema);
 //       "state": "California",
 //       "zip": "92697"
 //     },
-//     "signedUp": true,
 //     "events": [
 //       {
 //         "id": 00,
-//         "name": "Graduation!",
-//         "date": "2019-12-04",
-//         "time": "1:00 PM",
-//         "url": "://www.wedidit.com/grad"
+//         "title": "Graduation!",
+//         "start": "2019-12-04",
+//         "end": "1:00 PM",
+//         "isSelected": true
 //       },
 //       {
 //         "id": 01,
-//         "name": "After Party",
-//         "date": "2019-12-04",
-//         "time": "3:00 PM",
-//         "url": "://www.wedidit.com/party"
-//       },
-//       {
-//         "id": 02,
-//         "name": "Ski Trip",
-//         "date": "2019-12-05",
-//         "time": "10:00 AM",
-//         "url": "://www.wedidit.com/ski"
-//       },
-//       {
-//         "id": 08,
-//         "name": "",
-//         "date": "2019-12-07",
-//         "time": "",
-//         "url": "://www.wedidit.com/"
+//         "title": "After Party",
+//         "start": "2019-12-04",
+//         "end": "3:00 PM",
+//         "isSelected": true
 //       }
 //     ],
 //     "mobs": [],
 //     "abouts": []
 //   },
 //   {
-//     "friendId": 6,
 //     "email": "calum@calum.com",
 //     "password": "ThisPassword*9",
 //     "displayName": "calum-ragan",
@@ -319,180 +285,40 @@ const User = mongoose.model("User", UserSchema);
 //       "state": "California",
 //       "zip": "92697"
 //     },
-//     "signedUp": true,
 //     "events": [
 //       {
 //         "id": 00,
-//         "name": "Graduation!",
-//         "date": "2019-12-04",
-//         "time": "1:00 PM",
-//         "url": "://www.wedidit.com/grad"
+//         "title": "Graduation!",
+//         "start": "2019-12-04",
+//         "end": "1:00 PM",
+//         "isSelected": true
 //       },
 //       {
 //         "id": 01,
-//         "name": "After Party",
-//         "date": "2019-12-04",
-//         "time": "3:00 PM",
-//         "url": "://www.wedidit.com/party"
+//         "title": "After Party",
+//         "start": "2019-12-04",
+//         "end": "3:00 PM",
+//         "isSelected": true
 //       },
 //       {
 //         "id": 02,
-//         "name": "Ski Trip",
-//         "date": "2019-12-05",
-//         "time": "10:00 AM",
-//         "url": "://www.wedidit.com/ski"
-//       },
-//       {
-//         "id": 09,
-//         "name": "",
-//         "date": "2019-12-07",
-//         "time": "",
-//         "url": "://www.wedidit.com/"
-//       }
-//     ],
-//     "mobs": [],
-//     "abouts": []
-//   },
-//   {
-//     "friendId": 7,
-//     "email": "jo@jo.com",
-//     "password": "ThisPassword*9",
-//     "displayName": "jo",
-//     "firstName": "Joe",
-//     "lastName": "An",
-//     "location": {
-//       "city": "Irvine",
-//       "state": "California",
-//       "zip": "92697"
-//     },
-//     "signedUp": true,
-//     "events": [
-//       {
-//         "id": 00,
-//         "name": "Graduation!",
-//         "date": "2019-12-04",
-//         "time": "1:00 PM",
-//         "url": "://www.wedidit.com/grad"
-//       },
-//       {
-//         "id": 01,
-//         "name": "After Party",
-//         "date": "2019-12-04",
-//         "time": "3:00 PM",
-//         "url": "://www.wedidit.com/party"
-//       },
-//       {
-//         "id": 02,
-//         "name": "Ski Trip",
-//         "date": "2019-12-05",
-//         "time": "10:00 AM",
-//         "url": "://www.wedidit.com/ski"
-//       },
-//       {
-//         "id": 10,
-//         "name": "",
-//         "date": "2019-12-07",
-//         "time": "",
-//         "url": "://www.wedidit.com/"
-//       }
-//     ],
-//     "mobs": [],
-//     "abouts": []
-//   },
-//   {
-//     "friendId": 8,
-//     "email": "steven@steven.com",
-//     "password": "ThisPassword*9",
-//     "displayName": "smartyPantsSteven",
-//     "firstName": "Steven",
-//     "lastName": "Gu",
-//     "location": {
-//       "city": "Irvine",
-//       "state": "California",
-//       "zip": "92697"
-//     },
-//     "signedUp": true,
-//     "events": [
-//       {
-//         "id": 00,
-//         "name": "Graduation!",
-//         "date": "2019-12-04",
-//         "time": "1:00 PM",
-//         "url": "://www.wedidit.com/grad"
-//       },
-//       {
-//         "id": 01,
-//         "name": "After Party",
-//         "date": "2019-12-04",
-//         "time": "3:00 PM",
-//         "url": "://www.wedidit.com/party"
-//       },
-//       {
-//         "id": 02,
-//         "name": "Ski Trip",
-//         "date": "2019-12-05",
-//         "time": "10:00 AM",
-//         "url": "://www.wedidit.com/ski"
-//       },
-//       {
-//         "id": 10,
-//         "name": "",
-//         "date": "2019-12-07",
-//         "time": "",
-//         "url": "://www.wedidit.com/"
-//       }
-//     ],
-//     "mobs": [],
-//     "abouts": []
-//   },
-//   {
-//     "friendId": 9,
-//     "email": "sean@sean.com",
-//     "password": "ThisPassword*9",
-//     "displayName": "LeagueOfSean",
-//     "firstName": "Sean",
-//     "lastName": "Mc",
-//     "location": {
-//       "city": "Irvine",
-//       "state": "California",
-//       "zip": "92697"
-//     },
-//     "signedUp": true,
-//     "events": [
-//       {
-//         "id": 00,
-//         "name": "Graduation!",
-//         "date": "2019-12-04",
-//         "time": "1:00 PM",
-//         "url": "://www.wedidit.com/grad"
-//       },
-//       {
-//         "id": 01,
-//         "name": "After Party",
-//         "date": "2019-12-04",
-//         "time": "3:00 PM",
-//         "url": "://www.wedidit.com/party"
-//       },
-//       {
-//         "id": 02,
-//         "name": "Ski Trip",
-//         "date": "2019-12-05",
-//         "time": "10:00 AM",
-//         "url": "://www.wedidit.com/ski"
+//         "title": "Ski Trip",
+//         "start": "2019-12-05",
+//         "end": "10:00 AM",
+//         "isSelected": true
 //       },
 //       {
 //         "id": 11,
-//         "name": "Roller Skating",
-//         "date": "2019-12-07",
-//         "time": "1:00 PM",
-//         "url": "://www.wedidit.com/ski"
+//         "title": "Roller Skating",
+//         "start": "2019-12-07",
+//         "end": "1:00 PM",
+//         "isSelected": true
 //       }
 //     ],
 //     "mobs": [],
 //     "abouts": []
 //   },
 //   {
-//     "friendId": 10,
 //     "email": "zach@zach.com",
 //     "password": "ThisPassword*9",
 //     "displayName": "zachary",
@@ -503,42 +329,40 @@ const User = mongoose.model("User", UserSchema);
 //       "state": "California",
 //       "zip": "92697"
 //     },
-//     "signedUp": true,
 //     "events": [
 //       {
 //         "id": 00,
-//         "name": "Graduation!",
-//         "date": "2019-12-04",
-//         "time": "1:00 PM",
-//         "url": "://www.wedidit.com/grad"
+//         "title": "Graduation!",
+//         "start": "2019-12-04",
+//         "end": "1:00 PM",
+//         "isSelected": true
 //       },
 //       {
 //         "id": 01,
-//         "name": "After Party",
-//         "date": "2019-12-04",
-//         "time": "3:00 PM",
-//         "url": "://www.wedidit.com/party"
+//         "title": "After Party",
+//         "start": "2019-12-04",
+//         "end": "3:00 PM",
+//         "isSelected": true
 //       },
 //       {
 //         "id": 02,
-//         "name": "Ski Trip",
-//         "date": "2019-12-05",
-//         "time": "10:00 AM",
-//         "url": "://www.wedidit.com/ski"
+//         "title": "Ski Trip",
+//         "start": "2019-12-05",
+//         "end": "10:00 AM",
+//         "isSelected": true
 //       },
 //       {
 //         "id": 12,
-//         "name": "Roller Skating",
-//         "date": "2019-12-07",
-//         "time": "1:00 PM",
-//         "url": "://www.wedidit.com/ski"
+//         "title": "Roller Skating",
+//         "start": "2019-12-07",
+//         "end": "1:00 PM",
+//         "isSelected": true
 //       }
 //     ],
 //     "mobs": [],
 //     "abouts": []
 //   },
 //   {
-//     "friendId": 11,
 //     "email": "chris@chris.com",
 //     "password": "ThisPassword*9",
 //     "displayName": "chris",
@@ -549,42 +373,40 @@ const User = mongoose.model("User", UserSchema);
 //       "state": "California",
 //       "zip": "92697"
 //     },
-//     "signedUp": true,
 //     "events": [
 //       {
 //         "id": 00,
-//         "name": "Graduation!",
-//         "date": "2019-12-04",
-//         "time": "1:00 PM",
-//         "url": "://www.wedidit.com/grad"
+//         "title": "Graduation!",
+//         "start": "2019-12-04",
+//         "end": "1:00 PM",
+//         "isSelected": true
 //       },
 //       {
 //         "id": 01,
-//         "name": "After Party",
-//         "date": "2019-12-04",
-//         "time": "3:00 PM",
-//         "url": "://www.wedidit.com/party"
+//         "title": "After Party",
+//         "start": "2019-12-04",
+//         "end": "3:00 PM",
+//         "isSelected": true
 //       },
 //       {
 //         "id": 02,
-//         "name": "Ski Trip",
-//         "date": "2019-12-05",
-//         "time": "10:00 AM",
-//         "url": "://www.wedidit.com/ski"
+//         "title": "Ski Trip",
+//         "start": "2019-12-05",
+//         "end": "10:00 AM",
+//         "isSelected": true
 //       },
 //       {
 //         "id": 13,
-//         "name": "Roller Skating",
-//         "date": "2019-12-07",
-//         "time": "1:00 PM",
-//         "url": "://www.wedidit.com/ski"
+//         "title": "Roller Skating",
+//         "start": "2019-12-07",
+//         "end": "1:00 PM",
+//         "isSelected": true
 //       }
 //     ],
 //     "mobs": [],
 //     "abouts": []
 //   },
 //   {
-//     "friendId": 12,
 //     "email": "macie@macie.com",
 //     "password": "ThisPassword*9",
 //     "displayName": "MacieBaby",
@@ -595,35 +417,34 @@ const User = mongoose.model("User", UserSchema);
 //       "state": "California",
 //       "zip": "92697"
 //     },
-//     "signedUp": true,
 //     "events": [
 //       {
 //         "id": 00,
-//         "name": "Graduation!",
-//         "date": "2019-12-04",
-//         "time": "1:00 PM",
-//         "url": "://www.wedidit.com/grad"
+//         "title": "Graduation!",
+//         "start": "2019-12-04",
+//         "end": "1:00 PM",
+//         "isSelected": true
 //       },
 //       {
 //         "id": 01,
-//         "name": "After Party",
-//         "date": "2019-12-04",
-//         "time": "3:00 PM",
-//         "url": "://www.wedidit.com/party"
+//         "title": "After Party",
+//         "start": "2019-12-04",
+//         "end": "3:00 PM",
+//         "isSelected": true
 //       },
 //       {
 //         "id": 02,
-//         "name": "Ski Trip",
-//         "date": "2019-12-05",
-//         "time": "10:00 AM",
-//         "url": "://www.wedidit.com/ski"
+//         "title": "Ski Trip",
+//         "start": "2019-12-05",
+//         "end": "10:00 AM",
+//         "isSelected": true
 //       },
 //       {
 //         "id": 14,
-//         "name": "Roller Skating",
-//         "date": "2019-12-07",
-//         "time": "1:00 PM",
-//         "url": "://www.wedidit.com/ski"
+//         "title": "Roller Skating",
+//         "start": "2019-12-07",
+//         "end": "1:00 PM",
+//         "isSelected": true
 //       }
 //     ],
 //     "mobs": [],
@@ -633,7 +454,7 @@ const User = mongoose.model("User", UserSchema);
 
 // User.collection.insertMany(data, function (err, r) {
 //   assert.equal(null, err);
-//   assert.equal(12, r.insertedCount);
+//   assert.equal(9, r.insertedCount);
 // })
 
 module.exports = User;

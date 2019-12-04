@@ -7,10 +7,8 @@ import Button from "react-bootstrap/Button";
 
 import "./ApiCalendar.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import User from "../../User";
-import { set } from "mongoose";
 
-const { EVENTS_ERROR, SET_EVENTS, EVENTS_LOADING } = Event.actions;
+const { EVENTS_ERROR, USER_EVENTS, SET_EVENTS, EVENTS_LOADING } = Event.actions;
 
 function MyEvent(props) {
     const [displayclass, setDisplayClass] = useState("notSelected");
@@ -28,8 +26,12 @@ function MyEvent(props) {
 }
 
 function ApiCalendar() {
+
+    Event.refreshDbOnLoad();
+    
     const [/* user not needed */, eventDispatch] = Event.useContext();
     const [{ apiEvents }] = Event.useContext();
+    const [{ userEvents }] = Event.useContext();
     const [apiEventsList, setApiEventsList] = useState([]);
     const [savedApiEventsList, setSavedApiEventsList] = useState([]);
     const [showModal, setShowModal] = useState(false);
@@ -48,6 +50,7 @@ function ApiCalendar() {
 
     useEffect(() => {
         eventDispatch({ type: EVENTS_LOADING });
+        setApiEventsList(userEvents);
     }, []);
 
     useEffect(() => {
@@ -57,8 +60,7 @@ function ApiCalendar() {
                 title: event.short_title,
                 start: event.datetime_local,
                 end: event.datetime_local,
-                allDay: false,
-                isSelected: true,
+                isSelected: event.isSelected,
                 resource: { id: event.id }
             })
         });
@@ -69,12 +71,12 @@ function ApiCalendar() {
         if (!includes(modalEvent)) {
             setSavedApiEventsList([...savedApiEventsList, modalEvent])
             updateItem(modalEvent, { eventSelected: true })
+            addDbEvent(modalEvent);
         } else {
             setSavedApiEventsList(savedApiEventsList.filter(item => item.resource.id !== modalEvent.resource.id))
             updateItem(modalEvent, { eventSelected: "" });
         }
         setShowModal(false);
-        console.log(savedApiEventsList);
     }
 
     const includes = (event) => {
@@ -83,13 +85,12 @@ function ApiCalendar() {
 
     const updateItem = (item, updatedFields) => {
         const newApiEventsList = apiEventsList.map(event => {
-            // console.log("newApiEvents")
             if (event.resource.id === item.resource.id) {
                 const resource = {
                     ...event.resource,
                     ...updatedFields
                 }
-                console.log({
+                console.log("updateItem: ", {
                     ...item,
                     resource
                 });
@@ -111,18 +112,22 @@ function ApiCalendar() {
         setShowModal(true);
     }
 
-
     // update user's events in db
-    // const updateDbEvents = (eventList) => {
-    //     Event.refreshApiOnLoad();
-    //     Event.API.updateEvents(
-    //         eventList
-    //     ).then(events => {
-    //         eventDispatch({ type: USER_EVENTS, events});
-    //     }).catch((err) => {
-    //         eventDispatch({ type: EVENTS_ERROR, message: err });
-    //     });
-    // }
+    const addDbEvent = (savedEvent) => {
+        console.log("updateDbEvents: ", savedEvent);
+        console.log("savedEvent.resource.id: ", savedEvent.resource.id)
+        Event.API.addEvent(
+            savedEvent            
+        ).then(events => {
+            eventDispatch({ type: USER_EVENTS, events});
+        }).catch((err) => {
+            eventDispatch({ type: EVENTS_ERROR, message: err });
+        });
+    }
+
+    const test = (date) => {
+        console.log(date);
+    }
 
     return (
         <Fragment>
@@ -139,6 +144,7 @@ function ApiCalendar() {
                 }}
                 onSelectEvent={handleShowModal}
                 popup={true}
+                onNavigate={test}
             />
 
             {/* modal for event*/}

@@ -23,7 +23,7 @@ const reducer = (state, action) => {
     case USER_EVENTS:
       return {
         ...state,
-        events: action.events,
+        userEvents: action.events,
         loading: false,
         pageLoading: false
       };
@@ -64,7 +64,7 @@ const reducer = (state, action) => {
 
 const EventProvider = ({ value = {}, ...props }) => {
   const [state, dispatch] = useReducer(reducer, {
-    events: [],
+    userEvents: [],
     apiEvents: [],
     apiQuery: "",
     pageLoading: true,
@@ -86,8 +86,8 @@ const refreshDbEvents = () => {
       return;
     }
     eventDispatch({ type: EVENTS_LOADING });
-    API.getUserEvents().then(events => {
-      eventDispatch({ type: USER_EVENTS, events });
+    API.getSavedEvents().then(userEvents => {
+      eventDispatch({ type: USER_EVENTS, userEvents });
     });
   }, []);
 };
