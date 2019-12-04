@@ -19,7 +19,7 @@ export default function () {
                     <h4>this is the profilepage page, but we're using it to Test Things</h4>
                     <h6>Please answer 3 questions so we can learn what you like to do</h6>
                 </Col>
-                <AboutQuestions />
+                
             </Row>
         </Container>
     );

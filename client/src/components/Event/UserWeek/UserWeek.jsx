@@ -17,7 +17,7 @@ function UserWeek() {
             <Table responsive>
                 <tbody >
 
-                    <td>Sunday</td>
+                    {/* <td>Sunday</td>
                     <br />
                     <tr>
                         <Card id="UserWeekDayCard" style={{ width: "100%" }}>
@@ -39,13 +39,13 @@ function UserWeek() {
                         <Card id="UserWeekDayCard" style={{ width: "100%" }}>
                             <Card.Body>This is some text within a card body.</Card.Body>
                         </Card>
-                    </tr>                    
+                    </tr>                     */}
                     <tr id="TodayDisplay">
                         <td>Wednesday</td>
                     </tr>
                     <tr>
                         <Card id="UserWeekDayCard" style={{ width: "100%" }}>
-                            <Card.Body>This is some text within a card body.</Card.Body>
+                            <Card.Body></Card.Body>
                         </Card>
                     </tr>                    
                     <tr>
@@ -53,7 +53,7 @@ function UserWeek() {
                     </tr>
                     <tr>
                         <Card id="UserWeekDayCard" style={{ width: "100%" }}>
-                            <Card.Body>This is some text within a card body.</Card.Body>
+                            <Card.Body></Card.Body>
                         </Card>
                     </tr>                    
                     <tr>
@@ -61,7 +61,7 @@ function UserWeek() {
                     </tr>
                     <tr>
                         <Card id="UserWeekDayCard" style={{ width: "100%" }}>
-                            <Card.Body>This is some text within a card body.</Card.Body>
+                            <Card.Body>Captials at Ducks 2019-12-06T19:00:00 - 2019-12-06T19:00:00</Card.Body>
                         </Card>
                     </tr>                    
                     <tr>
@@ -69,7 +69,7 @@ function UserWeek() {
                     </tr>
                     <tr>
                         <Card id="UserWeekDayCard" style={{ width: "100%" }}>
-                            <Card.Body>This is some text within a card body.</Card.Body>
+                            <Card.Body></Card.Body>
                         </Card>
                     </tr>                    
                 </tbody>
