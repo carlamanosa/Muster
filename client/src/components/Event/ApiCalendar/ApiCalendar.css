@@ -22,7 +22,7 @@
     font-size: large;
   }
 
-  #padding {
+  /* #padding {
     padding: 2px 5px;
     font-size: 1rem;
   }
@@ -33,14 +33,28 @@
 
   div .rbc-event #notSelected {
     background-color: grey;
-  }
+  } */
+
+  /* div .rbc-event #notSelected {
+    background-color: grey;
+  } */
 
   div .rbc-event #selected {
-    background-color: rgb(245, 220, 108);
+    background-color: rgb(245, 121, 83);
+    padding: rgb(245, 121, 83);
+    outline: 5px auto rgb(245, 121, 83)
   }
 
   @keyframes App-logo-spin {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
   }
-  
+
+  #event-modal {
+    width: 35rem;
+    height: 40rem;
+    justify-content: center;
+    
+  }
+
+ 
