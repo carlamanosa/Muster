@@ -9,7 +9,7 @@ function MusterMob() {
 
     return (
         <ModalDialog id="saved-mob">
-            <ModalBody style={{ 'maxHeight': '23rem', 'paddingTop': '1rem', 'minHeight': '23rem', 'overflowY': 'auto' }}>
+            <ModalBody style={{ 'maxHeight': '23rem', 'paddingTop': '1rem', 'minHeight': '23rem', 'overflowY': 'auto', 'justifyContent':'center' }}>
                 <MobCard />
             </ModalBody>
         </ModalDialog>

@@ -1,7 +1,7 @@
 .card {
     background-color: white;
-    width: 18rem;
-    
+    box-shadow: 0 3px 6px #FAE2AF, 0 3px 6px rgb(235, 210, 155);
+    width: 20rem;
 }
 
 #event-title {
