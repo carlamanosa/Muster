@@ -58,7 +58,7 @@ export default function () {
                     <EventUserWeek />
                 </Col>
 
-                <Col>
+                <Col id="MusterSection">
                     <h3>Muster Mob</h3>
                     <MusterMob />
                 </Col>
