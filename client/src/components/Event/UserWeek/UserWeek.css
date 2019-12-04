@@ -6,3 +6,11 @@
     padding-top: 1rem;
 
 }
+
+#UserWeekDayCard {
+    box-shadow: none;
+}
+
+#TodayDisplay {
+    background-color: rgb(235, 235, 235);
+}
