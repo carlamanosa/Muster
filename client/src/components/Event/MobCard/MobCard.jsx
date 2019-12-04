@@ -9,9 +9,7 @@ import User from "../../../utils/Account/User";
 
 function MobCard() {
     User.refreshOnLoad();
-    const [displayEvents, setDisplayEvents] = useState([]);
-
-    
+   
     return (
         <Fragment>
             <Card className="card">
