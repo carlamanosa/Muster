@@ -2,9 +2,12 @@ import React, { Fragment } from "react";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import AboutQuestions from "../../components/User/AboutUser/AboutQuestions";
 
 import { AboutUserForm } from '../../components';
 import User from '../../utils/Account/User';
+
+import './AboutUser.css';
 
 function CheckBoxMessage() {
     return (
@@ -18,17 +21,12 @@ export default function () {
     User.refreshOnLoad();
 
     return (
-        <Container className="mt-2">
+        <Container className="mt-5">
             <Row>
                 <Col md={{ span: 6, offset: 3 }}>
-                    <AboutUserForm
-                        name="About User"
-                        className="aboutForm"
-                        api={User.API.setAbouts}
-                        CheckBoxMessage={CheckBoxMessage}
-                    />
-                    <br />
+                <AboutQuestions />
                 </Col>
+            
             </Row>
         </Container>
     );
