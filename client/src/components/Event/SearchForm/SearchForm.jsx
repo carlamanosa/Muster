@@ -9,17 +9,34 @@ import { EventError } from "../../../components";
 import "./SearchForm.css";
 
 
-const { SET_API_EVENTS, EVENTS_ERROR, SET_API_QUERY, EVENTS_LOADING } = Event.actions;
+const { SET_API_EVENTS, EVENTS_ERROR, SET_API_QUERY, EVENTS_LOADING, DISPLAY_EVENTS } = Event.actions;
 
 export default function () {
+    Event.refreshDbOnLoad();
     const [validated, setValidated] = useState(false);
     const [/* user not needed */, eventDispatch] = Event.useContext();
     const [{ apiEvents }] = Event.useContext();
-    
+    const [{ userEvents }] = Event.useContext();
+    const [{ displayEvents }] = Event.useContext();
+
+
+
+
     useEffect(() => {
-        eventDispatch({ type: EVENTS_LOADING });
-      }, []);
-    
+        const displayTheEvents = [];
+        userEvents.map(event => {
+            displayTheEvents.push({
+                title: event.title,
+                start: event.start,
+                end: event.start,
+                time: event.start,
+                isSelected: event.isSelected,
+                resource: { id: event.id, eventSelected: true }
+            })
+        });
+        eventDispatch({ type: DISPLAY_EVENTS, displayTheEvents});
+    }, [userEvents]);
+
     // Where we store the user's input from our search form
     // This one is the text input from the search bar that we'll send as a query to the API
     const qInput = useRef();

@@ -5,7 +5,8 @@ const {
   EVENTS_LOADING,
   SET_API_EVENTS,
   SET_API_QUERY,
-  USER_EVENTS,
+  SET_USER_EVENTS,
+  DISPLAY_EVENTS,
   EVENTS_ERROR,
   CLEAR_EVENTS_ERROR } = actions;
 
@@ -20,7 +21,7 @@ const reducer = (state, action) => {
         loading: true
       };
 
-    case USER_EVENTS:
+    case SET_USER_EVENTS:
       return {
         ...state,
         userEvents: action.events,
@@ -36,6 +37,14 @@ const reducer = (state, action) => {
         pageLoading: false
       };
 
+      case DISPLAY_EVENTS:
+        return {
+          ...state,
+          displayEvents: action.displayTheEvents,
+          loading: false,
+          pageLoading: false
+        };
+  
     case SET_API_QUERY:
       return {
         ...state,
@@ -66,6 +75,7 @@ const EventProvider = ({ value = {}, ...props }) => {
   const [state, dispatch] = useReducer(reducer, {
     userEvents: [],
     apiEvents: [],
+    displayEvents: [],
     apiQuery: "",
     pageLoading: true,
     loading: false,
@@ -81,13 +91,14 @@ const useEventContext = () => {
 
 const refreshDbEvents = () => {
   const [{ loading }, eventDispatch] = useEventContext();
+
   useEffect(() => {
     if (loading) {
       return;
     }
     eventDispatch({ type: EVENTS_LOADING });
-    API.getSavedEvents().then(userEvents => {
-      eventDispatch({ type: USER_EVENTS, userEvents });
+    API.getSavedEvents().then(events => {
+      eventDispatch({ type: SET_USER_EVENTS, events });
     });
   }, []);
 };
@@ -95,7 +106,6 @@ const refreshDbEvents = () => {
 const refreshApiEvents = () => {
   const [{ loading }, eventDispatch] = useEventContext();
   const [{ apiQuery }] = useEventContext();
-  const [{ userEvents }] = useEventContext();
 
   useEffect(() => {
     if (loading) {

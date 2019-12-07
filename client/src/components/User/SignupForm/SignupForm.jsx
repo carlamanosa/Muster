@@ -51,7 +51,11 @@ export default function ({
         }
 
         // If we have everything, we run the loginUser function and clear the form
+        const newUserInfo = {
+            email, password, displayName, firstName, lastName, location
+        }
         doUserFunc(email, password, displayName, firstName, lastName, location);
+        console.log(newUserInfo);
     };
 
     // doUserFunc does a post to our "api/login" route and if successful, *will (hopefully)* redirect them to the AboutUser page
@@ -77,6 +81,7 @@ export default function ({
             <h2>Sign Up</h2>
             <br />
             <Form
+                id="form-input"
                 validated={validated}
                 onSubmit={handleSubmit}
                 className={className}
@@ -84,7 +89,7 @@ export default function ({
 
                 {/* First Name */}
                 <Form.Group controlId="formBasicFirstName">
-                    <Form.Control id="form-input"
+                    <Form.Control
                         pattern=".*\S+.*"
                         type="text"
                         placeholder="First Name"
@@ -93,7 +98,7 @@ export default function ({
 
                 {/* Last Name */}
                 <Form.Group controlId="formBasicLastName">
-                    <Form.Control id="form-input"
+                    <Form.Control
                         pattern=".*\S+.*"
                         type="text"
                         placeholder="Last Name"
@@ -102,7 +107,7 @@ export default function ({
 
                 {/* Display Name */}
                 <Form.Group controlId="formBasicDisplayName">
-                    <Form.Control id="form-input"
+                    <Form.Control
                         required
                         pattern={emailPattern}
                         type="text"
@@ -115,7 +120,7 @@ export default function ({
 
                 {/* Email */}
                 <Form.Group controlId="formBasicEmail">
-                    <Form.Control id="form-input"
+                    <Form.Control
                         required
                         pattern={emailPattern}
                         type="email"
@@ -128,7 +133,7 @@ export default function ({
 
                 {/* Password */}
                 <Form.Group controlId="formBasicPassword">
-                    <Form.Control id="form-input"
+                    <Form.Control
                         required
                         pattern={passwordPattern}
                         type="password"
@@ -141,7 +146,7 @@ export default function ({
 
                 {/* City */}
                 <Form.Group controlId="formBasicCity">
-                    <Form.Control id="form-input"
+                    <Form.Control
                         pattern=".*\S+.*"
                         type="text"
                         placeholder="City"
@@ -154,7 +159,7 @@ export default function ({
 
                 {/* State */}
                 <Form.Group md="3" controlId="formBasicState">
-                    <Form.Control id="form-input"
+                    <Form.Control
                         pattern=".*\S+.*"
                         type="text"
                         placeholder="State"
@@ -167,7 +172,7 @@ export default function ({
 
                 {/* Zip */}
                 <Form.Group md="3" controlId="formBasicZip">
-                    <Form.Control id="form-input"
+                    <Form.Control
                         pattern=".*\S+.*"
                         type="number"
                         placeholder="Zipcode"
@@ -192,10 +197,17 @@ export default function ({
                     {name}
                 </Button>
                 </Form.Row>
+
+                {/* <Form.Row id="submitButtonRow">
+                    <Link id="link" to="/user/about">
+                        <Button id="submit-button" type="submit">{name}</Button>
+                    </Link>
+                </Form.Row> */}
+
                 <br />
 
                 <Form.Row id="linkRow">
-                <p>Already have a log in? Login <Link id="link" to="/login">here</Link></p>
+                    <p>Already have a log in? Login <Link id="link" to="/login">here</Link></p>
                 </Form.Row>
 
             </Form>

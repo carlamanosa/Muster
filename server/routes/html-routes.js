@@ -42,8 +42,7 @@ router.route([
     "/event/addlist",
     "/event/explore",
     "/event/create",
-    "/user/about",
-    "/about/signup",
+    "/user/about"
   ]).get(function(req, res) {
   res.sendFile(path.join(__dirname, "../../client/build/index.html"));
 });

@@ -8,7 +8,7 @@ import Button from "react-bootstrap/Button";
 import "./ApiCalendar.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
-const { EVENTS_ERROR, USER_EVENTS, SET_EVENTS, EVENTS_LOADING } = Event.actions;
+const { EVENTS_ERROR, SET_USER_EVENTS, EVENTS_LOADING } = Event.actions;
 
 function MyEvent(props) {
     const [displayclass, setDisplayClass] = useState("notSelected");
@@ -32,7 +32,9 @@ function ApiCalendar() {
     const [/* user not needed */, eventDispatch] = Event.useContext();
     const [{ apiEvents }] = Event.useContext();
     const [{ userEvents }] = Event.useContext();
+    const [{ displayEvents }] = Event.useContext();
     const [apiEventsList, setApiEventsList] = useState([]);
+    const [displayEventsList, setDisplayEventsList] = useState([]);
     const [savedApiEventsList, setSavedApiEventsList] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [modalEvent, setModalEvent] = useState({});
@@ -50,21 +52,31 @@ function ApiCalendar() {
 
     useEffect(() => {
         eventDispatch({ type: EVENTS_LOADING });
-        setApiEventsList(userEvents);
     }, []);
 
     useEffect(() => {
-        const newApiEventsList = [];
+        const updateEventsList = [];
+        displayEvents.map(event => {
+            updateEventsList.push({
+                title: event.title,
+                start: event.start,
+                end: event.start,
+                time: event.start,
+                isSelected: event.isSelected,
+                resource: { id: event.id, eventSelected: true }
+            })
+        });
         apiEvents.map(event => {
-            newApiEventsList.push({
+            updateEventsList.push({
                 title: event.short_title,
                 start: event.datetime_local,
                 end: event.datetime_local,
+                time: event.datetime_local,
                 isSelected: event.isSelected,
                 resource: { id: event.id }
             })
         });
-        setApiEventsList(newApiEventsList);
+        setApiEventsList(updateEventsList);
     }, [apiEvents]);
 
     const updateSavedEventList = () => {
@@ -114,12 +126,16 @@ function ApiCalendar() {
 
     // update user's events in db
     const addDbEvent = (savedEvent) => {
-        console.log("updateDbEvents: ", savedEvent);
-        console.log("savedEvent.resource.id: ", savedEvent.resource.id)
-        Event.API.addEvent(
-            savedEvent            
-        ).then(events => {
-            eventDispatch({ type: USER_EVENTS, events});
+        const dateTime = savedEvent.start;
+        const formatDateTime = dateTime.split("T");
+        Event.API.addEvent({
+            resource: { id: savedEvent.resource.id, eventSelected: true },
+            title: savedEvent.title,
+            start: savedEvent.end,
+            end: formatDateTime[0],
+            time: formatDateTime[1]
+        }).then(events => {
+            eventDispatch({ type: SET_USER_EVENTS, events});
         }).catch((err) => {
             eventDispatch({ type: EVENTS_ERROR, message: err });
         });

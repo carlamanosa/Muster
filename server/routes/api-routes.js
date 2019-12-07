@@ -81,10 +81,11 @@ router.get("/api/events", isAuthenticatedData, function (req, res) {
 });
 router.post("/api/events", isAuthenticatedData, function (req, res) {
   const event = new db.Event({
-    id: req.body.resource.id,
+    resource: { id: req.body.resource.id, eventSelected: true},
     title: req.body.title,
     start: req.body.start,
     end: req.body.end,
+    time: req.body.time,
     isSelected: true
   });
   console.log(JSON.stringify(event));
