@@ -12,7 +12,6 @@ const { EVENTS_LOADING, SET_USER_EVENTS, EVENTS_ERROR } = Event.actions;
 
 function UserWeek() {
     Event.refreshDbOnLoad();
-    const [{ userEvents }] = Event.useContext();
     const [weekDates, setWeekDates] = useState([{
         date: "",
         day: ""
@@ -31,12 +30,16 @@ function UserWeek() {
         }
         setWeekDates(weekDateArr);
         console.log(weekDateArr);
-        console.log(userEvents);
+    }
 
+    const getEvents = async () => {
+        const events = await Event.API.getSavedEvents();
+        console.log("events: ", events);
     }
 
     useEffect(() => {
         getWeek();
+        getEvents();        
     }, []);
 
     return (

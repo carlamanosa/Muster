@@ -16,26 +16,6 @@ export default function () {
     const [validated, setValidated] = useState(false);
     const [/* user not needed */, eventDispatch] = Event.useContext();
     const [{ apiEvents }] = Event.useContext();
-    const [{ userEvents }] = Event.useContext();
-    const [{ displayEvents }] = Event.useContext();
-
-
-
-
-    useEffect(() => {
-        const displayTheEvents = [];
-        userEvents.map(event => {
-            displayTheEvents.push({
-                title: event.title,
-                start: event.start,
-                end: event.start,
-                time: event.start,
-                isSelected: event.isSelected,
-                resource: { id: event.id, eventSelected: true }
-            })
-        });
-        eventDispatch({ type: DISPLAY_EVENTS, displayTheEvents});
-    }, [userEvents]);
 
     // Where we store the user's input from our search form
     // This one is the text input from the search bar that we'll send as a query to the API
