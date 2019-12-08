@@ -28,7 +28,7 @@ function MyEvent(props) {
 function ApiCalendar() {
 
     Event.refreshDbOnLoad();
-    
+
     const [/* user not needed */, eventDispatch] = Event.useContext();
     const [{ apiEvents }] = Event.useContext();
     const [{ displayEvents }] = Event.useContext();
@@ -77,9 +77,20 @@ function ApiCalendar() {
     }
 
     const displayAllEvents = async () => {
+        const ourDbEvents = [];
+        const ourApiEvents = [];
+        const dupeEvents = [];
         const allEvents = [];
         const dbEvents = await Event.API.getSavedEvents();
         dbEvents.map(event => {
+            ourDbEvents.push({
+                title: event.title,
+                start: event.start,
+                end: event.start,
+                time: event.start,
+                isSelected: event.isSelected,
+                resource: { id: event.id, eventSelected: true }
+            })
             allEvents.push({
                 title: event.title,
                 start: event.start,
@@ -90,6 +101,14 @@ function ApiCalendar() {
             })
         });
         apiEvents.map(event => {
+            ourApiEvents.push({
+                title: event.short_title,
+                start: event.datetime_local,
+                end: event.datetime_local,
+                time: event.datetime_local,
+                isSelected: event.isSelected,
+                resource: { id: event.id, eventSelected: "" }
+            })
             allEvents.push({
                 title: event.short_title,
                 start: event.datetime_local,
@@ -99,7 +118,19 @@ function ApiCalendar() {
                 resource: { id: event.id, eventSelected: "" }
             })
         });
-        setApiEventsList(allEvents);
+        console.log("ourApiEvents: ", ourApiEvents);
+        console.log("ourDbEvents: ", ourDbEvents);
+        console.log("allEvents: ", allEvents);
+
+        ourApiEvents.forEach(event => {
+            for(let i = 0; i < dbEvents.length; i++) {
+                if(event.resource.id === dbEvents[i].resource.id) {
+                    dupeEvents.push(event);
+                }
+            }
+        })
+
+        console.log("dupeEvents: ", dupeEvents);
     }
 
     const includes = (event) => {
@@ -158,7 +189,7 @@ function ApiCalendar() {
             end: formatDateTime[0],
             time: formatDateTime[1]
         }).then(events => {
-            eventDispatch({ type: SET_USER_EVENTS, events});
+            eventDispatch({ type: SET_USER_EVENTS, events });
         }).catch((err) => {
             eventDispatch({ type: EVENTS_ERROR, message: err });
         });
