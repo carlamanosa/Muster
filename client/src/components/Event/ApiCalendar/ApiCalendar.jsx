@@ -80,18 +80,9 @@ function ApiCalendar() {
         const ourDbEvents = [];
         const ourApiEvents = [];
         const dupeEvents = [];
-        const allEvents = [];
         const dbEvents = await Event.API.getSavedEvents();
         dbEvents.map(event => {
             ourDbEvents.push({
-                title: event.title,
-                start: event.start,
-                end: event.start,
-                time: event.start,
-                isSelected: event.isSelected,
-                resource: { id: event.id, eventSelected: true }
-            })
-            allEvents.push({
                 title: event.title,
                 start: event.start,
                 end: event.start,
@@ -109,18 +100,9 @@ function ApiCalendar() {
                 isSelected: event.isSelected,
                 resource: { id: event.id, eventSelected: "" }
             })
-            allEvents.push({
-                title: event.short_title,
-                start: event.datetime_local,
-                end: event.datetime_local,
-                time: event.datetime_local,
-                isSelected: event.isSelected,
-                resource: { id: event.id, eventSelected: "" }
-            })
         });
         console.log("ourApiEvents: ", ourApiEvents);
         console.log("ourDbEvents: ", ourDbEvents);
-        console.log("allEvents: ", allEvents);
 
         ourApiEvents.forEach(event => {
             for(let i = 0; i < dbEvents.length; i++) {
