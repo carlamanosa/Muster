@@ -18,20 +18,29 @@ export default function () {
     const [validated, setValidated] = useState(false);
     const [/* user not needed */, eventDispatch] = Event.useContext();
     const [{ apiEvents }] = Event.useContext();
+    const [queryQ, setQueryQ] = useState("hockey");
     const [queryDates, setQueryDates] = useState({
         start: "",
         end: ""
     })
 
-    const today = moment().format('YYYY[-]MM[-]DD');
-    const twoWeeks = moment().add(14, 'day');
-    console.log(moment(twoWeeks).format('YYYY[-]MM[-]DD'));
-    const step = moment(today).endOf('month').toDate();
-    const endMonth = moment(step).format('YYYY[-]MM[-]DD');
-    const dates = {
-        startDate: today,
-        endDate: endMonth
+    useEffect(() => {
+        const today = moment().format('YYYY[-]MM[-]DD');
+        const endMonth = moment(today).endOf('month').format('YYYY[-]MM[-]DD');
+        setQueryDates({start: today, end: endMonth});
+    }, []);
+
+    const updateQueryDates = (newDates) => {
+        setQueryDates({
+            start: moment(newDates.start).format('YYYY[-]MM[-]DD'),
+            end: moment(newDates.end).format('YYYY[-]MM[-]DD')
+        })
     }
+
+    useEffect(() => {
+        updateEventAPI();
+    }, [queryDates, queryQ]);
+
 
     // Where we store the user's input from our search form
     // This one is the text input from the search bar that we'll send as a query to the API
@@ -52,17 +61,13 @@ export default function () {
         const rawQ = qInput.current.value;
         const q = (rawQ.split(" ")).join("+");
         // Calling the function to make the API request (sending it our user's params)
-        setEventAPI(q);
+        setQueryQ(q);
     };
 
-    const updateQueryDates = (newDates) => {
-        console.log("newDates: ", newDates);
-    }
-
     // Build and then make API call (in progess)
-    function setEventAPI(q) {
+    const updateEventAPI = () => {
         const key = "client_id=MTk1OTI0NDF8MTU3NDQ1Mjc1MC43NQ&client_secret=24c6903bd6b5005c4d5de56d640bf9c071cf6f6a42b4a55c96dee81ebc08df14";
-        const queryURL = `https://api.seatgeek.com/2/events?geoip=true&per_page=100&q=${q}&datetime_local.gte=2019-11-29&datetime_local.lte=2019-12-31&${key}`;
+        const queryURL = `https://api.seatgeek.com/2/events?geoip=true&per_page=100&q=${queryQ}&datetime_local.gte=${queryDates.start}&datetime_local.lte=${queryDates.end}&${key}`;
         eventDispatch({ type: SET_API_QUERY, queryURL });
         Event.API.eventAPI(
             queryURL
