@@ -38,16 +38,6 @@ function ApiCalendar(props) {
     const [modalEvent, setModalEvent] = useState({});
     const localizer = momentLocalizer(moment);
 
-    const today = moment().format('YYYY[-]MM[-]DD');
-    const twoWeeks = moment().add(14, 'day');
-    console.log(moment(twoWeeks).format('YYYY[-]MM[-]DD'));
-    const step = moment(today).endOf('month').toDate();
-    const endMonth = moment(step).format('YYYY[-]MM[-]DD');
-    const dates = {
-        startDate: today,
-        endDate: endMonth
-    }
-
     useEffect(() => {
         eventDispatch({ type: EVENTS_LOADING });
     }, []);

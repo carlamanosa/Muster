@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col';
 import Event from '../../../utils/Account/Events';
 import { EventError } from "../../../components";
 import EventApiCalendar from "../ApiCalendar";
+import moment from "moment";
 import "./SearchForm.css";
 
 
@@ -17,6 +18,20 @@ export default function () {
     const [validated, setValidated] = useState(false);
     const [/* user not needed */, eventDispatch] = Event.useContext();
     const [{ apiEvents }] = Event.useContext();
+    const [queryDates, setQueryDates] = useState({
+        start: "",
+        end: ""
+    })
+
+    const today = moment().format('YYYY[-]MM[-]DD');
+    const twoWeeks = moment().add(14, 'day');
+    console.log(moment(twoWeeks).format('YYYY[-]MM[-]DD'));
+    const step = moment(today).endOf('month').toDate();
+    const endMonth = moment(step).format('YYYY[-]MM[-]DD');
+    const dates = {
+        startDate: today,
+        endDate: endMonth
+    }
 
     // Where we store the user's input from our search form
     // This one is the text input from the search bar that we'll send as a query to the API
