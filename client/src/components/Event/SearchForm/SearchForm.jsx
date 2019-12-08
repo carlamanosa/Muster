@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Event from '../../../utils/Account/Events';
 import { EventError } from "../../../components";
+import EventApiCalendar from "../ApiCalendar";
 import "./SearchForm.css";
 
 
@@ -38,6 +39,10 @@ export default function () {
         // Calling the function to make the API request (sending it our user's params)
         setEventAPI(q);
     };
+
+    const updateQueryDates = (newDates) => {
+        console.log("newDates: ", newDates);
+    }
 
     // Build and then make API call (in progess)
     function setEventAPI(q) {
@@ -98,6 +103,9 @@ export default function () {
                     </Form>
                 </Col>
             </Row>
+            <br />
+            <br />
+            <EventApiCalendar onUpdateDate={updateQueryDates}/>
         </Container>
     );
 }

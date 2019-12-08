@@ -1,7 +1,6 @@
 import React from "react";
 import Container from 'react-bootstrap/Container';
 import User from '../../../utils/Account/User';
-import { EventApiCalendar } from '../../../components';
 import { EventSearchForm } from "../../../components";
 
 export default function () {
@@ -10,9 +9,6 @@ export default function () {
     return (
         <Container className="mt-3">
             <EventSearchForm />
-            <br />
-            <br />
-            <EventApiCalendar />
         </Container>
     );
 }

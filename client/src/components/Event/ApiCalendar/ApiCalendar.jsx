@@ -8,7 +8,7 @@ import Button from "react-bootstrap/Button";
 import "./ApiCalendar.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
-const { EVENTS_ERROR, SET_USER_EVENTS, EVENTS_LOADING, DISPLAY_EVENTS } = Event.actions;
+const { EVENTS_ERROR, SET_USER_EVENTS, EVENTS_LOADING } = Event.actions;
 
 function MyEvent(props) {
     const [displayclass, setDisplayClass] = useState("notSelected");
@@ -25,7 +25,7 @@ function MyEvent(props) {
     )
 }
 
-function ApiCalendar() {
+function ApiCalendar(props) {
 
     Event.refreshDbOnLoad();
 
@@ -88,7 +88,7 @@ function ApiCalendar() {
                 end: event.start,
                 time: event.start,
                 isSelected: event.isSelected,
-                resource: { id: event.id, eventSelected: true }
+                resource: { id: event.resource.id, eventSelected: true }
             })
         });
         apiEvents.map(event => {
@@ -101,19 +101,39 @@ function ApiCalendar() {
                 resource: { id: event.id, eventSelected: "" }
             })
         });
-        console.log("ourApiEvents: ", ourApiEvents);
-        console.log("ourDbEvents: ", ourDbEvents);
 
         ourApiEvents.forEach(event => {
-            for(let i = 0; i < dbEvents.length; i++) {
-                if(event.resource.id === dbEvents[i].resource.id) {
+            for (let i = 0; i < dbEvents.length; i++) {
+                if (event.resource.id === dbEvents[i].resource.id) {
                     dupeEvents.push(event);
                 }
             }
         })
 
-        console.log("dupeEvents: ", dupeEvents);
+        console.log("dupeEvents: ", dupeEvents)
+
+        if (dupeEvents.length > 0) {
+            const uniqueEvents = new Set();
+
+            // const uniqueEvents = [];            
+            for (let i = 0; i < ourApiEvents.length; i++) {
+                for (let j = 0; j < dupeEvents.length; j++) {
+                    if (ourApiEvents[i].resource.id != dupeEvents[j].resource.id) {
+                        uniqueEvents.add(ourApiEvents[i]);
+                    }
+                }
+            }  
+            console.log("set Array: ", Array.from(uniqueEvents));
+            const allEvents = ourDbEvents.concat(Array.from(uniqueEvents));
+            setApiEventsList(allEvents);
+        } else {
+            const allEvents = ourDbEvents.concat(ourApiEvents);
+            setApiEventsList(allEvents);
+        }
+
+
     }
+
 
     const includes = (event) => {
         return savedApiEventsList.reduce((prev, item) => prev || item.resource.id === event.resource.id, false)
@@ -177,10 +197,6 @@ function ApiCalendar() {
         });
     }
 
-    const test = (date) => {
-        console.log(date);
-    }
-
     return (
         <Fragment>
             {/* calendar(month) to show events searched with buttons to go back and forth between weeks*/}
@@ -196,7 +212,7 @@ function ApiCalendar() {
                 }}
                 onSelectEvent={handleShowModal}
                 popup={true}
-                onNavigate={test}
+                onRangeChange={props.onUpdateDate}
             />
 
             {/* modal for event*/}
