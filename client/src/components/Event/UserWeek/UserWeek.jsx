@@ -38,9 +38,13 @@ function UserWeek() {
     }
 
     useEffect(() => {
-        getWeek();
-        getEvents();        
+        getWeek();      
     }, []);
+
+    useEffect(() => {
+        getEvents();      
+    }, []);
+
 
     return (
         <Container id="user-week" style={{ 'maxHeight': '23rem', 'paddingTop': '1rem', 'minHeight': '23rem', 'overflowY': 'auto' }}>
