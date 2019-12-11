@@ -44,6 +44,7 @@ function Drag (props) {
         <div className="AboutUser">
             <main>
                 <h3>How would you most like to spend your free time?</h3>
+                <h5>(List in Order)</h5>
                 <ul>
                     {order.map((item, idx) => (
                         <li key={item} onDragOver={() => onDragOver(idx)}>

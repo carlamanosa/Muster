@@ -27,6 +27,7 @@ router.post("/api/signup", function (req, res) {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     location: req.body.location,
+    about: req.body.about
   })
     .then(function () {
       res.redirect(307, "/api/login");
@@ -65,7 +66,6 @@ router.get("/api/user_data", function (req, res) {
       location: req.user.location,
       events: req.user.events,
       mobs: req.user.mobs,
-      abouts: req.user.abouts
     });
   }
 });

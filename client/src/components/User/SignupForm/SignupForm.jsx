@@ -19,15 +19,7 @@ export default function ({
     DisplayNameMessage = ""
 }) {
     User.refreshOnLoad();
-    const [about, setAbout] = useState(false);
-    const [newUser, setNewUser] = useState({            
-        email: "",
-        password: "",
-        displayName: "",
-        firstName: "",
-        lastName: "",
-        location: ""
-});
+    const [dragAbout, setDragAbout] = useState([]);
     const [validated, setValidated] = useState(false);
     const [/* user not needed */, userDispatch] = User.useContext();
     const firstNameInput = useRef();
@@ -39,8 +31,7 @@ export default function ({
     const stateInput = useRef();
     const zipInput = useRef();
 
-
-    const handleNext = event => {
+    const handleSubmit = event => {
         event.preventDefault();
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
@@ -57,9 +48,7 @@ export default function ({
             state: stateInput.current.value,
             zip: zipInput.current.value
         }
-        setNewUser({email, password, displayName, firstName, lastName, location});
-        setAbout(true);
-        console.log(newUser);
+        doUserFunc(email, password, displayName, firstName, lastName, location)    
     };
 
     // doUserFunc does a post to our "api/login" route and if successful, *will (hopefully)* redirect them to the AboutUser page
@@ -72,7 +61,8 @@ export default function ({
             displayName,
             firstName,
             lastName,
-            location
+            location,
+            about: dragAbout
         }).then(user => {
             userDispatch({ type: SET_USER, user });
         }).catch((err) => {
@@ -80,30 +70,14 @@ export default function ({
         });
     }
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        doUserFunc(newUser.email, newUser.password, newUser.displayName, newUser.firstName, newUser.lastName, newUser.lastName)
-        console.log("handle it")
-    }
-
-
-    return (about) ? (
-        <div>
-            <h2>Tell Us About Yourself</h2>
-            <br />
-            <Drag onChange={(order) => console.log("change: ", order)} />
-            <button onClick={handleSubmit}>Submit</button>
-        </div>
-        )
-        :
-        (
+    return (
             <Fragment>
                 <h2>Sign Up</h2>
                 <br />
                 <Form
                     id="form-input"
                     validated={validated}
-                    onSubmit={handleNext}
+                    onSubmit={handleSubmit}
                     className={className}
                     noValidate>
 
@@ -187,7 +161,7 @@ export default function ({
                         />
                         <Form.Control.Feedback type="invalid">
                             Please provide a valid state.
-                    </Form.Control.Feedback>
+                        </Form.Control.Feedback>
                     </Form.Group>
 
                     {/* Zip */}
@@ -203,6 +177,8 @@ export default function ({
                     </Form.Control.Feedback>
                     </Form.Group>
 
+                    <Drag onChange={(order) => setDragAbout(order)} />
+
                     <Form.Group>
                         <Form.Check id="checkbox"
                             required
@@ -217,15 +193,7 @@ export default function ({
                             {name}
                         </Button>
                     </Form.Row>
-
-                    {/* <Form.Row id="submitButtonRow">
-                    <Link id="link" to="/user/about">
-                        <Button id="submit-button" type="submit">{name}</Button>
-                    </Link>
-                </Form.Row> */}
-
                     <br />
-
                     <Form.Row id="linkRow">
                         <p>Already have a log in? Login <Link id="link" to="/login">here</Link></p>
                     </Form.Row>

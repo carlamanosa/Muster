@@ -1,17 +1,15 @@
 .AboutUser {
     font-family: sans-serif;
-    font-size: 1.5rem;
     text-align: center;
     width: 50vw;
     height: 50vh;
-    /* display: flex; */
+    display: flex;
     justify-content: center;
     align-items: center;
+    margin: 0 auto;
   }
   
   .AboutUser main {
-    background-color: #383838;
-    color: #fff;
     padding: 10px;
   }
   
@@ -22,12 +20,12 @@
   }
   
   .AboutUser ul li {
-    background-color: #383838;
     padding: 10px 20px;
     position: relative;
     display: flex;
     align-items: flex-start;
     line-height: 1;
+    font-size: 1em;
   }
   
   .AboutUser li .drag {
@@ -36,7 +34,10 @@
   }
   
   .AboutUser li svg {
-    height: 2rem;
-    color: #fff;
+    height: 1em;
+  }
+
+  h3 {
+    font-size: 1.5em;
   }
   
