@@ -78,14 +78,14 @@ function UserWeek(props) {
                     {weekDates.map(day => {
                         return (
                             <Fragment >
-                                <tr onClick={() => selectionClicked(true, day)}>
-                                    <td>{day.day}</td>
+                                <tr id="dayOfWeek" onClick={() => selectionClicked(true, day)}>
+                                    <td >{day.day}</td>
                                 </tr>
                                 <tr>
                                     <Card id="UserWeekDayCard" style={{ width: "100%" }}>
                                         <Card.Body onClick={() => selectionClicked(false, day)}>
-                                            <Card.Text style={{ fontSize: "15px" }}>{day.event}</Card.Text>
-                                            <Card.Subtitle style={{ fontSize: "13px", float: "right" }}>{day.time}</Card.Subtitle>
+                                            <Card.Text id="eventTitle" style={{ fontSize: "20px" }}>{day.event}</Card.Text>
+                                            {/* <Card.Subtitle style={{ fontSize: "13px", float: "right" }}>{day.time}</Card.Subtitle> */}
                                         </Card.Body>
                                     </Card>
                                 </tr>

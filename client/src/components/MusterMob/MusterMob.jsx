@@ -11,12 +11,12 @@ function MusterMob(props) {
         <ModalDialog id="saved-mob">
             <ModalBody style={{ 'maxHeight': '23rem', 'paddingTop': '1rem', 'minHeight': '23rem', 'overflowY': 'auto', 'justifyContent': 'center' }}>
                 <Card className="card" style={{ width: "100%" }}>
-                    <Card.Header id="event-title">
+                    <Card.Header id="event-day-title">
                         <Card.Title>{props.day}</Card.Title>
                         <Card.Subtitle>{props.date}</Card.Subtitle>
                     </Card.Header>
                     <Card.Body>
-                        <Card.Text id="event-date">Events?</Card.Text>
+                        <Card.Text id="event-date-events">Events?</Card.Text>
                     </Card.Body>
                 </Card>
             </ModalBody>
@@ -30,7 +30,7 @@ function MusterMob(props) {
                             <Card.Subtitle id="event-date">{props.day}, {props.date}</Card.Subtitle>
                         </Card.Header>
                         <Card.Body>
-                            <Card.Text id="event-date">Mob?</Card.Text>
+                            <Card.Text id="mob-events">Mob?</Card.Text>
                         </Card.Body>
                     </Card>
                 </ModalBody>

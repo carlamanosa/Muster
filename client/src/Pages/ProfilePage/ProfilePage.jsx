@@ -5,7 +5,6 @@ import Col from 'react-bootstrap/Col';
 import User from '../../utils/Account/User';
 
 // import TestingThings from "../../components/Testing";
-import AboutUserForm from "../../components/User/AboutUserForm";
 
 export default function () {
     

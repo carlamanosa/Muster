@@ -15,8 +15,7 @@ import {
     Home,
     ExploreEvents,
     ProfilePage,
-    Mob,
-    AboutUser
+    Mob
 } from "../../pages";
 
 function Main() {
@@ -34,7 +33,7 @@ function Main() {
                 <Event.Provider>
                     <Switch>
                         <LoggedInRoute exact path="/" component={Home} />
-                        <LoggedInRoute exact path="/user/about" component={AboutUser} />
+                        {/* <LoggedInRoute exact path="/user/about" component={AboutUser} /> */}
                         <LoggedInRoute exact path="/event/explore" component={ExploreEvents} />
                         <LoggedInRoute exact path="/user/profilepage" component={ProfilePage} />
                         <LoggedInRoute exact path="/mob" component={Mob} />

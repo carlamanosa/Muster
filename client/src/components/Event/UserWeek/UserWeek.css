@@ -9,8 +9,24 @@
 
 #UserWeekDayCard {
     box-shadow: none;
+    border: thin whitesmoke;
+    text-align: center;
+
 }
 
 #TodayDisplay {
     background-color: rgb(235, 235, 235);
+}
+
+#dayOfWeek:hover {
+    background-image:
+    radial-gradient(
+      white,
+      rgb(236, 236, 255)
+    );
+    width: 100%;
+}
+
+#eventTitle:hover {
+    text-shadow: 2px 2px 30px blue;
 }

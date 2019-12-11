@@ -5,8 +5,7 @@ import User from '../../../utils/Account/User';
 import UserError from '../Error';
 import { Link } from 'react-router-dom';
 import "./SignupForm.css";
-import Row from "react-bootstrap/Row";
-
+import Drag from "./Drag";
 const { USER_LOADING, SET_USER, USER_ERROR } = User.actions;
 
 export default function ({
@@ -20,6 +19,15 @@ export default function ({
     DisplayNameMessage = ""
 }) {
     User.refreshOnLoad();
+    const [about, setAbout] = useState(false);
+    const [newUser, setNewUser] = useState({            
+        email: "",
+        password: "",
+        displayName: "",
+        firstName: "",
+        lastName: "",
+        location: ""
+});
     const [validated, setValidated] = useState(false);
     const [/* user not needed */, userDispatch] = User.useContext();
     const firstNameInput = useRef();
@@ -32,7 +40,7 @@ export default function ({
     const zipInput = useRef();
 
 
-    const handleSubmit = event => {
+    const handleNext = event => {
         event.preventDefault();
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
@@ -49,13 +57,9 @@ export default function ({
             state: stateInput.current.value,
             zip: zipInput.current.value
         }
-
-        // If we have everything, we run the loginUser function and clear the form
-        const newUserInfo = {
-            email, password, displayName, firstName, lastName, location
-        }
-        doUserFunc(email, password, displayName, firstName, lastName, location);
-        console.log(newUserInfo);
+        setNewUser({email, password, displayName, firstName, lastName, location});
+        setAbout(true);
+        console.log(newUser);
     };
 
     // doUserFunc does a post to our "api/login" route and if successful, *will (hopefully)* redirect them to the AboutUser page
@@ -76,141 +80,157 @@ export default function ({
         });
     }
 
-    return (
-        <Fragment id="signupForm">
-            <h2>Sign Up</h2>
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        doUserFunc(newUser.email, newUser.password, newUser.displayName, newUser.firstName, newUser.lastName, newUser.lastName)
+        console.log("handle it")
+    }
+
+
+    return (about) ? (
+        <div>
+            <h2>Tell Us About Yourself</h2>
             <br />
-            <Form
-                id="form-input"
-                validated={validated}
-                onSubmit={handleSubmit}
-                className={className}
-                noValidate>
+            <Drag onChange={(order) => console.log("change: ", order)} />
+            <button onClick={handleSubmit}>Submit</button>
+        </div>
+        )
+        :
+        (
+            <Fragment>
+                <h2>Sign Up</h2>
+                <br />
+                <Form
+                    id="form-input"
+                    validated={validated}
+                    onSubmit={handleNext}
+                    className={className}
+                    noValidate>
 
-                {/* First Name */}
-                <Form.Group controlId="formBasicFirstName">
-                    <Form.Control
-                        pattern=".*\S+.*"
-                        type="text"
-                        placeholder="First Name"
-                        ref={firstNameInput} />
-                </Form.Group>
+                    {/* First Name */}
+                    <Form.Group controlId="formBasicFirstName">
+                        <Form.Control
+                            pattern=".*\S+.*"
+                            type="text"
+                            placeholder="First Name"
+                            ref={firstNameInput} />
+                    </Form.Group>
 
-                {/* Last Name */}
-                <Form.Group controlId="formBasicLastName">
-                    <Form.Control
-                        pattern=".*\S+.*"
-                        type="text"
-                        placeholder="Last Name"
-                        ref={lastNameInput} />
-                </Form.Group>
+                    {/* Last Name */}
+                    <Form.Group controlId="formBasicLastName">
+                        <Form.Control
+                            pattern=".*\S+.*"
+                            type="text"
+                            placeholder="Last Name"
+                            ref={lastNameInput} />
+                    </Form.Group>
 
-                {/* Display Name */}
-                <Form.Group controlId="formBasicDisplayName">
-                    <Form.Control
-                        required
-                        pattern={emailPattern}
-                        type="text"
-                        placeholder="Display Name"
-                        ref={displayNameInput} />
-                    <Form.Control.Feedback type="invalid">
-                        <DisplayNameMessage />
+                    {/* Display Name */}
+                    <Form.Group controlId="formBasicDisplayName">
+                        <Form.Control
+                            required
+                            pattern={emailPattern}
+                            type="text"
+                            placeholder="Display Name"
+                            ref={displayNameInput} />
+                        <Form.Control.Feedback type="invalid">
+                            <DisplayNameMessage />
+                        </Form.Control.Feedback>
+                    </Form.Group>
+
+                    {/* Email */}
+                    <Form.Group controlId="formBasicEmail">
+                        <Form.Control
+                            required
+                            pattern={emailPattern}
+                            type="email"
+                            placeholder="Email"
+                            ref={emailInput} />
+                        <Form.Control.Feedback type="invalid">
+                            <EmailMessage />
+                        </Form.Control.Feedback>
+                    </Form.Group>
+
+                    {/* Password */}
+                    <Form.Group controlId="formBasicPassword">
+                        <Form.Control
+                            required
+                            pattern={passwordPattern}
+                            type="password"
+                            placeholder="Password"
+                            ref={passwordInput} />
+                        <Form.Control.Feedback type="invalid">
+                            <PasswordMessage />
+                        </Form.Control.Feedback>
+                    </Form.Group>
+
+                    {/* City */}
+                    <Form.Group controlId="formBasicCity">
+                        <Form.Control
+                            pattern=".*\S+.*"
+                            type="text"
+                            placeholder="City"
+                            ref={cityInput}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            Please provide a valid city.
                     </Form.Control.Feedback>
-                </Form.Group>
+                    </Form.Group>
 
-                {/* Email */}
-                <Form.Group controlId="formBasicEmail">
-                    <Form.Control
-                        required
-                        pattern={emailPattern}
-                        type="email"
-                        placeholder="Email"
-                        ref={emailInput} />
-                    <Form.Control.Feedback type="invalid">
-                        <EmailMessage />
+                    {/* State */}
+                    <Form.Group md="3" controlId="formBasicState">
+                        <Form.Control
+                            pattern=".*\S+.*"
+                            type="text"
+                            placeholder="State"
+                            ref={stateInput}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            Please provide a valid state.
                     </Form.Control.Feedback>
-                </Form.Group>
+                    </Form.Group>
 
-                {/* Password */}
-                <Form.Group controlId="formBasicPassword">
-                    <Form.Control
-                        required
-                        pattern={passwordPattern}
-                        type="password"
-                        placeholder="Password"
-                        ref={passwordInput} />
-                    <Form.Control.Feedback type="invalid">
-                        <PasswordMessage />
+                    {/* Zip */}
+                    <Form.Group md="3" controlId="formBasicZip">
+                        <Form.Control
+                            pattern=".*\S+.*"
+                            type="number"
+                            placeholder="Zipcode"
+                            ref={zipInput}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            Please provide a valid zip.
                     </Form.Control.Feedback>
-                </Form.Group>
+                    </Form.Group>
 
-                {/* City */}
-                <Form.Group controlId="formBasicCity">
-                    <Form.Control
-                        pattern=".*\S+.*"
-                        type="text"
-                        placeholder="City"
-                        ref={cityInput}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                        Please provide a valid city.
-                    </Form.Control.Feedback>
-                </Form.Group>
+                    <Form.Group>
+                        <Form.Check id="checkbox"
+                            required
+                            label="Agree to terms and conditions"
+                            feedback="You must agree before submitting."
+                        />
+                    </Form.Group>
+                    <UserError />
 
-                {/* State */}
-                <Form.Group md="3" controlId="formBasicState">
-                    <Form.Control
-                        pattern=".*\S+.*"
-                        type="text"
-                        placeholder="State"
-                        ref={stateInput}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                        Please provide a valid state.
-                    </Form.Control.Feedback>
-                </Form.Group>
+                    <Form.Row id="submitButtonRow">
+                        <Button id="submit-button" type="submit">
+                            {name}
+                        </Button>
+                    </Form.Row>
 
-                {/* Zip */}
-                <Form.Group md="3" controlId="formBasicZip">
-                    <Form.Control
-                        pattern=".*\S+.*"
-                        type="number"
-                        placeholder="Zipcode"
-                        ref={zipInput}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                        Please provide a valid zip.
-                    </Form.Control.Feedback>
-                </Form.Group>
-
-                <Form.Group>
-                    <Form.Check id="checkbox"
-                        required
-                        label="Agree to terms and conditions"
-                        feedback="You must agree before submitting."
-                    />
-                </Form.Group>
-                <UserError />
-
-                <Form.Row id="submitButtonRow">
-                <Button id="submit-button" type="submit">
-                    {name}
-                </Button>
-                </Form.Row>
-
-                {/* <Form.Row id="submitButtonRow">
+                    {/* <Form.Row id="submitButtonRow">
                     <Link id="link" to="/user/about">
                         <Button id="submit-button" type="submit">{name}</Button>
                     </Link>
                 </Form.Row> */}
 
-                <br />
+                    <br />
 
-                <Form.Row id="linkRow">
-                    <p>Already have a log in? Login <Link id="link" to="/login">here</Link></p>
-                </Form.Row>
+                    <Form.Row id="linkRow">
+                        <p>Already have a log in? Login <Link id="link" to="/login">here</Link></p>
+                    </Form.Row>
 
-            </Form>
-        </Fragment>
-    );
+                </Form>
+            </Fragment>
+        )
 }
