@@ -14,6 +14,8 @@ select:-webkit-autofill:focus {
 
 }
 
+
+
 #signupForm {
     margin: 0 auto;
 }
@@ -58,6 +60,14 @@ select:-webkit-autofill:focus {
 
 h2 {
     text-align: center;
+}
+
+
+
+.AboutUser {
+    padding-top: -2rem;
+    padding-right: 12rem;
+    padding-bottom: 1rem;
 }
 
 /* #neon {
