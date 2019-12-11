@@ -5,6 +5,7 @@ import Home from "./Home";
 import ProfilePage from "./ProfilePage";
 import Mob from "./Mob";
 import AboutUser from "./AboutUser";
+import ExploreEvents from "./Event/ExploreEvents"
 
 export {
     NotFound,
@@ -13,7 +14,6 @@ export {
     Home,
     ProfilePage,
     Mob,
+    ExploreEvents,
     AboutUser
 };
-
-export * from "./Event";

@@ -1,16 +1,15 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useState, Fragment } from "react";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import User from '../../utils/Account/User';
 import Event from '../../utils/Account/Events';
 import MobList from "../../components/MobList/MobList";
-import { EventMobCard } from "../../components";
 import { EventUserWeek } from "../../components";
+import moment from "moment";
 
 import './Home.css';
 import TestingThings from "../../components/Testing/Testing";
-import MobCard from "../../components/Event/MobCard";
 import MusterMob from "../../components/MusterMob/MusterMob";
 
 export default function () {
@@ -19,7 +18,14 @@ export default function () {
     // we eagerly load events here so when the user switches pages it will appear faster. 
     Event.refreshDbOnLoad();
     const [{ user }] = User.useContext();
-    const [eventDispatch] = Event.useContext();
+    const [selection, setSelection] = useState({
+        date: moment().format('ll'),
+        day: moment().format('dddd'),
+        event: "",
+        time: "",
+        daySelected: true,
+        eventId: ""
+    });
 
     // useEffect(() => {
     //     const startPos = {
@@ -34,6 +40,16 @@ export default function () {
     //     };
     //     navigator.geolocation.getCurrentPosition(geoSuccess);
     // }, []);
+    const selectionChange = (bool, clicked) => {
+        setSelection({
+            date: moment(clicked.date).format('ll'),
+            day: clicked.day,
+            event: clicked.event,
+            time: clicked.time,
+            daySelected: bool,
+            eventId: clicked.id
+        })
+    }
 
     return (
         <Container className="mt-3">
@@ -55,12 +71,12 @@ export default function () {
                 <Col>
                 <h3> User Week</h3>
                     <br />
-                    <EventUserWeek />
+                    <EventUserWeek onSelection={selectionChange}/>
                 </Col>
 
                 <Col id="MusterSection">
                     <h3>Muster Mob</h3>
-                    <MusterMob />
+                    <MusterMob {...selection}/>
                 </Col>
             </Row>
 

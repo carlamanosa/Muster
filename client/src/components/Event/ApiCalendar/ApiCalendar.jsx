@@ -8,7 +8,7 @@ import Button from "react-bootstrap/Button";
 import "./ApiCalendar.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
-const { EVENTS_ERROR, USER_EVENTS, SET_EVENTS, EVENTS_LOADING } = Event.actions;
+const { EVENTS_ERROR, SET_USER_EVENTS, EVENTS_LOADING } = Event.actions;
 
 function MyEvent(props) {
     const [displayclass, setDisplayClass] = useState("notSelected");
@@ -25,47 +25,109 @@ function MyEvent(props) {
     )
 }
 
-function ApiCalendar() {
+function ApiCalendar(props) {
 
     Event.refreshDbOnLoad();
-    
+
     const [/* user not needed */, eventDispatch] = Event.useContext();
     const [{ apiEvents }] = Event.useContext();
-    const [{ userEvents }] = Event.useContext();
+    const [{ displayEvents }] = Event.useContext();
     const [apiEventsList, setApiEventsList] = useState([]);
     const [savedApiEventsList, setSavedApiEventsList] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [modalEvent, setModalEvent] = useState({});
     const localizer = momentLocalizer(moment);
 
-    const today = moment().format('YYYY[-]MM[-]DD');
-    const twoWeeks = moment().add(14, 'day');
-    console.log(moment(twoWeeks).format('YYYY[-]MM[-]DD'));
-    const step = moment(today).endOf('month').toDate();
-    const endMonth = moment(step).format('YYYY[-]MM[-]DD');
-    const dates = {
-        startDate: today,
-        endDate: endMonth
-    }
-
     useEffect(() => {
         eventDispatch({ type: EVENTS_LOADING });
-        setApiEventsList(userEvents);
     }, []);
 
     useEffect(() => {
-        const newApiEventsList = [];
+        displayDbEvents();
+    }, []);
+
+    useEffect(() => {
+        displayAllEvents();
+    }, [apiEvents]);
+
+    const displayDbEvents = async () => {
+        const events = [];
+        const dbEvents = await Event.API.getSavedEvents();
+        dbEvents.map(event => {
+            events.push({
+                title: event.title,
+                start: event.start,
+                end: event.start,
+                time: event.start,
+                isSelected: event.isSelected,
+                resource: { id: event.id, eventSelected: true }
+            })
+        });
+        setApiEventsList(events);
+    }
+
+    const displayAllEvents = async () => {
+        const ourDbEvents = [];
+        const ourApiEvents = [];
+        const dupeEvents = [];
+        const dbEvents = await Event.API.getSavedEvents();
+        dbEvents.map(event => {
+            ourDbEvents.push({
+                title: event.title,
+                start: event.start,
+                end: event.start,
+                time: event.start,
+                isSelected: event.isSelected,
+                resource: { id: event.resource.id, eventSelected: true }
+            })
+        });
         apiEvents.map(event => {
-            newApiEventsList.push({
+            ourApiEvents.push({
                 title: event.short_title,
                 start: event.datetime_local,
                 end: event.datetime_local,
+                time: event.datetime_local,
                 isSelected: event.isSelected,
-                resource: { id: event.id }
+                resource: { id: event.id, eventSelected: "" }
             })
         });
-        setApiEventsList(newApiEventsList);
-    }, [apiEvents]);
+
+        ourApiEvents.forEach(event => {
+            for (let i = 0; i < dbEvents.length; i++) {
+                if (event.resource.id === dbEvents[i].resource.id) {
+                    dupeEvents.push(event);
+                }
+            }
+        })
+
+        console.log("dupeEvents: ", dupeEvents)
+
+        if (dupeEvents.length > 0) {
+            const uniqueEvents = new Set();
+
+            // const uniqueEvents = [];            
+            for (let i = 0; i < ourApiEvents.length; i++) {
+                for (let j = 0; j < dupeEvents.length; j++) {
+                    if (ourApiEvents[i].resource.id != dupeEvents[j].resource.id) {
+                        uniqueEvents.add(ourApiEvents[i]);
+                    }
+                }
+            }  
+            console.log("set Array: ", Array.from(uniqueEvents));
+            const allEvents = ourDbEvents.concat(Array.from(uniqueEvents));
+            setApiEventsList(allEvents);
+        } else {
+            const allEvents = ourDbEvents.concat(ourApiEvents);
+            setApiEventsList(allEvents);
+        }
+
+
+    }
+
+
+    const includes = (event) => {
+        return savedApiEventsList.reduce((prev, item) => prev || item.resource.id === event.resource.id, false)
+    }
 
     const updateSavedEventList = () => {
         if (!includes(modalEvent)) {
@@ -77,10 +139,6 @@ function ApiCalendar() {
             updateItem(modalEvent, { eventSelected: "" });
         }
         setShowModal(false);
-    }
-
-    const includes = (event) => {
-        return savedApiEventsList.reduce((prev, item) => prev || item.resource.id === event.resource.id, false)
     }
 
     const updateItem = (item, updatedFields) => {
@@ -114,19 +172,19 @@ function ApiCalendar() {
 
     // update user's events in db
     const addDbEvent = (savedEvent) => {
-        console.log("updateDbEvents: ", savedEvent);
-        console.log("savedEvent.resource.id: ", savedEvent.resource.id)
-        Event.API.addEvent(
-            savedEvent            
-        ).then(events => {
-            eventDispatch({ type: USER_EVENTS, events});
+        const dateTime = savedEvent.start;
+        const formatDateTime = dateTime.split("T");
+        Event.API.addEvent({
+            resource: { id: savedEvent.resource.id, eventSelected: true },
+            title: savedEvent.title,
+            start: savedEvent.end,
+            end: formatDateTime[0],
+            time: formatDateTime[1]
+        }).then(events => {
+            eventDispatch({ type: SET_USER_EVENTS, events });
         }).catch((err) => {
             eventDispatch({ type: EVENTS_ERROR, message: err });
         });
-    }
-
-    const test = (date) => {
-        console.log(date);
     }
 
     return (
@@ -144,13 +202,15 @@ function ApiCalendar() {
                 }}
                 onSelectEvent={handleShowModal}
                 popup={true}
-                onNavigate={test}
+                onRangeChange={props.onUpdateDate}
             />
 
             {/* modal for event*/}
             <Modal id="event-modal" show={showModal} onHide={handleCloseModal} animation={false}>
                 <Modal.Title>{modalEvent.title}</Modal.Title>
-                <Modal.Body>{modalEvent.start} - {modalEvent.end}</Modal.Body>
+                <Modal.Body>
+                    {modalEvent.start} - {modalEvent.end}
+                </Modal.Body>
                 <Button id="close-button" variant="light" onClick={handleCloseModal}>
                     Close
                 </Button>

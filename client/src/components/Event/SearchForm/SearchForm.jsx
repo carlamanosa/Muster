@@ -5,21 +5,59 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Event from '../../../utils/Account/Events';
+import User from '../../../utils/Account/User';
 import { EventError } from "../../../components";
+import EventApiCalendar from "../ApiCalendar";
+import moment from "moment";
 import "./SearchForm.css";
 
 
-const { SET_API_EVENTS, EVENTS_ERROR, SET_API_QUERY, EVENTS_LOADING } = Event.actions;
+const { SET_API_EVENTS, EVENTS_ERROR, SET_API_QUERY } = Event.actions;
 
 export default function () {
+    Event.refreshDbOnLoad();
+    User.refreshOnLoad();
     const [validated, setValidated] = useState(false);
     const [/* user not needed */, eventDispatch] = Event.useContext();
     const [{ apiEvents }] = Event.useContext();
-    
+    const [queryQ, setQueryQ] = useState("christmas");
+    const [queryDates, setQueryDates] = useState({
+        start: "",
+        end: ""
+    })
+
     useEffect(() => {
-        eventDispatch({ type: EVENTS_LOADING });
-      }, []);
-    
+        const today = moment().format('YYYY[-]MM[-]DD');
+        const endMonth = moment(today).endOf('month').format('YYYY[-]MM[-]DD');
+        setQueryDates({start: today, end: endMonth});
+    }, []);
+
+    useEffect(() => {
+        aboutUser()
+    }, []);
+
+    const aboutUser = async () => {
+        const userAbouts = await User.API.getAbouts();
+        const one = userAbouts[0].toLowerCase();
+        if (one.includes("concert")) {
+            setQueryQ("concert")
+        } else if (one.includes("sport")) {
+            setQueryQ("sports")
+        }
+    }
+
+    const updateQueryDates = (newDates) => {
+        setQueryDates({
+            start: moment(newDates.start).format('YYYY[-]MM[-]DD'),
+            end: moment(newDates.end).format('YYYY[-]MM[-]DD')
+        })
+    }
+
+    useEffect(() => {
+        updateEventAPI();
+    }, [queryDates, queryQ]);
+
+
     // Where we store the user's input from our search form
     // This one is the text input from the search bar that we'll send as a query to the API
     const qInput = useRef();
@@ -39,13 +77,13 @@ export default function () {
         const rawQ = qInput.current.value;
         const q = (rawQ.split(" ")).join("+");
         // Calling the function to make the API request (sending it our user's params)
-        setEventAPI(q);
+        setQueryQ(q);
     };
 
     // Build and then make API call (in progess)
-    function setEventAPI(q) {
+    const updateEventAPI = () => {
         const key = "client_id=MTk1OTI0NDF8MTU3NDQ1Mjc1MC43NQ&client_secret=24c6903bd6b5005c4d5de56d640bf9c071cf6f6a42b4a55c96dee81ebc08df14";
-        const queryURL = `https://api.seatgeek.com/2/events?geoip=true&per_page=100&q=${q}&datetime_local.gte=2019-11-29&datetime_local.lte=2019-12-31&${key}`;
+        const queryURL = `https://api.seatgeek.com/2/events?geoip=true&per_page=1000&q=${queryQ}&datetime_local.gte=${queryDates.start}&datetime_local.lte=${queryDates.end}&${key}`;
         eventDispatch({ type: SET_API_QUERY, queryURL });
         Event.API.eventAPI(
             queryURL
@@ -92,7 +130,7 @@ export default function () {
                                     ref={qInput} />
                                 
                             </Form.Group>
-                            <Button variant="light" type="submit" id="submit-button2">
+                                <Button variant="light" type="submit" id="submit-button2">
                                     Submit
                                 </Button>
                         </Form.Row>
@@ -101,6 +139,9 @@ export default function () {
                     </Form>
                 </Col>
             </Row>
+            <br />
+            <br />
+            <EventApiCalendar onUpdateDate={updateQueryDates}/>
         </Container>
     );
 }

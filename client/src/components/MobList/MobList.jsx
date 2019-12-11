@@ -1,9 +1,9 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Fragment } from "react";
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Card from 'react-bootstrap/Card'
+import Card from 'react-bootstrap/Card';
+import User from "../../utils/Account/User";
+import Mobs from "../../utils/Account/Mobs";
 import "./MobList.css";
 // geting Mob List from database 
 // get info from mob list objects 

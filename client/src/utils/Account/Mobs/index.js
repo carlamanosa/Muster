@@ -15,5 +15,5 @@ export {
     API as mobAPI,
     Provider as MobProvider, 
     useContext as useMobContext,
-    refreshDbOnLoad as refreshMobsOnLoad
+    refreshOnLoad as refreshMobsOnLoad
 }

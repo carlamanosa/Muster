@@ -26,7 +26,7 @@ const reducer = (state, action) => {
         case ABOUT_USER:
             return {
                 ...state,
-                about: action.about,
+                about: action.dragAbout,
                 loading: false,
                 pageLoading: false
             };

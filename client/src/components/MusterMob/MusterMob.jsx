@@ -1,19 +1,41 @@
 import React from "react";
 import ModalDialog from 'react-bootstrap/ModalDialog';
 import ModalBody from 'react-bootstrap/ModalBody';
-import MobCard from "../Event/MobCard";
+import Card from 'react-bootstrap/Card';
 import "./MusterMob.css";
 
 
-function MusterMob() {
+function MusterMob(props) {
 
-    return (
+    return (props.daySelected) ? (
         <ModalDialog id="saved-mob">
-            <ModalBody style={{ 'maxHeight': '23rem', 'paddingTop': '1rem', 'minHeight': '23rem', 'overflowY': 'auto', 'justifyContent':'center' }}>
-                <MobCard />
+            <ModalBody style={{ 'maxHeight': '23rem', 'paddingTop': '1rem', 'minHeight': '23rem', 'overflowY': 'auto', 'justifyContent': 'center' }}>
+                <Card className="card" style={{ width: "100%" }}>
+                    <Card.Header id="event-day-title">
+                        <Card.Title>{props.day}</Card.Title>
+                        <Card.Subtitle>{props.date}</Card.Subtitle>
+                    </Card.Header>
+                    <Card.Body>
+                        <Card.Text id="event-date-events">Events?</Card.Text>
+                    </Card.Body>
+                </Card>
             </ModalBody>
         </ModalDialog>
-    )
+    ) : (
+            <ModalDialog id="saved-mob">
+                <ModalBody style={{ 'maxHeight': '23rem', 'paddingTop': '1rem', 'minHeight': '23rem', 'overflowY': 'auto', 'justifyContent': 'center' }}>
+                    <Card className="card" style={{ width: "100%" }}>
+                        <Card.Header id="event-title">
+                            <Card.Title>{props.event}</Card.Title>
+                            <Card.Subtitle id="event-date">{props.day}, {props.date}</Card.Subtitle>
+                        </Card.Header>
+                        <Card.Body>
+                            <Card.Text id="mob-events">Mob?</Card.Text>
+                        </Card.Body>
+                    </Card>
+                </ModalBody>
+            </ModalDialog>
+        )
 }
 
 export default MusterMob;

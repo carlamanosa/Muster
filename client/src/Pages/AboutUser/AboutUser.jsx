@@ -2,9 +2,6 @@ import React, { Fragment } from "react";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import AboutQuestions from "../../components/User/AboutUser/AboutQuestions";
-
-import { AboutUserForm } from '../../components';
 import User from '../../utils/Account/User';
 
 import './AboutUser.css';
@@ -24,7 +21,7 @@ export default function () {
         <Container className="mt-5">
             <Row>
                 <Col md={{ span: 6, offset: 3 }}>
-                <AboutQuestions />
+                    <h1>Hello You</h1>
                 </Col>
             
             </Row>
