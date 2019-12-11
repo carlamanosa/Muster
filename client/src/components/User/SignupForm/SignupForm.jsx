@@ -74,7 +74,7 @@ export default function ({
 
     return (
             <Fragment>
-                <h2>Sign Up</h2>
+                <h2 id="neon" >Sign Up</h2>
                 <br />
                 <Form
                     id="form-input"

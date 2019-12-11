@@ -11,7 +11,6 @@ select:-webkit-autofill:focus {
   -webkit-text-fill-color: black;
   -webkit-box-shadow: 0 0 0px 1000px whitesmoke inset;
   transition: background-color 5000s ease-in-out 0s;
-
 }
 
 #signupForm {
@@ -66,10 +65,6 @@ h2 {
     font-size: 3.5em;
     color: #fff;
     text-shadow: 0 0 20px #ff005b;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    left: 50%;
-    width: 100%;
 }
 
 #neon::after {
@@ -79,14 +74,11 @@ h2 {
     padding: 0 20px;
     z-index: -1;
     color: #ff005b;
-    position: absolute;
     filter: blur(15px);
-    width: 100%;
 }
 
 #neon::before {
     content: "";
-    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -95,7 +87,6 @@ h2 {
     z-index: -2;
     filter: blur(40px);
     opacity: .5;
-
 } */
 
 
