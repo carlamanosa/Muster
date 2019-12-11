@@ -179,7 +179,7 @@ export default function ({
                     </Form.Control.Feedback>
                     </Form.Group>
 
-                    <Drag onChange={(order) => setDragAbout(order)} />
+                    <Drag id="questions-box" onChange={(order) => setDragAbout(order)} />
 
                     <Form.Group>
                         <Form.Check id="checkbox"
