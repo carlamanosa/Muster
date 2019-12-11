@@ -1,31 +1,36 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import User from '../../utils/Account/User';
 import MobList from "../../components/MobList/MobList";
 import SuggestedFriends from "../../components/SuggestedFriends";
 import SearchFriends from "../../components/SearchFriends";
 
 export default function () {
-    
-    User.refreshOnLoad();
-    const [{ user }] = User.useContext();
+    const [selectedMob, setSelectedMob] = useState({});
+    const [searchedMob, setSearcheddMob] = useState({});
 
-    
-
+    const mobNameClick = (mobInfo) => {
+        console.log("mobInfo: ", mobInfo)
+        setSelectedMob({
+            name: mobInfo.name,
+            events: mobInfo.info.events,
+            about: mobInfo.info.about[0]
+        })
+    }
+     
     return (
         <Container className="mt-2">
             <Row>
                 <Col>
                     <h3>My Friends</h3>
                     <br />
-                    <MobList />
+                    <MobList mobClick={mobNameClick} {...searchedMob}/>
                 </Col>
                 <Col>
                     <h3>Search Friends</h3>
                     <br />
-                    <SearchFriends />
+                    <SearchFriends {...selectedMob}/>
                 </Col>
             </Row>
 

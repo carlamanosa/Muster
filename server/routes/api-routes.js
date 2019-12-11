@@ -102,9 +102,9 @@ router.post("/api/events", isAuthenticatedData, function (req, res) {
 });
 
 router.get("/api/mobs", isAuthenticatedData, function (req, res) {
-  db.User.findById(req.user._id)
-    .then(function (dbUser) {
-      res.json(dbUser.mobs);
+  db.User.find({})
+    .then(function (dbMobs) {
+      res.json(dbMobs);
     })
     .catch(function (err) {
       res.status(500).json(err);

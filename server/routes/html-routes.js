@@ -38,6 +38,7 @@ router.route([
     "/signup",
     "/login",
     "/events",
+    "/mob",
     "/event/add",
     "/event/addlist",
     "/event/explore",

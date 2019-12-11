@@ -10,7 +10,7 @@ import "./SuggestedFriends.css";
 
 function SuggestedFriends() {
 
-    const [showSuggestion, setShowSuggestion] = useState("this");
+    const [showSuggestion, setShowSuggestion] = useState("hide");
 
     const handleClick = () => {
         setShowSuggestion("hide");

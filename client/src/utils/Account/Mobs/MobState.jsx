@@ -23,7 +23,7 @@ const reducer = (state, action) => {
     case SET_MOBS:
       return {
         ...state,
-        mobs: action.events,
+        mobs: action.ourMobs,
         loading: false,
         pageLoading: false
       };

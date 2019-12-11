@@ -1,19 +1,17 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, useEffect } from "react";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import User from '../../utils/Account/User';
+import Mob from "../../utils/Account/Mobs";
 import Event from '../../utils/Account/Events';
-import MobList from "../../components/MobList/MobList";
 import { EventUserWeek } from "../../components";
 import moment from "moment";
 
 import './Home.css';
-import TestingThings from "../../components/Testing/Testing";
 import MusterMob from "../../components/MusterMob/MusterMob";
 
 export default function () {
-
     User.refreshOnLoad();
     // we eagerly load events here so when the user switches pages it will appear faster. 
     Event.refreshDbOnLoad();
@@ -24,8 +22,35 @@ export default function () {
         event: "",
         time: "",
         daySelected: true,
-        eventId: ""
+        eventId: "",
+        mobEvents: []
     });
+
+    useEffect(() => {
+        allTheMobs();
+    }, []);
+    
+    const allTheMobs = async () => {
+        const ourMobEvents = [];
+        const allMobs = await Mob.API.getMobs();
+        console.log(allMobs);
+        allMobs.forEach(mob => {
+            const friend = mob.displayName;
+            const theEvents = mob.events;
+            console.log(friend, theEvents)
+            theEvents.forEach(event => {
+                ourMobEvents.push({
+                    name: friend,
+                    event
+                });
+            });
+        });
+        console.log("ourMobs: ", ourMobEvents);
+        setSelection({
+            ...selection,
+            mobEvents: ourMobEvents
+        })
+    }
 
     // useEffect(() => {
     //     const startPos = {
@@ -40,8 +65,10 @@ export default function () {
     //     };
     //     navigator.geolocation.getCurrentPosition(geoSuccess);
     // }, []);
+
     const selectionChange = (bool, clicked) => {
         setSelection({
+            ...selection,
             date: moment(clicked.date).format('ll'),
             day: clicked.day,
             event: clicked.event,
