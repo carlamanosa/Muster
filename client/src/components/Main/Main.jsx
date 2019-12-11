@@ -13,9 +13,7 @@ import {
     Login,
     Signup,
     Home,
-    EventAddList,
     ExploreEvents,
-    EventAdd,
     ProfilePage,
     Mob,
     AboutUser
@@ -37,9 +35,7 @@ function Main() {
                     <Switch>
                         <LoggedInRoute exact path="/" component={Home} />
                         <LoggedInRoute exact path="/user/about" component={AboutUser} />
-                        <LoggedInRoute exact path="/event/addlist" component={EventAddList} />
                         <LoggedInRoute exact path="/event/explore" component={ExploreEvents} />
-                        <LoggedInRoute exact path="/event/add" component={EventAdd} />
                         <LoggedInRoute exact path="/user/profilepage" component={ProfilePage} />
                         <LoggedInRoute exact path="/mob" component={Mob} />
                         <LoggedOutRoute exact path="/login" component={Login} />

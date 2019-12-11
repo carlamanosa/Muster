@@ -114,7 +114,7 @@ export default function () {
                                     ref={qInput} />
                                 
                             </Form.Group>
-                            <Button variant="light" type="submit" id="submit-button2">
+                                <Button variant="light" type="submit" id="submit-button2">
                                     Submit
                                 </Button>
                         </Form.Row>
