@@ -66,6 +66,7 @@ router.get("/api/user_data", function (req, res) {
       location: req.user.location,
       events: req.user.events,
       mobs: req.user.mobs,
+      about: req.user.about
     });
   }
 });

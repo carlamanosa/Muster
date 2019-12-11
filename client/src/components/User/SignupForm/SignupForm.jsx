@@ -6,7 +6,7 @@ import UserError from '../Error';
 import { Link } from 'react-router-dom';
 import "./SignupForm.css";
 import Drag from "./Drag";
-const { USER_LOADING, SET_USER, USER_ERROR } = User.actions;
+const { USER_LOADING, SET_USER, USER_ERROR, ABOUT_USER } = User.actions;
 
 export default function ({
     api,
@@ -19,7 +19,7 @@ export default function ({
     DisplayNameMessage = ""
 }) {
     User.refreshOnLoad();
-    const [dragAbout, setDragAbout] = useState([]);
+    const [dragAbout, setDragAbout] = useState(["Have a Quiet Night in", "Try a New Restaurant", "Go to a Concert/Show", "Watch Sports"]);
     const [validated, setValidated] = useState(false);
     const [/* user not needed */, userDispatch] = User.useContext();
     const firstNameInput = useRef();
@@ -48,6 +48,7 @@ export default function ({
             state: stateInput.current.value,
             zip: zipInput.current.value
         }
+        console.log("dragAbout: ", dragAbout);
         doUserFunc(email, password, displayName, firstName, lastName, location)    
     };
 
@@ -64,6 +65,7 @@ export default function ({
             location,
             about: dragAbout
         }).then(user => {
+            userDispatch({ type: ABOUT_USER, dragAbout });
             userDispatch({ type: SET_USER, user });
         }).catch((err) => {
             userDispatch({ type: USER_ERROR, message: err });

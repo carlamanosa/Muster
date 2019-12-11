@@ -1,6 +1,5 @@
 module.exports = {
   User: require("./user"),
   Event: require("./event"),
-  Mob: require("./mob"),
-  About: require("./about"),
+  Mob: require("./mob")
 }

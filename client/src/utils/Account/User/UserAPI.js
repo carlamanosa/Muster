@@ -18,8 +18,8 @@ export default {
     return axios.post("/api/signup", userData).then(({ data }) => data);
   },
   // Gets aboutUser
-  getAbouts: function (aboutUserData) {
-    return axios.get("/api/abouts", aboutUserData).then(({ data }) => data);
+  getAbouts: function () {
+    return axios.get("/api/user_data").then(({ data }) => data.about);
   },
   // Updates aboutUser
   setAbouts: function (aboutUserData) {

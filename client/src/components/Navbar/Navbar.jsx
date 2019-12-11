@@ -33,7 +33,7 @@ function MyNavbar() {
                 <NavLink to="/">Home</NavLink>
                 <NavLink to="/event/explore">Explore Events</NavLink>
                 <NavLink to="/mob">My Mob</NavLink>
-                <NavLink to="/user/about">About Me</NavLink>
+                {/* <NavLink to="/user/about">About Me</NavLink> */}
                 <Nav.Link eventKey="/logout" onClick={logout}>Logout</Nav.Link>
               </Nav>
             </Navbar.Collapse>

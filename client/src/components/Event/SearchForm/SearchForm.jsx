@@ -5,20 +5,22 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Event from '../../../utils/Account/Events';
+import User from '../../../utils/Account/User';
 import { EventError } from "../../../components";
 import EventApiCalendar from "../ApiCalendar";
 import moment from "moment";
 import "./SearchForm.css";
 
 
-const { SET_API_EVENTS, EVENTS_ERROR, SET_API_QUERY, EVENTS_LOADING, DISPLAY_EVENTS } = Event.actions;
+const { SET_API_EVENTS, EVENTS_ERROR, SET_API_QUERY } = Event.actions;
 
 export default function () {
     Event.refreshDbOnLoad();
+    User.refreshOnLoad();
     const [validated, setValidated] = useState(false);
     const [/* user not needed */, eventDispatch] = Event.useContext();
     const [{ apiEvents }] = Event.useContext();
-    const [queryQ, setQueryQ] = useState("hockey");
+    const [queryQ, setQueryQ] = useState("christmas");
     const [queryDates, setQueryDates] = useState({
         start: "",
         end: ""
@@ -29,6 +31,20 @@ export default function () {
         const endMonth = moment(today).endOf('month').format('YYYY[-]MM[-]DD');
         setQueryDates({start: today, end: endMonth});
     }, []);
+
+    useEffect(() => {
+        aboutUser()
+    }, []);
+
+    const aboutUser = async () => {
+        const userAbouts = await User.API.getAbouts();
+        const one = userAbouts[0].toLowerCase();
+        if (one.includes("concert")) {
+            setQueryQ("concert")
+        } else if (one.includes("sport")) {
+            setQueryQ("sports")
+        }
+    }
 
     const updateQueryDates = (newDates) => {
         setQueryDates({
@@ -67,7 +83,7 @@ export default function () {
     // Build and then make API call (in progess)
     const updateEventAPI = () => {
         const key = "client_id=MTk1OTI0NDF8MTU3NDQ1Mjc1MC43NQ&client_secret=24c6903bd6b5005c4d5de56d640bf9c071cf6f6a42b4a55c96dee81ebc08df14";
-        const queryURL = `https://api.seatgeek.com/2/events?geoip=true&per_page=100&q=${queryQ}&datetime_local.gte=${queryDates.start}&datetime_local.lte=${queryDates.end}&${key}`;
+        const queryURL = `https://api.seatgeek.com/2/events?geoip=true&per_page=1000&q=${queryQ}&datetime_local.gte=${queryDates.start}&datetime_local.lte=${queryDates.end}&${key}`;
         eventDispatch({ type: SET_API_QUERY, queryURL });
         Event.API.eventAPI(
             queryURL
