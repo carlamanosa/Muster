@@ -1,27 +1,31 @@
-# Muster
+#MUSTER
+ 
+ come together; assemble; gather
 
-## About Muster
-
-## SeatGeek API Secret Thing
-Your app secret is "24c6903bd6b5005c4d5de56d640bf9c071cf6f6a42b4a55c96dee81ebc08df14" - copy now as it can't be retrieved later.
-
-function buildQueryURL() {
-    // queryURL is the url we'll use to query the API
-    const URL = "https://api.seatgeek.com/2/events?";
-
-    // Set the API key
-    const key = "client_id=MTk1OTI0NDF8MTU3NDQ1Mjc1MC43NQ&client_secret=24c6903bd6b5005c4d5de56d640bf9c071cf6f6a42b4a55c96dee81ebc08df14";
-  
-    // Begin building an object to contain our API call's query parameters
-    const params = "&taxonomies.name=sports&taxonomies.name=concert"
-
-    const queryURL = URL + key + params;
-    
-    // Logging the URL so we have access to it for troubleshooting
-    console.log(queryURL);
-  }
+Heather Latin & Carla Manosa
 
 
-  buildQueryURL();
+#Project Overview: 
 
+A social application that lets users search local events from sports, concerts, and plays. With an encrypted login, users will have their own homepage that will display their personal saved events and events matched with their friends or “Muster Mob”. 
 
+Technologies Used: 
+
+HTML5, CSS, APIs (react-big-calendar, seatgeek.com, google fonts), ReactJS, Express, MongoDB, NodeJS, Passport
+
+#Successes:
+
+•	Our events calendar works! It is functional to do the necessities of gathering information of user chosen events, saves their choices to our database, and displays on their homepage.
+
+Challenges: 
+
+•	Together we worked on using a new NPM package called react-big-calendar. Being our first time using this package, we had challenges of working with the calendar and all of our APIs together. 
+•	Gathering the user choice data from the calendar, another challenge was to get the data stored onto our database. 
+
+Upcoming Improvements: 
+
+#EVERYTHING! But if we had to narrow down: 
+
+•	User Mob “Friend” Page
+
+We want to have the user Mob page fully functioning in order for the user to find and meet other people. This page will display their current friends, find, suggest, and search other Muster users.
