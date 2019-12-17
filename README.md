@@ -21,6 +21,6 @@ Our events calendar works! It is functional to do the necessities of gathering i
 
 EVERYTHING! But if we had to narrow down: 
 
-User Mob “Friend” Page
+* User Mob “Friend” Page
 
 We want to have the user Mob page fully functioning in order for the user to find and meet other people. This page will display their current friends, find, suggest, and search other Muster users.
